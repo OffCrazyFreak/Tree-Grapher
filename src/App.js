@@ -69,7 +69,9 @@ export default function App() {
       fileReader.onload = async (e) => {
         try {
           const importedData = JSON.parse(e.target.result);
+
           setTreeData(importedData);
+          setSearchResults(flattenTree(importedData));
         } catch (error) {
           console.error("Error parsing imported data:", error);
         }
@@ -81,6 +83,18 @@ export default function App() {
     fileInput.click();
   }
 
+  // Flatten the tree structure to get all node names
+  function flattenTree(nodes) {
+    let flattenedNodes = [];
+    for (const node of nodes) {
+      flattenedNodes.push(node);
+      if (node.children.length > 0) {
+        flattenedNodes = flattenedNodes.concat(flattenTree(node.children));
+      }
+    }
+    return flattenedNodes;
+  }
+
   return (
     <>
       <NodeForm
@@ -90,6 +104,7 @@ export default function App() {
         treeData={treeData}
         setTreeData={setTreeData}
         setSearchResults={setSearchResults}
+        flattenTree={flattenTree}
       />
 
       <Container
@@ -105,7 +120,7 @@ export default function App() {
       >
         <SearchBar
           fullWidth={mqSub600}
-          data={treeData}
+          data={flattenTree(treeData)}
           setSearchResults={setSearchResults}
         />
 
@@ -175,12 +190,18 @@ export default function App() {
           />
         </Tabs>
         <Box>
-          {tabValue === 0 ? (
+          {treeData.length === 0 ? (
+            <Typography variant="h3" align="center" sx={{ marginBlock: 2 }}>
+              No nodes to display
+            </Typography>
+          ) : tabValue === 0 ? (
             <TreeView treeData={treeData} />
           ) : (
             tabValue === 1 && (
               <TableComponent
-              // Pass necessary props to the TableComponent
+                searchResults={searchResults}
+                setSearchResults={setSearchResults}
+                handleEdit={handleEdit}
               />
             )
           )}

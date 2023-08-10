@@ -21,6 +21,7 @@ export default function NodeForm({
   treeData,
   setTreeData,
   setSearchResults,
+  flattenTree,
 }) {
   const [parent, setParent] = useState();
   const [name, setName] = useState();
@@ -84,7 +85,7 @@ export default function NodeForm({
 
     // Update the tree data state
     setTreeData(updatedTreeData);
-    setSearchResults(updatedTreeData);
+    setSearchResults(flattenTree(updatedTreeData));
 
     setOpenFormModal(false);
   }
@@ -103,18 +104,6 @@ export default function NodeForm({
       }
     }
     return true;
-  }
-
-  // Flatten the tree structure to get all node names
-  function flattenTree(nodes) {
-    let flattenedNodes = [];
-    for (const node of nodes) {
-      flattenedNodes.push(node);
-      if (node.children.length > 0) {
-        flattenedNodes = flattenedNodes.concat(flattenTree(node.children));
-      }
-    }
-    return flattenedNodes;
   }
 
   useEffect(() => {

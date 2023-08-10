@@ -28,10 +28,6 @@ const tableColumns = [
     label: "Name",
   },
   {
-    key: "link",
-    label: "Link",
-  },
-  {
     key: "description",
     label: "Description",
     xsHide: true,
@@ -41,7 +37,6 @@ const tableColumns = [
 export default function TableComponent({
   searchResults,
   setSearchResults,
-  // handleView,
   handleEdit,
 }) {
   const [sortBy, setSortBy] = useState("");
@@ -94,15 +89,22 @@ export default function TableComponent({
     );
   }
 
-  function getFormatedCellValue(column, value) {
-    if (column.key === "link") {
+  function getFormatedCellValue(column, result) {
+    const cellValue = result[column.key];
+
+    if (column.key === "name" && result.link) {
       return (
-        <Link href={value} target="_blank">
-          {value}
+        <Link href={result.link} target="_blank" rel="noopener noreferrer">
+          {cellValue}
         </Link>
       );
+    } else if (column.key === "parent") {
+      const parentNode = searchResults.find((node) =>
+        node.children.some((child) => child.name === result.name)
+      );
+      return parentNode ? parentNode.name : "Unknown";
     } else {
-      return value;
+      return cellValue;
     }
   }
 
@@ -155,8 +157,6 @@ export default function TableComponent({
         {searchResults.map((result) => (
           <TableRow key={result.id}>
             {tableColumns.map((column) => {
-              const cellValue = result[column.key];
-
               return (
                 <TableCell
                   key={column.key}
@@ -181,7 +181,7 @@ export default function TableComponent({
                     maxWidth: column.showTooltip ? "30ch" : "60ch", // required so the cell doesnt overflow
                   }}
                 >
-                  {getFormatedCellValue(column, cellValue)}
+                  {getFormatedCellValue(column, result)}
                 </TableCell>
               );
             })}
@@ -205,24 +205,6 @@ export default function TableComponent({
                   backgroundColor: result.priority ? "whitesmoke" : "inherit",
                 }}
               >
-                {/* {handleView && (
-                  <Tooltip title="Details" key="Details">
-                    <IconButton
-                      size="small"
-                      onClick={() => handleView(result)}
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#1976d2",
-
-                        borderRadius: 1,
-
-                        width: { xs: 20, md: "unset" },
-                      }}
-                    >
-                      <DetailsIcon />
-                    </IconButton>
-                  </Tooltip>
-                )} */}
                 {handleEdit && (
                   <Tooltip title="Edit" key="Edit">
                     <IconButton
