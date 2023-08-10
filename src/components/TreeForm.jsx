@@ -8,7 +8,7 @@ import {
   InputLabel,
 } from "@mui/material";
 
-export default function TreeForm({ treeData, setTreeData }) {
+export default function TreeForm({ treeData, setTreeData, setSearchResults }) {
   const [formData, setFormData] = useState({
     parent: "",
     name: "",
@@ -27,13 +27,12 @@ export default function TreeForm({ treeData, setTreeData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Prepend "http://" to the link if it does not contain
-    const sanitizeLink = (link) => {
+    function sanitizeLink(link) {
       if (link && !/^https?:\/\//i.test(link)) {
         return `http://${link}`;
       }
       return link;
-    };
+    }
 
     const newNode = {
       name: formData.name,
@@ -72,6 +71,7 @@ export default function TreeForm({ treeData, setTreeData }) {
 
     // Update the tree data state
     setTreeData(updatedTreeData);
+    setSearchResults(updatedTreeData);
 
     // Reset form fields after submission
     setFormData({

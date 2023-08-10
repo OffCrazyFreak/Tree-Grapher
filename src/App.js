@@ -1,12 +1,44 @@
 import { useState } from "react";
-import { Typography, Container, Button, Input } from "@mui/material";
-import TreeForm from "./components/TreeForm";
+import {
+  useMediaQuery,
+  Typography,
+  Container,
+  Button,
+  Tab,
+  Tabs,
+  Box,
+  ButtonGroup,
+} from "@mui/material";
+import {
+  AddCircle as AddCircleIcon,
+  CloudDownload as CloudDownloadIcon,
+  CloudUpload as CloudUploadIcon,
+  AccountTree as AccountTreeIcon,
+  TableChart as TableChartIcon,
+} from "@mui/icons-material";
+import SearchBar from "./components/SearchBar";
+// import TreeForm from "./components/TreeForm";
+import NodeForm from "./components/NodeForm";
 import TreeView from "./components/TreeView";
+import TableComponent from "./components/TableComponent";
 
 export default function App() {
   const [treeData, setTreeData] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleExport = () => {
+  const [tabValue, setTabValue] = useState(0);
+
+  const [openFormModal, setOpenFormModal] = useState(false);
+  const [node, setNode] = useState();
+
+  const mqSub600 = useMediaQuery("(max-width: 600px)");
+
+  function handleEdit(node) {
+    setNode(node);
+    setOpenFormModal(true);
+  }
+
+  function handleExport() {
     const now = new Date();
     const formattedDate = now
       .toISOString()
@@ -23,13 +55,18 @@ export default function App() {
     link.download = fileName;
     link.click();
     URL.revokeObjectURL(url);
-  };
+  }
 
-  const handleImport = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
+  function handleImport() {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".json";
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+
+      const fileReader = new FileReader();
+
+      fileReader.onload = async (e) => {
         try {
           const importedData = JSON.parse(e.target.result);
           setTreeData(importedData);
@@ -37,42 +74,118 @@ export default function App() {
           console.error("Error parsing imported data:", error);
         }
       };
-      reader.readAsText(file);
-    }
-  };
+
+      fileReader.readAsText(file);
+    };
+
+    fileInput.click();
+  }
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Tree Form
-      </Typography>
-      <TreeForm treeData={treeData} setTreeData={setTreeData} />
+    <>
+      <NodeForm
+        node={node}
+        openFormModal={openFormModal}
+        setOpenFormModal={setOpenFormModal}
+        treeData={treeData}
+        setTreeData={setTreeData}
+        setSearchResults={setSearchResults}
+      />
 
-      <label>
-        <Input
-          type="file"
-          accept=".json"
-          style={{ display: "none" }}
-          onChange={handleImport}
-        />
-        <Button variant="contained" color="primary" component="span">
-          Import Tree
-        </Button>
-      </label>
+      <Container
+        sx={{
+          paddingBlock: 2,
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleExport}
-        disabled={treeData.length === 0} // Disable if treeData is empty
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: mqSub600 ? "column" : "row",
+          gap: 2,
+        }}
       >
-        Export Tree
-      </Button>
+        <SearchBar
+          fullWidth={mqSub600}
+          data={treeData}
+          setSearchResults={setSearchResults}
+        />
 
-      <Typography variant="h4" gutterBottom>
-        Tree View
-      </Typography>
-      <TreeView treeData={treeData} />
-    </Container>
+        <ButtonGroup
+          variant="contained"
+          orientation={mqSub600 ? "vertical" : "horizontal"}
+          sx={{ whiteSpace: "nowrap" }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddCircleIcon />}
+            onClick={() => {
+              setNode();
+              setOpenFormModal(true);
+            }}
+          >
+            Add node
+          </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<CloudUploadIcon />}
+            onClick={handleImport}
+          >
+            Import tree
+          </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={treeData.length === 0}
+            startIcon={<CloudDownloadIcon />}
+            onClick={handleExport}
+          >
+            Export tree
+          </Button>
+        </ButtonGroup>
+      </Container>
+
+      <Container>
+        {/* <Typography variant="h4" gutterBottom>
+          Tree Form
+        </Typography>
+        <TreeForm
+          treeData={treeData}
+          setTreeData={setTreeData}
+          setSearchResults={setSearchResults}
+        /> */}
+
+        <Tabs
+          value={tabValue}
+          onChange={(e, newValue) => setTabValue(newValue)}
+          centered
+          // sx={{ width: "100%" }}
+        >
+          <Tab
+            icon={<AccountTreeIcon />}
+            label="Tree View"
+            sx={{ width: "50%" }}
+          />
+          <Tab
+            icon={<TableChartIcon />}
+            label="Table View"
+            sx={{ width: "50%" }}
+          />
+        </Tabs>
+        <Box>
+          {tabValue === 0 ? (
+            <TreeView treeData={treeData} />
+          ) : (
+            tabValue === 1 && (
+              <TableComponent
+              // Pass necessary props to the TableComponent
+              />
+            )
+          )}
+        </Box>
+      </Container>
+    </>
   );
 }
