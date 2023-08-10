@@ -1,34 +1,30 @@
-import { List, ListItem, ListItemText, Link, Tooltip } from "@mui/material";
+import React from "react";
+
+function TreeNode({ node, level }) {
+  const paddingLeft = `${level * 10}px`; // Adjust the padding based on the level
+
+  return (
+    <div style={{ paddingLeft }}>
+      {level > 0 && "├── "}{" "}
+      {/* Display the appropriate prefix based on the level */}
+      {node.name}
+      {node.children && node.children.length > 0 && (
+        <div>
+          {node.children.map((child) => (
+            <TreeNode key={child.name} node={child} level={level + 1} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function TreeView({ treeData }) {
-  const renderTree = (nodes, level = 0) => (
-    <List>
-      {nodes.map((node, index) => (
-        <ListItem key={index}>
-          <ListItemText
-            primary={
-              <Tooltip title={node.description}>
-                {node.link ? (
-                  <Link
-                    href={node.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {node.name}
-                  </Link>
-                ) : (
-                  node.name
-                )}
-              </Tooltip>
-            }
-          />
-          {node.children.length > 0 && (
-            <ul>{renderTree(node.children, level + 1)}</ul>
-          )}
-        </ListItem>
+  return (
+    <div>
+      {treeData.map((rootNode) => (
+        <TreeNode key={rootNode.name} node={rootNode} level={0} />
       ))}
-    </List>
+    </div>
   );
-
-  return <div>{renderTree(treeData)}</div>;
 }

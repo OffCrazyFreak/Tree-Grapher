@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   useMediaQuery,
   Typography,
@@ -13,16 +12,22 @@ import {
   AddCircle as AddCircleIcon,
   CloudDownload as CloudDownloadIcon,
   CloudUpload as CloudUploadIcon,
+  Delete as DeleteIcon,
   AccountTree as AccountTreeIcon,
   TableChart as TableChartIcon,
 } from "@mui/icons-material";
+
+import { useState } from "react";
+
 import SearchBar from "./components/SearchBar";
-// import TreeForm from "./components/TreeForm";
 import NodeForm from "./components/NodeForm";
 import TreeView from "./components/TreeView";
-import TableComponent from "./components/TableComponent";
+import TableComponent from "./components/TableView";
 
 export default function App() {
+  const mqSub480 = useMediaQuery("(max-width: 480px)");
+  const mqSub720 = useMediaQuery("(max-width: 720px)");
+
   const [treeData, setTreeData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -30,13 +35,6 @@ export default function App() {
 
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
-
-  const mqSub600 = useMediaQuery("(max-width: 600px)");
-
-  function handleEdit(node) {
-    setNode(node);
-    setOpenFormModal(true);
-  }
 
   function handleExport() {
     const now = new Date();
@@ -70,8 +68,7 @@ export default function App() {
         try {
           const importedData = JSON.parse(e.target.result);
 
-          setTreeData(importedData);
-          setSearchResults(flattenTree(importedData));
+          updateData(importedData);
         } catch (error) {
           console.error("Error parsing imported data:", error);
         }
@@ -83,16 +80,71 @@ export default function App() {
     fileInput.click();
   }
 
-  // Flatten the tree structure to get all node names
-  function flattenTree(nodes) {
-    let flattenedNodes = [];
-    for (const node of nodes) {
-      flattenedNodes.push(node);
-      if (node.children.length > 0) {
-        flattenedNodes = flattenedNodes.concat(flattenTree(node.children));
+  function handleEdit(node) {
+    setNode(node);
+    setOpenFormModal(true);
+  }
+
+  function handleDelete(node) {
+    // Find the parent node that contains the node to be deleted
+    const findParent = (parentNode, targetName) => {
+      for (let i = 0; i < parentNode.children.length; i++) {
+        if (parentNode.children[i].name === targetName) {
+          if (parentNode.children[i].children.length > 0) {
+            console.error("Cannot delete a node with children.");
+          } else {
+            parentNode.children.splice(i, 1);
+          }
+          return true;
+        } else if (findParent(parentNode.children[i], targetName)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // Find and remove the node from treeData
+    for (let i = 0; i < treeData.length; i++) {
+      if (treeData[i].name === node.name) {
+        if (treeData[i].children.length > 0) {
+          console.error("Cannot delete a node with children.");
+        } else {
+          treeData.splice(i, 1);
+          setSearchResults(flattenTree(treeData));
+        }
+        return;
+      } else if (findParent(treeData[i], node.name)) {
+        setSearchResults(flattenTree(treeData));
+        return;
       }
     }
-    return flattenedNodes;
+
+    console.error("Node not found.");
+  }
+
+  // Returns a list of node objects in format { parent, name, link, description }
+  function flattenTree(nodes) {
+    const nodesList = [];
+
+    function traverseTree(nodes, parentName) {
+      for (const currentNode of nodes) {
+        const { name, link, description, children } = currentNode;
+        nodesList.push({ parent: parentName, name, link, description });
+
+        if (children && children.length > 0) {
+          traverseTree(children, name);
+        }
+      }
+    }
+
+    traverseTree(nodes, "Unknown");
+
+    return nodesList;
+  }
+
+  function updateData(data) {
+    setTreeData(data);
+    setSearchResults(flattenTree(data));
   }
 
   return (
@@ -102,10 +154,32 @@ export default function App() {
         openFormModal={openFormModal}
         setOpenFormModal={setOpenFormModal}
         treeData={treeData}
-        setTreeData={setTreeData}
-        setSearchResults={setSearchResults}
-        flattenTree={flattenTree}
+        searchResults={searchResults}
+        updateData={updateData}
       />
+
+      <Container>
+        <Typography variant="h2" align="center" sx={{ paddingBlock: 1 }}>
+          Tree Grapher
+        </Typography>
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom={false}
+          sx={{ paddingBlock: 0.5 }}
+        >
+          - A simple tree graph maker -
+        </Typography>
+        <Typography
+          variant="body2"
+          align="center"
+          gutterBottom={false}
+          sx={{ paddingBlock: 0.5 }}
+        >
+          Remember to export your tree graph before deleting or exiting the
+          application
+        </Typography>
+      </Container>
 
       <Container
         sx={{
@@ -114,20 +188,19 @@ export default function App() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexDirection: mqSub600 ? "column" : "row",
+          flexDirection: mqSub720 ? "column" : "row",
           gap: 2,
         }}
       >
         <SearchBar
-          fullWidth={mqSub600}
+          fullWidth={mqSub720}
           data={flattenTree(treeData)}
           setSearchResults={setSearchResults}
         />
 
         <ButtonGroup
           variant="contained"
-          orientation={mqSub600 ? "vertical" : "horizontal"}
-          sx={{ whiteSpace: "nowrap" }}
+          orientation={mqSub480 ? "vertical" : "horizontal"}
         >
           <Button
             variant="contained"
@@ -159,24 +232,24 @@ export default function App() {
           >
             Export tree
           </Button>
+
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={treeData.length === 0}
+            startIcon={<DeleteIcon />}
+            onClick={() => updateData([])}
+          >
+            Clear all
+          </Button>
         </ButtonGroup>
       </Container>
 
       <Container>
-        {/* <Typography variant="h4" gutterBottom>
-          Tree Form
-        </Typography>
-        <TreeForm
-          treeData={treeData}
-          setTreeData={setTreeData}
-          setSearchResults={setSearchResults}
-        /> */}
-
         <Tabs
           value={tabValue}
           onChange={(e, newValue) => setTabValue(newValue)}
           centered
-          // sx={{ width: "100%" }}
         >
           <Tab
             icon={<AccountTreeIcon />}
@@ -190,8 +263,8 @@ export default function App() {
           />
         </Tabs>
         <Box>
-          {treeData.length === 0 ? (
-            <Typography variant="h3" align="center" sx={{ marginBlock: 2 }}>
+          {searchResults.length === 0 ? (
+            <Typography variant="h4" align="center" sx={{ marginBlock: 2 }}>
               No nodes to display
             </Typography>
           ) : tabValue === 0 ? (
@@ -202,6 +275,7 @@ export default function App() {
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
                 handleEdit={handleEdit}
+                handleDelete={handleDelete}
               />
             )
           )}

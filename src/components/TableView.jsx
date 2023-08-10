@@ -10,22 +10,19 @@ import {
   Box,
   Tooltip,
 } from "@mui/material";
-import {
-  // Visibility as DetailsIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-} from "@mui/icons-material";
+import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const tableColumns = [
   {
-    key: "parent",
-    label: "Parent",
-  },
-  {
     key: "name",
     label: "Name",
+  },
+  {
+    key: "parent",
+    label: "Parent",
+    xsHide: true,
   },
   {
     key: "description",
@@ -38,16 +35,10 @@ export default function TableComponent({
   searchResults,
   setSearchResults,
   handleEdit,
+  handleDelete,
 }) {
   const [sortBy, setSortBy] = useState("");
   const [sortDirection, setSortDirection] = useState("desc");
-
-  function handleDelete(company) {
-    // setObject({ type: "Company", name: company.name });
-    // setEndpoint("/companies/" + company.id);
-    // setPopulateObjects({ function: populateTable });
-    // setOpenDeleteAlert(true);
-  }
 
   function handleSort(column) {
     if (column.key === sortBy) {
@@ -70,14 +61,6 @@ export default function TableComponent({
           return 1;
         } else if (b[column.key] === null) {
           return -1;
-        } else if (column.key === "frresp") {
-          (
-            a[column.key].firstName +
-            " " +
-            a[column.key].lastName
-          ).localeCompare(
-            b[column.key].firstName + " " + b[column.key].lastName
-          );
         } else {
           // TODO: sorting numbers is still broken
           // toString needed when sorting numbers
@@ -98,16 +81,12 @@ export default function TableComponent({
           {cellValue}
         </Link>
       );
-    } else if (column.key === "parent") {
-      const parentNode = searchResults.find((node) =>
-        node.children.some((child) => child.name === result.name)
-      );
-      return parentNode ? parentNode.name : "Unknown";
     } else {
       return cellValue;
     }
   }
 
+  useEffect(() => {}, [searchResults]);
   return (
     <Table
       stickyHeader
@@ -124,14 +103,11 @@ export default function TableComponent({
               sx={{
                 display: {
                   xs: column.xsHide ? "none" : "table-cell",
-                  md: column.mdHide ? "none" : "table-cell",
-                  lg: "table-cell",
+                  md: "table-cell",
                 },
                 padding: 0.5,
 
                 width: "min-content",
-
-                textAlign: column.centerContent && "center",
 
                 whiteSpace: "nowrap",
               }}
@@ -155,7 +131,7 @@ export default function TableComponent({
       </TableHead>
       <TableBody>
         {searchResults.map((result) => (
-          <TableRow key={result.id}>
+          <TableRow key={result.name}>
             {tableColumns.map((column) => {
               return (
                 <TableCell
@@ -189,8 +165,6 @@ export default function TableComponent({
             <TableCell
               sx={{
                 padding: 0.5,
-
-                backgroundColor: result.priority ? "whitesmoke" : "inherit",
               }}
             >
               <Box
@@ -201,8 +175,6 @@ export default function TableComponent({
                   gap: 0.5,
 
                   padding: 0.5,
-
-                  backgroundColor: result.priority ? "whitesmoke" : "inherit",
                 }}
               >
                 {handleEdit && (
@@ -215,8 +187,6 @@ export default function TableComponent({
                         backgroundColor: "#1976d2",
 
                         borderRadius: 1,
-
-                        width: { xs: 20, md: "unset" },
                       }}
                     >
                       <EditIcon />
@@ -233,8 +203,6 @@ export default function TableComponent({
                         backgroundColor: "#1976d2",
 
                         borderRadius: 1,
-
-                        width: { xs: 20, md: "unset" },
                       }}
                     >
                       <DeleteIcon />
