@@ -31,7 +31,7 @@ const tableColumns = [
   },
 ];
 
-export default function TableComponent({
+export default function TableView({
   searchResults,
   setSearchResults,
   handleEdit,

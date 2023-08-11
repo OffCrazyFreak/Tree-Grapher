@@ -1,4 +1,5 @@
 import {
+  CssBaseline,
   useMediaQuery,
   Typography,
   Container,
@@ -21,8 +22,8 @@ import { useState } from "react";
 
 import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
-import TreeView from "./components/TreeView";
-import TableComponent from "./components/TableView";
+import ControlledTreeView from "./components/ControlledTreeView";
+import TableView from "./components/TableView";
 
 export default function App() {
   const mqSub480 = useMediaQuery("(max-width: 480px)");
@@ -122,7 +123,7 @@ export default function App() {
     console.error("Node not found.");
   }
 
-  // Returns a list of node objects in format { parent, name, link, description }
+  // Returns a sorted list of node objects in format { parent, name, link, description }
   function flattenTree(nodes) {
     const nodesList = [];
 
@@ -139,6 +140,8 @@ export default function App() {
 
     traverseTree(nodes, "Unknown");
 
+    nodesList.sort((a, b) => a.name.localeCompare(b.name)); // Sort nodes by names
+
     return nodesList;
   }
 
@@ -149,6 +152,8 @@ export default function App() {
 
   return (
     <>
+      <CssBaseline />
+
       <NodeForm
         node={node}
         openFormModal={openFormModal}
@@ -268,10 +273,13 @@ export default function App() {
               No nodes to display
             </Typography>
           ) : tabValue === 0 ? (
-            <TreeView treeData={treeData} />
+            <ControlledTreeView
+              treeData={treeData}
+              searchResults={searchResults}
+            />
           ) : (
             tabValue === 1 && (
-              <TableComponent
+              <TableView
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
                 handleEdit={handleEdit}
