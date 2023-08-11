@@ -18,7 +18,7 @@ import {
   TableChart as TableChartIcon,
 } from "@mui/icons-material";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
@@ -148,7 +148,28 @@ export default function App() {
   function updateData(data) {
     setTreeData(data);
     setSearchResults(flattenTree(data));
+
+    // Store data in localStorage
+    if (data.length > 0) {
+      localStorage.setItem("treeData", JSON.stringify(data));
+    } else {
+      localStorage.removeItem("treeData");
+    }
   }
+
+  useEffect(() => {
+    // Retrieve data from localStorage
+    const storedTreeData = localStorage.getItem("treeData");
+
+    // Parse the stored JSON string back to an object
+    if (storedTreeData) {
+      const parsedData = JSON.parse(storedTreeData);
+
+      // Update state with the retrieved data
+      setTreeData(parsedData);
+      setSearchResults(flattenTree(parsedData));
+    }
+  }, []);
 
   return (
     <>
@@ -198,7 +219,6 @@ export default function App() {
         }}
       >
         <SearchBar
-          fullWidth={mqSub720}
           data={flattenTree(treeData)}
           setSearchResults={setSearchResults}
         />

@@ -1,4 +1,5 @@
 import {
+  useMediaQuery,
   Autocomplete,
   TextField,
   InputAdornment,
@@ -6,7 +7,9 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
-export default function SearchBar({ fullWidth, data, setSearchResults }) {
+export default function SearchBar({ data, setSearchResults }) {
+  const mqSub720 = useMediaQuery("(max-width: 720px)");
+
   function handleChange(value) {
     value = value.toLowerCase();
 
@@ -58,7 +61,7 @@ export default function SearchBar({ fullWidth, data, setSearchResults }) {
         />
       )}
       sx={
-        fullWidth
+        mqSub720
           ? { width: "100%", maxWidth: "none" }
           : { width: "50%", maxWidth: "25rem" }
       }
