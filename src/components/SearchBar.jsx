@@ -45,6 +45,7 @@ export default function SearchBar({ data, setSearchResults }) {
             <Tooltip
               title="In Tree View expands nodes to the desired node, its siblings, and children. In Table View shows nodes whose names contain the search query."
               arrow
+              placement="top"
               enterTouchDelay={0}
               onClick={(e) => e.stopPropagation()} // Prevents Autocomplete from closing
             >

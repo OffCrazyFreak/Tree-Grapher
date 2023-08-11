@@ -63,7 +63,12 @@ export default function ControlledTreeView({ treeData, searchResults }) {
 
     // Add tooltip if description exists
     const label = node.description ? (
-      <Tooltip title={node.description} arrow enterTouchDelay={0}>
+      <Tooltip
+        title={node.description}
+        placement="top"
+        arrow
+        enterTouchDelay={0}
+      >
         {link}
         <InfoIcon
           fontSize="inherit"
