@@ -53,7 +53,7 @@ export default function NodeForm({
       updatedTreeData = replaceSubtree(updatedTreeData, node.name, updatedNode);
     } else {
       if (node) {
-        if (node.parent !== "Unknown") {
+        if (node.parent !== "No parent (root node)") {
           // Remove node from old parent's children
           const oldParentSubtree = findSubtree(updatedTreeData, node.parent);
           oldParentSubtree.children = oldParentSubtree.children.filter(
@@ -72,7 +72,7 @@ export default function NodeForm({
         }
       }
 
-      if (parent.name === "Unknown") {
+      if (parent.name === "No parent (root node)") {
         // Adding or updating a root node
         updatedTreeData.push(updatedNode);
       } else {
@@ -158,7 +158,7 @@ export default function NodeForm({
   }
 
   useEffect(() => {
-    setParent({ name: node?.parent || "Unknown" });
+    setParent({ name: node?.parent || "No parent (root node)" });
     setName(node?.name);
     setLink(node?.link);
     setDescription(node?.description);
@@ -219,7 +219,7 @@ export default function NodeForm({
               }}
             >
               <Autocomplete
-                options={[{ name: "Unknown" }, ...searchResults]}
+                options={[{ name: "No parent (root node)" }, ...searchResults]}
                 clearOnEscape
                 openOnFocus
                 disabled={treeData.length === 0}

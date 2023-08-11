@@ -138,7 +138,7 @@ export default function App() {
       }
     }
 
-    traverseTree(nodes, "Unknown");
+    traverseTree(nodes, "No parent (root node)");
 
     nodesList.sort((a, b) => a.name.localeCompare(b.name)); // Sort nodes by names
 
