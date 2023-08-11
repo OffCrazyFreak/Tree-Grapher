@@ -12,8 +12,6 @@ import { useState } from "react";
 export default function SearchBar({ data, setSearchResults }) {
   const mqSub720 = useMediaQuery("(max-width: 720px)");
 
-  const [inputFocused, setInputFocused] = useState(false);
-
   function handleChange(value) {
     value = value.toLowerCase();
 
@@ -28,8 +26,6 @@ export default function SearchBar({ data, setSearchResults }) {
     <Autocomplete
       freeSolo
       size="small"
-      onFocus={() => setInputFocused(true)}
-      onBlur={() => setInputFocused(false)}
       onInputChange={(e, inputValue) => {
         handleChange(inputValue);
       }}
