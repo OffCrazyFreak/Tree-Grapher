@@ -222,6 +222,7 @@ export default function NodeForm({
                 options={[{ name: "Unknown" }, ...searchResults]}
                 clearOnEscape
                 openOnFocus
+                disabled={treeData.length === 0}
                 value={parent}
                 getOptionLabel={(option) => option.name} // Display node names
                 isOptionEqualToValue={(option, value) =>
