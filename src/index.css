@@ -33,3 +33,8 @@ body {
   flex-direction: column;
   height: 100%;
 }
+
+.MuiLink-root:hover,
+.MuiLink-root:focus {
+  color: #666;
+}

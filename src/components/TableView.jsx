@@ -77,7 +77,12 @@ export default function TableView({
 
     if (column.key === "name" && result.link) {
       return (
-        <Link href={result.link} target="_blank" rel="noopener noreferrer">
+        <Link
+          href={result.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          underline="none"
+        >
           {cellValue}
         </Link>
       );

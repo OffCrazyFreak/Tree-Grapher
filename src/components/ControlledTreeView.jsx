@@ -1,4 +1,5 @@
 import { TreeView, TreeItem } from "@mui/lab";
+import { Link, Tooltip } from "@mui/material";
 import {
   ExpandMore as ExpandMoreIcon,
   ChevronRight as ChevronRightIcon,
@@ -14,7 +15,10 @@ export default function ControlledTreeView({ treeData, searchResults }) {
   };
 
   useEffect(() => {
+    // Create a list of node names that are included in search results
     const expandedNodes = searchResults.map((node) => node.name);
+
+    // Create a set of parent node names for the nodes in search results
     const parentNodes = searchResults.reduce((parents, node) => {
       let parentNode = findParentNode(treeData, node);
       while (parentNode) {
@@ -24,27 +28,62 @@ export default function ControlledTreeView({ treeData, searchResults }) {
       return parents;
     }, new Set());
 
+    // Set the expanded state to include both expandedNodes and parentNodes
     setExpanded([...expandedNodes, ...parentNodes]);
   }, [searchResults]);
 
+  // Recursive function to find the parent node of a given targetNode
   const findParentNode = (nodes, targetNode) => {
     for (const node of nodes) {
+      // Check if any child of the current node matches the targetNode
       if (node.children.some((child) => child.name === targetNode.name)) {
-        return node;
+        return node; // Return the current node as the parent
       }
+
+      // Recursively search for the parent node in the children of the current node
       const foundParent = findParentNode(node.children, targetNode);
       if (foundParent) {
-        return foundParent;
+        return foundParent; // Return the parent found in the children
       }
     }
-    return null;
+    return null; // Return null if no parent node is found
   };
 
-  const renderTree = (nodes) => (
-    <TreeItem key={nodes.name} nodeId={nodes.name} label={nodes.name}>
-      {nodes.children.map((node) => renderTree(node))}
-    </TreeItem>
-  );
+  const renderTree = (node, depth = 0) => {
+    // Add link if exists
+    const link = node.link ? (
+      <Link
+        href={node.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        underline="none"
+      >
+        {node.name}
+      </Link>
+    ) : (
+      node.name
+    );
+
+    // Add tooltip if description exists
+    const label = node.description ? (
+      <Tooltip title={node.description} arrow>
+        {link}
+      </Tooltip>
+    ) : (
+      link
+    );
+
+    return (
+      <TreeItem
+        key={node.name}
+        nodeId={node.name}
+        label={label}
+        sx={{ paddingLeft: depth + "vw" }}
+      >
+        {node.children.map((childNode) => renderTree(childNode, depth + 1))}
+      </TreeItem>
+    );
+  };
 
   return (
     <TreeView
