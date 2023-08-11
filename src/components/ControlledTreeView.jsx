@@ -3,16 +3,13 @@ import { Link, Tooltip } from "@mui/material";
 import {
   ExpandMore as ExpandMoreIcon,
   ChevronRight as ChevronRightIcon,
+  Info as InfoIcon,
 } from "@mui/icons-material";
 
 import { useState, useEffect } from "react";
 
 export default function ControlledTreeView({ treeData, searchResults }) {
   const [expanded, setExpanded] = useState([]);
-
-  const handleToggleExpand = (e, nodeIds) => {
-    setExpanded(nodeIds);
-  };
 
   useEffect(() => {
     // Create a list of node names that are included in search results
@@ -66,8 +63,12 @@ export default function ControlledTreeView({ treeData, searchResults }) {
 
     // Add tooltip if description exists
     const label = node.description ? (
-      <Tooltip title={node.description} arrow>
+      <Tooltip title={node.description} arrow enterTouchDelay={0}>
         {link}
+        <InfoIcon
+          fontSize="inherit"
+          sx={{ verticalAlign: "middle", paddingLeft: 0.2, color: "#444" }}
+        />
       </Tooltip>
     ) : (
       link
@@ -90,7 +91,10 @@ export default function ControlledTreeView({ treeData, searchResults }) {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={expanded}
-      onNodeToggle={handleToggleExpand}
+      onNodeToggle={(e, nodeIds) => {
+        setExpanded(nodeIds);
+      }}
+      multiSelect
       sx={{ overflowX: "auto" }}
     >
       {treeData.map((rootNode) => renderTree(rootNode))}

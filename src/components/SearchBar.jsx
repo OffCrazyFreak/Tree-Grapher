@@ -7,8 +7,12 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
+import { useState } from "react";
+
 export default function SearchBar({ data, setSearchResults }) {
   const mqSub720 = useMediaQuery("(max-width: 720px)");
+
+  const [inputFocused, setInputFocused] = useState(false);
 
   function handleChange(value) {
     value = value.toLowerCase();
@@ -24,6 +28,8 @@ export default function SearchBar({ data, setSearchResults }) {
     <Autocomplete
       freeSolo
       size="small"
+      onFocus={() => setInputFocused(true)}
+      onBlur={() => setInputFocused(false)}
       onInputChange={(e, inputValue) => {
         handleChange(inputValue);
       }}
@@ -39,7 +45,20 @@ export default function SearchBar({ data, setSearchResults }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search nodes"
+          label={
+            <Tooltip
+              title="In Tree View expands nodes to the desired node, its siblings, and children. In Table View shows nodes whose names contain the search query."
+              arrow
+              enterTouchDelay={0}
+              onClick={(e) => e.stopPropagation()} // Prevents Autocomplete from closing
+            >
+              Search nodes
+              <InfoIcon
+                fontSize="small"
+                sx={{ verticalAlign: "middle", paddingLeft: 0.2 }}
+              />
+            </Tooltip>
+          }
           InputProps={{
             ...params.InputProps,
             startAdornment: (
@@ -47,24 +66,13 @@ export default function SearchBar({ data, setSearchResults }) {
                 <SearchIcon />
               </InputAdornment>
             ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip
-                  title="In Tree View expands nodes to the desired node, its siblings, and children. In Table View shows nodes whose names contain the search query."
-                  arrow
-                >
-                  <InfoIcon />
-                </Tooltip>
-              </InputAdornment>
-            ),
           }}
         />
       )}
-      sx={
-        mqSub720
-          ? { width: "100%", maxWidth: "none" }
-          : { width: "50%", maxWidth: "25rem" }
-      }
+      sx={{
+        width: mqSub720 ? "100%" : "50%",
+        maxWidth: mqSub720 ? "none" : "25rem",
+      }}
     />
   );
 }
