@@ -1,5 +1,10 @@
-import { Autocomplete, TextField, InputAdornment } from "@mui/material";
-import { Search as SearchIcon } from "@mui/icons-material";
+import {
+  Autocomplete,
+  TextField,
+  InputAdornment,
+  Tooltip,
+} from "@mui/material";
+import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
 export default function SearchBar({ fullWidth, data, setSearchResults }) {
   function handleChange(value) {
@@ -37,6 +42,16 @@ export default function SearchBar({ fullWidth, data, setSearchResults }) {
             startAdornment: (
               <InputAdornment position="end">
                 <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip
+                  title="In Tree View expands nodes to the desired node, its siblings, and children. In Table View shows nodes whose names contain the search query."
+                  arrow
+                >
+                  <InfoIcon />
+                </Tooltip>
               </InputAdornment>
             ),
           }}
