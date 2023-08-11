@@ -232,6 +232,7 @@ export default function App() {
             color="primary"
             startIcon={<AddCircleIcon />}
             onClick={() => {
+              setSearchResults(flattenTree(treeData));
               setNode();
               setOpenFormModal(true);
             }}
