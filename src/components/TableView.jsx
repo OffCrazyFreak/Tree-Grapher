@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const tableColumns = [
   {
