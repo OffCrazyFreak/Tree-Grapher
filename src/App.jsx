@@ -233,7 +233,7 @@ export default function App() {
             gutterBottom={false}
             sx={{ paddingBlock: 0.5 }}
           >
-            - A simple tree graph maker -
+            ~ A simple tree graph maker ~
           </Typography>
         </Container>
 
@@ -362,6 +362,7 @@ export default function App() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexDirection: { xs: "column", sm: "row" },
 
           backgroundColor: (theme) => theme.palette.primary.main,
 
@@ -378,9 +379,11 @@ export default function App() {
           <GitHubIcon />
         </IconButton>
 
-        <Typography>Remember to export your tree graph</Typography>
+        <Typography align="center">
+          ~ Remember to export your tree graph ~
+        </Typography>
         <Typography
-          sx={{ cursor: "pointer" }}
+          align="center"
           onClick={() => {
             if (
               treeData.length === 0 ||
@@ -391,11 +394,14 @@ export default function App() {
               updateData(SampleTreeData);
             }
           }}
+          sx={{ cursor: "pointer" }}
         >
-          Import sample tree graph
+          ~ Import sample tree graph ~
         </Typography>
 
-        <Typography>&copy; Jakov Jakovac {new Date().getFullYear()}</Typography>
+        <Typography align="center">
+          &copy; Jakov Jakovac {new Date().getFullYear()}
+        </Typography>
       </Container>
     </>
   );
