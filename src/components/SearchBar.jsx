@@ -1,5 +1,4 @@
 import {
-  useMediaQuery,
   Autocomplete,
   TextField,
   InputAdornment,

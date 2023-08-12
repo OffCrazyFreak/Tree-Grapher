@@ -98,8 +98,6 @@ export default function TableView({
     }
   }
 
-  useEffect(() => {}, [searchResults]);
-
   return (
     <Table
       stickyHeader

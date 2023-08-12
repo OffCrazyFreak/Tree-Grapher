@@ -275,7 +275,16 @@ export default function App() {
               variant="contained"
               color="primary"
               startIcon={<CloudUploadIcon />}
-              onClick={handleImport}
+              onClick={() => {
+                if (
+                  treeData.length === 0 ||
+                  window.confirm(
+                    "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
+                  )
+                ) {
+                  handleImport();
+                }
+              }}
             >
               Import tree
             </Button>
@@ -372,7 +381,16 @@ export default function App() {
         <Typography>Remember to export your tree graph</Typography>
         <Typography
           sx={{ cursor: "pointer" }}
-          onClick={() => updateData(SampleTreeData)}
+          onClick={() => {
+            if (
+              treeData.length === 0 ||
+              window.confirm(
+                "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
+              )
+            ) {
+              updateData(SampleTreeData);
+            }
+          }}
         >
           Import sample tree graph
         </Typography>
