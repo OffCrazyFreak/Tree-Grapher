@@ -96,6 +96,10 @@ export default function App() {
           if (parentNode.children[i].children.length > 0) {
             console.error("Cannot delete a node with children.");
           } else {
+            if (node.name === selectedTreeNode) {
+              setSelectedTreeNode(null);
+            }
+
             parentNode.children.splice(i, 1);
           }
           return true;
@@ -112,6 +116,10 @@ export default function App() {
         if (treeData[i].children.length > 0) {
           console.error("Cannot delete a node with children.");
         } else {
+          if (node.name === selectedTreeNode) {
+            setSelectedTreeNode(null);
+          }
+
           treeData.splice(i, 1);
           setSearchResults(flattenTree(treeData));
         }
@@ -205,8 +213,7 @@ export default function App() {
           gutterBottom={false}
           sx={{ paddingBlock: 0.5 }}
         >
-          Remember to export your tree graph before deleting or exiting the
-          application
+          Remember to export your tree graph
         </Typography>
       </Container>
 
@@ -267,7 +274,10 @@ export default function App() {
             color="primary"
             disabled={treeData.length === 0}
             startIcon={<DeleteIcon />}
-            onClick={() => updateData([])}
+            onClick={() => {
+              setSelectedTreeNode(null);
+              updateData([]);
+            }}
           >
             Clear all
           </Button>
@@ -291,7 +301,7 @@ export default function App() {
             sx={{ width: "50%" }}
           />
         </Tabs>
-        <Box>
+        <Box paddingBlock="1rem">
           {searchResults.length === 0 ? (
             <Typography variant="h4" align="center" sx={{ marginBlock: 2 }}>
               No nodes to display

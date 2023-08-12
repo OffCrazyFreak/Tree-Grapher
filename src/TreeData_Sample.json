@@ -1,0 +1,231 @@
+[
+  {
+    "name": "CEO 1",
+    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+    "description": "Chief Executive Officer",
+    "children": [
+      {
+        "name": "CCO",
+        "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+        "description": "Chief Financial Officer",
+        "children": []
+      },
+      {
+        "name": "CVO",
+        "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+        "description": "Chief Vision Officer",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "CEO 2",
+    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+    "description": "Chief Executive Officer",
+    "children": [
+      {
+        "name": "CFO",
+        "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+        "description": "Chief Financial Officer",
+        "children": [
+          {
+            "name": "Accounting",
+            "link": null,
+            "description": "Financial Management",
+            "children": [
+              {
+                "name": "Accounts Receivable",
+                "link": null,
+                "description": "Manage Incoming Payments",
+                "children": [
+                  {
+                    "name": "Collections",
+                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                    "description": "Debt Collection",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Accounts Payable",
+                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                "description": "Manage Outgoing Payments",
+                "children": [
+                  {
+                    "name": "Vendor Management",
+                    "link": null,
+                    "description": "Supplier Relations",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Financial Planning",
+            "link": null,
+            "description": "Budgeting and Forecasting",
+            "children": [
+              {
+                "name": "Strategic Planning",
+                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                "description": "Long-Term Financial Goals",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CTO",
+        "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+        "description": "Chief Technology Officer",
+        "children": [
+          {
+            "name": "Engineering",
+            "link": null,
+            "description": "Software and Hardware Development",
+            "children": [
+              {
+                "name": "Software Engineering",
+                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                "description": "Application Development",
+                "children": [
+                  {
+                    "name": "Front-End Development",
+                    "link": null,
+                    "description": "User Interface Design",
+                    "children": []
+                  },
+                  {
+                    "name": "Back-End Development",
+                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                    "description": "Server-Side Logic",
+                    "children": [
+                      {
+                        "name": "Database Management",
+                        "link": null,
+                        "description": "Data Storage",
+                        "children": [
+                          {
+                            "name": "Relational Databases",
+                            "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                            "description": "Structured Data Storage",
+                            "children": [
+                              {
+                                "name": "MySQL",
+                                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                "description": "Relational Database",
+                                "children": []
+                              },
+                              {
+                                "name": "PostgreSQL",
+                                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                "description": "Open Source RDBMS",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "NoSQL Databases",
+                            "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                            "description": "Flexible Data Storage",
+                            "children": [
+                              {
+                                "name": "Document Databases",
+                                "link": null,
+                                "description": "JSON-Like Documents",
+                                "children": [
+                                  {
+                                    "name": "MongoDB",
+                                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                    "description": "NoSQL Document Database",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "CouchDB",
+                                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                    "description": "Distributed Document Database",
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "Graph Databases",
+                                "link": null,
+                                "description": "Relationship-Focused Data",
+                                "children": [
+                                  {
+                                    "name": "Neo4j",
+                                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                    "description": "Graph Database",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "ArangoDB",
+                                    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                                    "description": "Multi-Model Database",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Hardware Engineering",
+                "link": null,
+                "description": "Physical Device Design",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "IT",
+            "link": null,
+            "description": "Information Technology",
+            "children": [
+              {
+                "name": "Network Administration",
+                "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+                "description": "Network Maintenance",
+                "children": []
+              },
+              {
+                "name": "Security",
+                "link": null,
+                "description": "Data and Network Security",
+                "children": [
+                  {
+                    "name": "Cybersecurity",
+                    "link": null,
+                    "description": "Protect Against Threats",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CEO 3",
+    "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+    "description": "Chief Executive Officer",
+    "children": [
+      {
+        "name": "COO",
+        "link": "https://github.com/OffCrazyFreak/Tree-Grapher",
+        "description": "Chief Operating officer",
+        "children": []
+      }
+    ]
+  }
+]

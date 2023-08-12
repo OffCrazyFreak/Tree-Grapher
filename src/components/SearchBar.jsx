@@ -30,7 +30,7 @@ export default function SearchBar({ data, setSearchResults }) {
         handleChange(inputValue);
       }}
       options={data.map((item) => ({
-        value: item.id,
+        value: item.name,
         label: item.name,
       }))}
       renderOption={(props, option) => (
@@ -49,11 +49,13 @@ export default function SearchBar({ data, setSearchResults }) {
               enterTouchDelay={0}
               onClick={(e) => e.stopPropagation()} // Prevents Autocomplete from closing
             >
-              Search nodes
-              <InfoIcon
-                fontSize="small"
-                sx={{ verticalAlign: "middle", paddingLeft: 0.2 }}
-              />
+              <span>
+                Search nodes
+                <InfoIcon
+                  fontSize="small"
+                  sx={{ verticalAlign: "middle", paddingLeft: 0.2 }}
+                />
+              </span>
             </Tooltip>
           }
           InputProps={{
