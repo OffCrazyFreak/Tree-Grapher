@@ -24,6 +24,7 @@ import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
+import DeleteAlert from "./components/DeleteAlert";
 
 export default function App() {
   const mqSub480 = useMediaQuery("(max-width: 480px)");
@@ -35,6 +36,8 @@ export default function App() {
 
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
+
+  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
 
   const [selectedTreeNode, setSelectedTreeNode] = useState(null);
 
@@ -82,12 +85,12 @@ export default function App() {
     fileInput.click();
   }
 
-  function handleEdit(node) {
+  function handleEditNode(node) {
     setNode(node);
     setOpenFormModal(true);
   }
 
-  function handleDelete(node) {
+  function handleDeleteNode(node) {
     // Find the parent node that contains the node to be deleted
     const findParent = (parentNode, targetName) => {
       for (let i = 0; i < parentNode.children.length; i++) {
@@ -130,6 +133,13 @@ export default function App() {
     }
 
     console.error("Node not found.");
+  }
+
+  function handleDeleteTree() {
+    setOpenDeleteAlert(false);
+
+    setSelectedTreeNode(null);
+    updateData([]);
   }
 
   // Returns a sorted list of node objects in format { parent, name, link, description }
@@ -192,6 +202,12 @@ export default function App() {
         searchResults={searchResults}
         updateData={updateData}
         selectedTreeNode={selectedTreeNode}
+      />
+
+      <DeleteAlert
+        openDeleteAlert={openDeleteAlert}
+        setOpenDeleteAlert={setOpenDeleteAlert}
+        deleteFunction={handleDeleteTree}
       />
 
       <Container maxWidth={false}>
@@ -275,8 +291,7 @@ export default function App() {
             disabled={treeData.length === 0}
             startIcon={<DeleteIcon />}
             onClick={() => {
-              setSelectedTreeNode(null);
-              updateData([]);
+              setOpenDeleteAlert(true);
             }}
           >
             Delete tree
@@ -318,8 +333,8 @@ export default function App() {
               <TableView
                 searchResults={searchResults}
                 setSearchResults={setSearchResults}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
+                handleEdit={handleEditNode}
+                handleDelete={handleDeleteNode}
               />
             )
           )}

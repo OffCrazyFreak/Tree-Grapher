@@ -195,9 +195,12 @@ export default function NodeForm({
           <FormControl
             sx={{
               position: "absolute",
-              top: "50%",
+              top: { xs: "5%", sm: "50%" },
               left: "50%",
-              transform: "translate(-50%, -50%)",
+              transform: {
+                xs: "translateX(-50%)",
+                sm: "translate(-50%, -50%)",
+              },
 
               maxWidth: "95%",
               width: "40rem",
