@@ -22,12 +22,14 @@ const tableColumns = [
   {
     key: "parent",
     label: "Parent",
+    smHide: true,
     xsHide: true,
   },
   {
     key: "description",
     label: "Description",
     xsHide: true,
+    showTooltip: true,
   },
 ];
 
@@ -62,8 +64,6 @@ export default function TableView({
         } else if (b[column.key] === null) {
           return -1;
         } else {
-          // TODO: sorting numbers is still broken
-          // toString needed when sorting numbers
           return a[column.key]
             .toString()
             .localeCompare(b[column.key].toString());
@@ -86,12 +86,19 @@ export default function TableView({
           {cellValue}
         </Link>
       );
+    } else if (column.key === "description") {
+      return (
+        <Tooltip placement="bottom-start" title={cellValue}>
+          {cellValue}
+        </Tooltip>
+      );
     } else {
       return cellValue;
     }
   }
 
   useEffect(() => {}, [searchResults]);
+
   return (
     <Table
       stickyHeader
@@ -108,6 +115,7 @@ export default function TableView({
               sx={{
                 display: {
                   xs: column.xsHide ? "none" : "table-cell",
+                  sm: column.smHide ? "none" : "table-cell",
                   md: "table-cell",
                 },
                 padding: 0.5,
@@ -144,15 +152,10 @@ export default function TableView({
                   sx={{
                     display: {
                       xs: column.xsHide ? "none" : "table-cell",
-                      md: column.mdHide ? "none" : "table-cell",
-                      lg: "table-cell",
+                      sm: column.smHide ? "none" : "table-cell",
+                      md: "table-cell",
                     },
-
                     padding: 0.5,
-
-                    backgroundColor: result.priority && "whitesmoke",
-
-                    textAlign: column.centerContent && "center",
 
                     width: "min-content",
 
