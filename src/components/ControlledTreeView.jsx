@@ -8,7 +8,12 @@ import {
 
 import { useState, useEffect } from "react";
 
-export default function ControlledTreeView({ treeData, searchResults }) {
+export default function ControlledTreeView({
+  treeData,
+  searchResults,
+  selectedTreeNode,
+  setSelectedTreeNode,
+}) {
   const [expanded, setExpanded] = useState([]);
 
   useEffect(() => {
@@ -99,7 +104,12 @@ export default function ControlledTreeView({ treeData, searchResults }) {
       onNodeToggle={(e, nodeIds) => {
         setExpanded(nodeIds);
       }}
-      multiSelect
+      onNodeSelect={(e, node) => {
+        node === selectedTreeNode
+          ? setSelectedTreeNode(null)
+          : setSelectedTreeNode(node);
+      }}
+      selected={selectedTreeNode}
       sx={{ overflowX: "auto" }}
     >
       {treeData.map((rootNode) => renderTree(rootNode))}

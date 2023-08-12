@@ -21,6 +21,7 @@ export default function NodeForm({
   treeData,
   searchResults,
   updateData,
+  selectedTreeNode,
 }) {
   const [parent, setParent] = useState();
   const [name, setName] = useState();
@@ -158,7 +159,12 @@ export default function NodeForm({
   }
 
   useEffect(() => {
-    setParent({ name: node?.parent || "No parent (root node)" });
+    setParent({
+      // if in edit mode (node exists) set its parent as parent,
+      // else if a node in tree is selected, set it as parent,
+      // else set to no parent
+      name: node?.parent || selectedTreeNode || "No parent (root node)",
+    });
     setName(node?.name);
     setLink(node?.link);
     setDescription(node?.description);

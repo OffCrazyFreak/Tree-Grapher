@@ -37,6 +37,8 @@ export default function App() {
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
 
+  const [selectedTreeNode, setSelectedTreeNode] = useState(null);
+
   function handleExport() {
     const now = new Date();
     const formattedDate = now
@@ -182,6 +184,7 @@ export default function App() {
         treeData={treeData}
         searchResults={searchResults}
         updateData={updateData}
+        selectedTreeNode={selectedTreeNode}
       />
 
       <Container>
@@ -297,6 +300,8 @@ export default function App() {
             <ControlledTreeView
               treeData={treeData}
               searchResults={searchResults}
+              selectedTreeNode={selectedTreeNode}
+              setSelectedTreeNode={setSelectedTreeNode}
             />
           ) : (
             tabValue === 1 && (
