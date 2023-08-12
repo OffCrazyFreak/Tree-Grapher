@@ -8,6 +8,7 @@ import {
   Tabs,
   Box,
   ButtonGroup,
+  IconButton,
 } from "@mui/material";
 import {
   AddCircle as AddCircleIcon,
@@ -16,6 +17,7 @@ import {
   Delete as DeleteIcon,
   AccountTree as AccountTreeIcon,
   TableChart as TableChartIcon,
+  GitHub as GitHubIcon,
 } from "@mui/icons-material";
 
 import { useState, useEffect } from "react";
@@ -25,6 +27,8 @@ import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
 import DeleteAlert from "./components/DeleteAlert";
+
+import SampleTreeData from "./TreeData_Sample.json";
 
 export default function App() {
   const mqSub480 = useMediaQuery("(max-width: 480px)");
@@ -75,7 +79,7 @@ export default function App() {
 
           updateData(importedData);
         } catch (error) {
-          console.error("Error parsing imported data:", error);
+          alert("Error parsing imported data.");
         }
       };
 
@@ -91,53 +95,61 @@ export default function App() {
   }
 
   function handleDeleteNode(node) {
-    // Find the parent node that contains the node to be deleted
-    const findParent = (parentNode, targetName) => {
-      for (let i = 0; i < parentNode.children.length; i++) {
-        if (parentNode.children[i].name === targetName) {
-          if (parentNode.children[i].children.length > 0) {
-            console.error("Cannot delete a node with children.");
-          } else {
-            if (node.name === selectedTreeNode) {
-              setSelectedTreeNode(null);
-            }
-
-            parentNode.children.splice(i, 1);
-          }
-          return true;
-        } else if (findParent(parentNode.children[i], targetName)) {
-          return true;
+    // Find the node with the given name in the treeData
+    const findNode = (nodes, targetName) => {
+      for (const node of nodes) {
+        if (node.name === targetName) {
+          return node;
+        }
+        const foundNode = findNode(node.children, targetName);
+        if (foundNode) {
+          return foundNode;
         }
       }
-      return false;
+      return null;
     };
 
-    // Find and remove the node from treeData
-    for (let i = 0; i < treeData.length; i++) {
-      if (treeData[i].name === node.name) {
-        if (treeData[i].children.length > 0) {
-          console.error("Cannot delete a node with children.");
-        } else {
-          if (node.name === selectedTreeNode) {
-            setSelectedTreeNode(null);
-          }
+    const nodeToDelete = findNode(treeData, node.name);
 
-          treeData.splice(i, 1);
-          setSearchResults(flattenTree(treeData));
-        }
-        return;
-      } else if (findParent(treeData[i], node.name)) {
-        setSearchResults(flattenTree(treeData));
-        return;
-      }
+    if (!nodeToDelete) {
+      alert("Node not found.");
+      return;
     }
 
-    console.error("Node not found.");
+    if (nodeToDelete.children.length > 0) {
+      alert("Cannot delete a node with children.");
+      return;
+    }
+
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this node?"
+    );
+
+    if (shouldDelete) {
+      // Delete the node from treeData
+      const deleteNode = (nodes, targetName) => {
+        for (let i = 0; i < nodes.length; i++) {
+          if (nodes[i].name === targetName) {
+            nodes.splice(i, 1);
+            return true;
+          }
+          if (deleteNode(nodes[i].children, targetName)) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      deleteNode(treeData, node.name);
+      setSearchResults(flattenTree(treeData));
+
+      if (node.name === selectedTreeNode) {
+        setSelectedTreeNode(null);
+      }
+    }
   }
 
   function handleDeleteTree() {
-    setOpenDeleteAlert(false);
-
     setSelectedTreeNode(null);
     updateData([]);
   }
@@ -210,135 +222,162 @@ export default function App() {
         deleteFunction={handleDeleteTree}
       />
 
-      <Container maxWidth={false}>
-        <Typography variant="h2" align="center" sx={{ paddingBlock: 1 }}>
-          Tree Grapher
-        </Typography>
-        <Typography
-          variant="h5"
-          align="center"
-          gutterBottom={false}
-          sx={{ paddingBlock: 0.5 }}
+      <Box sx={{ flex: "1 0 auto" }}>
+        <Container maxWidth={false}>
+          <Typography variant="h2" align="center" sx={{ paddingBlock: 1 }}>
+            Tree Grapher
+          </Typography>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom={false}
+            sx={{ paddingBlock: 0.5 }}
+          >
+            - A simple tree graph maker -
+          </Typography>
+        </Container>
+
+        <Container
+          maxWidth={false}
+          sx={{
+            paddingBlock: 2,
+
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 2,
+          }}
         >
-          - A simple tree graph maker -
-        </Typography>
-        <Typography
-          variant="body2"
-          align="center"
-          gutterBottom={false}
-          sx={{ paddingBlock: 0.5 }}
-        >
-          Remember to export your tree graph
-        </Typography>
-      </Container>
+          <SearchBar
+            data={flattenTree(treeData)}
+            setSearchResults={setSearchResults}
+          />
+
+          <ButtonGroup
+            variant="contained"
+            orientation={mqSub480 ? "vertical" : "horizontal"}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddCircleIcon />}
+              onClick={() => {
+                setSearchResults(flattenTree(treeData));
+                setNode();
+                setOpenFormModal(true);
+              }}
+            >
+              Add node
+            </Button>
+
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<CloudUploadIcon />}
+              onClick={handleImport}
+            >
+              Import tree
+            </Button>
+
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={treeData.length === 0}
+              startIcon={<CloudDownloadIcon />}
+              onClick={handleExport}
+            >
+              Export tree
+            </Button>
+
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={treeData.length === 0}
+              startIcon={<DeleteIcon />}
+              onClick={() => {
+                setOpenDeleteAlert(true);
+              }}
+            >
+              Delete tree
+            </Button>
+          </ButtonGroup>
+        </Container>
+
+        <Container maxWidth={false}>
+          <Tabs
+            value={tabValue}
+            onChange={(e, newValue) => setTabValue(newValue)}
+            centered
+          >
+            <Tab
+              icon={<AccountTreeIcon />}
+              label="Tree View"
+              sx={{ width: "50%" }}
+            />
+            <Tab
+              icon={<TableChartIcon />}
+              label="Table View"
+              sx={{ width: "50%" }}
+            />
+          </Tabs>
+          <Box paddingBlock="1rem">
+            {searchResults.length === 0 ? (
+              <Typography variant="h4" align="center" sx={{ marginBlock: 2 }}>
+                No nodes to display
+              </Typography>
+            ) : tabValue === 0 ? (
+              <ControlledTreeView
+                treeData={treeData}
+                searchResults={searchResults}
+                selectedTreeNode={selectedTreeNode}
+                setSelectedTreeNode={setSelectedTreeNode}
+              />
+            ) : (
+              tabValue === 1 && (
+                <TableView
+                  searchResults={searchResults}
+                  setSearchResults={setSearchResults}
+                  handleEdit={handleEditNode}
+                  handleDelete={handleDeleteNode}
+                />
+              )
+            )}
+          </Box>
+        </Container>
+      </Box>
 
       <Container
         maxWidth={false}
         sx={{
-          paddingBlock: 2,
-
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexDirection: { xs: "column", sm: "row" },
-          gap: 2,
+
+          backgroundColor: (theme) => theme.palette.primary.main,
+
+          color: "#fff",
         }}
       >
-        <SearchBar
-          data={flattenTree(treeData)}
-          setSearchResults={setSearchResults}
-        />
-
-        <ButtonGroup
-          variant="contained"
-          orientation={mqSub480 ? "vertical" : "horizontal"}
+        <IconButton
+          href="https://github.com/OffCrazyFreak/Tree-Grapher"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="inherit"
+          size="small"
         >
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddCircleIcon />}
-            onClick={() => {
-              setSearchResults(flattenTree(treeData));
-              setNode();
-              setOpenFormModal(true);
-            }}
-          >
-            Add node
-          </Button>
+          <GitHubIcon />
+        </IconButton>
 
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CloudUploadIcon />}
-            onClick={handleImport}
-          >
-            Import tree
-          </Button>
-
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={treeData.length === 0}
-            startIcon={<CloudDownloadIcon />}
-            onClick={handleExport}
-          >
-            Export tree
-          </Button>
-
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={treeData.length === 0}
-            startIcon={<DeleteIcon />}
-            onClick={() => {
-              setOpenDeleteAlert(true);
-            }}
-          >
-            Delete tree
-          </Button>
-        </ButtonGroup>
-      </Container>
-
-      <Container maxWidth={false}>
-        <Tabs
-          value={tabValue}
-          onChange={(e, newValue) => setTabValue(newValue)}
-          centered
+        <Typography>Remember to export your tree graph</Typography>
+        <Typography
+          sx={{ cursor: "pointer" }}
+          onClick={() => updateData(SampleTreeData)}
         >
-          <Tab
-            icon={<AccountTreeIcon />}
-            label="Tree View"
-            sx={{ width: "50%" }}
-          />
-          <Tab
-            icon={<TableChartIcon />}
-            label="Table View"
-            sx={{ width: "50%" }}
-          />
-        </Tabs>
-        <Box paddingBlock="1rem">
-          {searchResults.length === 0 ? (
-            <Typography variant="h4" align="center" sx={{ marginBlock: 2 }}>
-              No nodes to display
-            </Typography>
-          ) : tabValue === 0 ? (
-            <ControlledTreeView
-              treeData={treeData}
-              searchResults={searchResults}
-              selectedTreeNode={selectedTreeNode}
-              setSelectedTreeNode={setSelectedTreeNode}
-            />
-          ) : (
-            tabValue === 1 && (
-              <TableView
-                searchResults={searchResults}
-                setSearchResults={setSearchResults}
-                handleEdit={handleEditNode}
-                handleDelete={handleDeleteNode}
-              />
-            )
-          )}
-        </Box>
+          Import sample tree graph
+        </Typography>
+
+        <Typography>&copy; Jakov Jakovac {new Date().getFullYear()}</Typography>
       </Container>
     </>
   );

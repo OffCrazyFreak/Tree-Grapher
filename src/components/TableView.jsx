@@ -9,6 +9,7 @@ import {
   Link,
   Box,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
@@ -73,7 +74,7 @@ export default function TableView({
   }
 
   function getFormatedCellValue(column, result) {
-    const cellValue = result[column.key];
+    const cellValue = <Typography>{result[column.key]}</Typography>;
 
     if (column.key === "name" && result.link) {
       return (
@@ -185,38 +186,35 @@ export default function TableView({
                   padding: 0.5,
                 }}
               >
-                {handleEdit && (
-                  <Tooltip title="Edit" key="Edit">
-                    <IconButton
-                      size="small"
-                      onClick={() => handleEdit(result)}
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#1976d2",
+                <Tooltip title="Edit">
+                  <IconButton
+                    size="small"
+                    onClick={() => handleEdit(result)}
+                    sx={{
+                      color: "white",
+                      backgroundColor: "#1976d2",
 
-                        borderRadius: 1,
-                      }}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
-                )}
-                {handleDelete && (
-                  <Tooltip title="Delete">
-                    <IconButton
-                      size="small"
-                      onClick={() => handleDelete(result)}
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#1976d2",
+                      borderRadius: 1,
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
 
-                        borderRadius: 1,
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                )}
+                <Tooltip title="Delete">
+                  <IconButton
+                    size="small"
+                    onClick={() => handleDelete(result)}
+                    sx={{
+                      color: "white",
+                      backgroundColor: "#1976d2",
+
+                      borderRadius: 1,
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               </Box>
             </TableCell>
           </TableRow>

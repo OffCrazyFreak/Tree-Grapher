@@ -13,6 +13,12 @@ export default function DeleteAlert({
   setOpenDeleteAlert,
   deleteFunction,
 }) {
+  function submit() {
+    deleteFunction();
+
+    setOpenDeleteAlert(false);
+  }
+
   return (
     <Backdrop open={openDeleteAlert}>
       <Modal
@@ -21,7 +27,7 @@ export default function DeleteAlert({
         // submit on Enter key
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            deleteFunction();
+            submit();
           }
         }}
         // close on Escape key
@@ -83,7 +89,7 @@ export default function DeleteAlert({
                 Cancel
               </Button>
 
-              <Button variant="contained" onClick={deleteFunction}>
+              <Button variant="contained" onClick={submit}>
                 Delete tree
               </Button>
             </Box>
