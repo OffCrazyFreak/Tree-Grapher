@@ -1,5 +1,5 @@
 import { TreeView, TreeItem } from "@mui/lab";
-import { Link, Tooltip, Typography } from "@mui/material";
+import { Link, Tooltip, Typography, Box } from "@mui/material";
 import {
   ExpandMore as ExpandMoreIcon,
   ChevronRight as ChevronRightIcon,
@@ -81,11 +81,7 @@ export default function ControlledTreeView({
 
   const renderTree = (node, depth = 0) => {
     let nodeNameComponent = (
-      <Typography
-        fontSize={fontSize}
-        whiteSpace="nowrap"
-        display="inline-block"
-      >
+      <Typography fontSize={fontSize} whiteSpace="nowrap">
         {node.name}
       </Typography>
     );
@@ -109,21 +105,25 @@ export default function ControlledTreeView({
       nodeNameComponent = (
         <Tooltip
           title={node.description}
-          placement="top"
+          placement="top-start"
           arrow
           enterTouchDelay={0}
         >
-          <span>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             {nodeNameComponent}
             <InfoIcon
               sx={{
-                verticalAlign: "sub",
                 marginLeft: 0.2,
                 color: "#666",
                 fontSize: fontSize,
               }}
             />
-          </span>
+          </Box>
         </Tooltip>
       );
     }

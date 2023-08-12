@@ -7,11 +7,7 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
-import { useState } from "react";
-
 export default function SearchBar({ data, setSearchResults }) {
-  const mqSub720 = useMediaQuery("(max-width: 720px)");
-
   function handleChange(value) {
     value = value.toLowerCase();
 
@@ -69,8 +65,8 @@ export default function SearchBar({ data, setSearchResults }) {
         />
       )}
       sx={{
-        width: mqSub720 ? "100%" : "50%",
-        maxWidth: mqSub720 ? "none" : "25rem",
+        width: { xs: "100%", sm: "50%" },
+        maxWidth: { xs: "none", sm: "25rem" },
       }}
     />
   );

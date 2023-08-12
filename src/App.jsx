@@ -27,7 +27,6 @@ import TableView from "./components/TableView";
 
 export default function App() {
   const mqSub480 = useMediaQuery("(max-width: 480px)");
-  const mqSub720 = useMediaQuery("(max-width: 720px)");
 
   const [treeData, setTreeData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -195,7 +194,7 @@ export default function App() {
         selectedTreeNode={selectedTreeNode}
       />
 
-      <Container>
+      <Container maxWidth={false}>
         <Typography variant="h2" align="center" sx={{ paddingBlock: 1 }}>
           Tree Grapher
         </Typography>
@@ -218,13 +217,14 @@ export default function App() {
       </Container>
 
       <Container
+        maxWidth={false}
         sx={{
           paddingBlock: 2,
 
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexDirection: mqSub720 ? "column" : "row",
+          flexDirection: { xs: "column", sm: "row" },
           gap: 2,
         }}
       >
@@ -279,12 +279,12 @@ export default function App() {
               updateData([]);
             }}
           >
-            Clear all
+            Delete tree
           </Button>
         </ButtonGroup>
       </Container>
 
-      <Container>
+      <Container maxWidth={false}>
         <Tabs
           value={tabValue}
           onChange={(e, newValue) => setTabValue(newValue)}
