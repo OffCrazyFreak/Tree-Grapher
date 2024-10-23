@@ -22,7 +22,7 @@ export default function SearchBar({ data, setSearchResults }) {
       freeSolo
       size="small"
       onInputChange={(e, inputValue) => {
-        if (inputValue.length === 0 || inputValue.length > 3) {
+        if (inputValue.length === 0 || inputValue.length >= 3) {
           handleChange(inputValue);
         }
       }}
