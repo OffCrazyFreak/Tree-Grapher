@@ -29,6 +29,7 @@ import TableView from "./components/TableView";
 import DeleteAlert from "./components/DeleteAlert";
 
 import SampleTreeData from "./TreeData_Sample.json";
+import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
 
 export default function App() {
   const mqSub480 = useMediaQuery("(max-width: 480px)");
@@ -199,6 +200,10 @@ export default function App() {
       // Update state with the retrieved data
       setTreeData(parsedData);
       setSearchResults(flattenTree(parsedData));
+    } else {
+      // Update state with the retrieved data
+      setTreeData(BESTZagrebTreeData);
+      setSearchResults(flattenTree(BESTZagrebTreeData));
     }
   }, []);
 

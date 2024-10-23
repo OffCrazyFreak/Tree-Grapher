@@ -134,7 +134,7 @@ export default function ControlledTreeView({
         nodeId={node.name}
         label={nodeNameComponent}
         sx={{
-          paddingLeft: "1vw",
+          paddingLeft: depth !== 0 && "1vw",
           paddingTop: depth === 0 && fontSize,
         }}
       >
