@@ -41,7 +41,7 @@
                   {
                     "name": "Rino Bolić",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": []
                   }
                 ]
@@ -49,7 +49,7 @@
               {
                 "name": "Ivan Čičak",
                 "link": null,
-                "description": "Status: Full member",
+                "description": "Status: Alumni",
                 "children": [
                   {
                     "name": "Adriana Ivoš",
@@ -152,7 +152,7 @@
                   {
                     "name": "Antonia Ravlija",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": [
                       {
                         "name": "Ema Pavić",
@@ -163,7 +163,7 @@
                       {
                         "name": "Lucija Šarac",
                         "link": null,
-                        "description": "Status: Full member",
+                        "description": "Status: Alumni",
                         "children": [
                           {
                             "name": "Matej Ivanović",
@@ -223,7 +223,7 @@
                 "description": "Status: Alumni",
                 "children": [
                   {
-                    "name": "Mirna Barac",
+                    "name": "Mirna Barać",
                     "link": null,
                     "description": "Status: Alumni",
                     "children": [
@@ -235,7 +235,7 @@
                           {
                             "name": "Lucija Bogdan",
                             "link": null,
-                            "description": "Status: Full member",
+                            "description": "Status: Alumni",
                             "children": [
                               {
                                 "name": "Danijel Krpes",
@@ -246,7 +246,7 @@
                               {
                                 "name": "Barbara Bilić",
                                 "link": null,
-                                "description": "Zatražila brisanje javnih informacija o sebi | Status: Alumni",
+                                "description": "Zatražila brisanje javnih podataka | Status: Alumni",
                                 "children": []
                               },
                               {
@@ -431,7 +431,7 @@
                   {
                     "name": "Emil Ratković",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": [
                       {
                         "name": "Katarina Pavić",
@@ -446,7 +446,7 @@
                               {
                                 "name": "Ema Ćurin",
                                 "link": null,
-                                "description": "Status: Baby member",
+                                "description": "Status: Alumni",
                                 "children": []
                               }
                             ]
@@ -462,8 +462,21 @@
                       {
                         "name": "Petar Hajduk",
                         "link": null,
-                        "description": "Status: Baby member",
-                        "children": []
+                        "description": "Status: Full member",
+                        "children": [
+                          {
+                            "name": "Ivan Kovačić",
+                            "link": null,
+                            "description": "Status: Full member",
+                            "children": []
+                          },
+                          {
+                            "name": "Franko Blažević",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
                       }
                     ]
                   }
@@ -483,7 +496,27 @@
                         "name": "Antun Matijašec",
                         "link": null,
                         "description": "Status: Full member",
-                        "children": []
+                        "children": [
+                          {
+                            "name": "Pavle Jugović",
+                            "link": null,
+                            "description": "Status: Full member",
+                            "children": [
+                              {
+                                "name": "Luka Kosak",
+                                "link": null,
+                                "description": "Status: Baby member",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Nikola Katnić",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
                       }
                     ]
                   },
@@ -541,7 +574,7 @@
                   {
                     "name": "Sara Sulen",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": [
                       {
                         "name": "Božena Zrilić",
@@ -552,7 +585,7 @@
                       {
                         "name": "Ante Balaić-Marmun",
                         "link": null,
-                        "description": "Status: Full member",
+                        "description": "Status: Alumni",
                         "children": [
                           {
                             "name": "Jakov Jakovac (JJ)",
@@ -562,11 +595,24 @@
                               {
                                 "name": "Roberto Gregov",
                                 "link": null,
-                                "description": "Status: Baby member",
+                                "description": "Status: Full member",
                                 "children": []
                               },
                               {
                                 "name": "Laura Zebec",
+                                "link": null,
+                                "description": "Status: Full member",
+                                "children": [
+                                  {
+                                    "name": "Patrik Kapetan",
+                                    "link": null,
+                                    "description": "Status: Baby member",
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "Barbara Jozić",
                                 "link": null,
                                 "description": "Status: Baby member",
                                 "children": []
@@ -582,7 +628,7 @@
               {
                 "name": "Bruno Hećimović",
                 "link": null,
-                "description": "Status: Full member",
+                "description": "Status: Alumni",
                 "children": [
                   {
                     "name": "Lucija Glavinić",
@@ -628,7 +674,7 @@
               {
                 "name": "Anja Macan",
                 "link": null,
-                "description": "Status: Full member",
+                "description": "Status: Alumni",
                 "children": [
                   {
                     "name": "Luka Čirjak",
@@ -639,7 +685,7 @@
                   {
                     "name": "Maria Lučić",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": [
                       {
                         "name": "Marko Ilić",
@@ -650,8 +696,21 @@
                       {
                         "name": "Iva Suljuzović",
                         "link": null,
-                        "description": "Status: Full member",
-                        "children": []
+                        "description": "Status: Alumni",
+                        "children": [
+                          {
+                            "name": "Grga Štimac",
+                            "link": null,
+                            "description": "Status: Full member",
+                            "children": []
+                          },
+                          {
+                            "name": "Gabrijela Perković",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
                       }
                     ]
                   },
@@ -659,7 +718,70 @@
                     "name": "Mihaela Voća",
                     "link": null,
                     "description": "Status: Full member",
-                    "children": []
+                    "children": [
+                      {
+                        "name": "Ana Marić",
+                        "link": null,
+                        "description": "Status: Full member",
+                        "children": []
+                      },
+                      {
+                        "name": "Domagoj Jurišak",
+                        "link": null,
+                        "description": "Status: Full member",
+                        "children": [
+                          {
+                            "name": "Ana Žanko",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          },
+                          {
+                            "name": "Franka Zorić",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Jelena Penava",
+                        "link": null,
+                        "description": "Status: Full member",
+                        "children": [
+                          {
+                            "name": "Elena Popović",
+                            "link": null,
+                            "description": "Status: Full member",
+                            "children": []
+                          },
+                          {
+                            "name": "Hana Hodak",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          },
+                          {
+                            "name": "Tajana Milković",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          },
+                          {
+                            "name": "Erna Fiorencis",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Tina Katalinić",
+                        "link": null,
+                        "description": "Status: Full member",
+                        "children": []
+                      }
+                    ]
                   }
                 ]
               },
@@ -691,7 +813,7 @@
                   {
                     "name": "Leo Bolješić",
                     "link": null,
-                    "description": "Status: Full member",
+                    "description": "Status: Alumni",
                     "children": [
                       {
                         "name": "Karlo Brčina",
@@ -703,6 +825,19 @@
                             "link": null,
                             "description": "Status: Alumni",
                             "children": []
+                          },
+                          {
+                            "name": "Tea Madžarac",
+                            "link": null,
+                            "description": "Status: Full member",
+                            "children": [
+                              {
+                                "name": "Sara Rivić Carević",
+                                "link": null,
+                                "description": "Status: Baby member",
+                                "children": []
+                              }
+                            ]
                           }
                         ]
                       },
@@ -715,14 +850,21 @@
                       {
                         "name": "Kristina Vukušić",
                         "link": null,
-                        "description": "Status: Baby member",
+                        "description": "Status: Alumni",
                         "children": []
                       },
                       {
                         "name": "Nika Sogonić",
                         "link": null,
-                        "description": "Status: Baby member",
-                        "children": []
+                        "description": "Status: Full member",
+                        "children": [
+                          {
+                            "name": "Lara Rich",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
                       }
                     ]
                   }
@@ -777,5 +919,23 @@
         "children": []
       }
     ]
+  },
+  {
+    "name": "Antonela Čović",
+    "link": null,
+    "description": "Status: Alumni",
+    "children": []
+  },
+  {
+    "name": "Kermer Irma",
+    "link": null,
+    "description": "Status: Alumni",
+    "children": []
+  },
+  {
+    "name": "Sofija Kranjčec",
+    "link": null,
+    "description": "Status: Alumni",
+    "children": []
   }
 ]
