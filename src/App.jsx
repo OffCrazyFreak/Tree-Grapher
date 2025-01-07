@@ -22,6 +22,8 @@ import {
 
 import { useState, useEffect } from "react";
 
+import BackToTopBtn from "./components/BackToTopBtn";
+import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
@@ -32,8 +34,6 @@ import SampleTreeData from "./TreeData_Sample.json";
 import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
 
 export default function App() {
-  const mqSub480 = useMediaQuery("(max-width: 480px)");
-
   const [treeData, setTreeData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -45,50 +45,6 @@ export default function App() {
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
 
   const [selectedTreeNode, setSelectedTreeNode] = useState(null);
-
-  function handleExport() {
-    const now = new Date();
-    const formattedDate = now
-      .toISOString()
-      .replace(/[:.]/g, "-")
-      .replace(/[T]/g, "_")
-      .slice(0, -5); // Remove milliseconds
-    const fileName = `TreeData_${formattedDate}.json`;
-
-    const dataToExport = JSON.stringify(treeData, null, 2);
-    const blob = new Blob([dataToExport], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    URL.revokeObjectURL(url);
-  }
-
-  function handleImport() {
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.accept = ".json";
-    fileInput.onchange = (e) => {
-      const file = e.target.files[0];
-
-      const fileReader = new FileReader();
-
-      fileReader.onload = async (e) => {
-        try {
-          const importedData = JSON.parse(e.target.result);
-
-          updateData(importedData);
-        } catch (error) {
-          alert("Error parsing imported data.");
-        }
-      };
-
-      fileReader.readAsText(file);
-    };
-
-    fileInput.click();
-  }
 
   function handleEditNode(node) {
     setNode(node);
@@ -211,6 +167,8 @@ export default function App() {
     <>
       <CssBaseline />
 
+      <BackToTopBtn />
+
       <NodeForm
         node={node}
         openFormModal={openFormModal}
@@ -227,114 +185,79 @@ export default function App() {
         deleteFunction={handleDeleteTree}
       />
 
-      <Box sx={{ flex: "1 0 auto" }}>
-        <Container maxWidth={false}>
-          <Typography variant="h2" align="center" sx={{ paddingBlock: 1 }}>
-            Tree Grapher
-          </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-            gutterBottom={false}
-            sx={{ paddingBlock: 0.5 }}
-          >
-            ~ A simple tree graph maker ~
-          </Typography>
-        </Container>
+      <Header
+        treeData={treeData}
+        updateData={updateData}
+        setOpenDeleteAlert={setOpenDeleteAlert}
+      />
 
-        <Container
-          maxWidth={false}
+      <Box sx={{ flex: "1 0 auto", margin: "1.5vw" }}>
+        <Box
           sx={{
             paddingBlock: 2,
 
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            flexDirection: { xs: "column", sm: "row" },
+            flexWrap: "wrap-reverse",
             gap: 2,
+
+            position: "sticky",
+            top: 0,
+            zIndex: "100",
+            backdropFilter: "blur(6px)",
           }}
         >
-          <SearchBar
-            data={flattenTree(treeData)}
-            setSearchResults={setSearchResults}
-          />
-
-          <ButtonGroup
-            variant="contained"
-            orientation={mqSub480 ? "vertical" : "horizontal"}
+          <Box
+            sx={{
+              flex: 1,
+              flexBasis: "15rem",
+            }}
           >
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AddCircleIcon />}
-              onClick={() => {
-                setSearchResults(flattenTree(treeData));
-                setNode();
-                setOpenFormModal(true);
-              }}
-            >
-              Add node
-            </Button>
+            <SearchBar
+              data={flattenTree(treeData)}
+              setSearchResults={setSearchResults}
+            />
+          </Box>
 
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<CloudUploadIcon />}
-              onClick={() => {
-                if (
-                  treeData.length === 0 ||
-                  window.confirm(
-                    "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-                  )
-                ) {
-                  handleImport();
-                }
-              }}
-            >
-              Import tree
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddCircleIcon />}
+            onClick={() => {
+              setSearchResults(flattenTree(treeData));
+              setNode();
+              setOpenFormModal(true);
+            }}
+          >
+            Add node
+          </Button>
+        </Box>
 
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={treeData.length === 0}
-              startIcon={<CloudDownloadIcon />}
-              onClick={handleExport}
-            >
-              Export tree
-            </Button>
-
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={treeData.length === 0}
-              startIcon={<DeleteIcon />}
-              onClick={() => {
-                setOpenDeleteAlert(true);
-              }}
-            >
-              Delete tree
-            </Button>
-          </ButtonGroup>
-        </Container>
-
-        <Container maxWidth={false}>
+        <Box>
           <Tabs
             value={tabValue}
             onChange={(e, newValue) => setTabValue(newValue)}
+            variant="fullWidth"
             centered
+            sx={{
+              "*": {
+                minHeight: 0,
+              },
+            }}
           >
             <Tab
               icon={<AccountTreeIcon />}
+              iconPosition="start"
               label="Tree View"
-              sx={{ width: "50%" }}
             />
             <Tab
               icon={<TableChartIcon />}
+              iconPosition="start"
               label="Table View"
-              sx={{ width: "50%" }}
             />
           </Tabs>
+
           <Box paddingBlock="1rem">
             {searchResults.length === 0 ? (
               <Typography variant="h4" align="center" sx={{ marginBlock: 2 }}>
@@ -344,8 +267,6 @@ export default function App() {
               <ControlledTreeView
                 treeData={treeData}
                 searchResults={searchResults}
-                selectedTreeNode={selectedTreeNode}
-                setSelectedTreeNode={setSelectedTreeNode}
               />
             ) : (
               tabValue === 1 && (
@@ -358,7 +279,7 @@ export default function App() {
               )
             )}
           </Box>
-        </Container>
+        </Box>
       </Box>
 
       <Container

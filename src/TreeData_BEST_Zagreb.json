@@ -1,83 +1,5 @@
 [
   {
-    "name": "Luka Matetić",
-    "link": null,
-    "description": "Status: Alumni",
-    "children": [
-      {
-        "name": "Daria Vlah",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": [
-          {
-            "name": "Tin Ivan Križ",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          },
-          {
-            "name": "Valentina Kocijan",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": [
-              {
-                "name": "Branimir Rajčić",
-                "link": null,
-                "description": "Status: Baby member",
-                "children": []
-              }
-            ]
-          },
-          {
-            "name": "Lucija Boras",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": [
-              {
-                "name": "Sandra Romac",
-                "link": null,
-                "description": "Status: Alumni",
-                "children": [
-                  {
-                    "name": "Rino Bolić",
-                    "link": null,
-                    "description": "Status: Alumni",
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "name": "Ivan Čičak",
-                "link": null,
-                "description": "Status: Alumni",
-                "children": [
-                  {
-                    "name": "Adriana Ivoš",
-                    "link": null,
-                    "description": "Status: Baby member",
-                    "children": []
-                  },
-                  {
-                    "name": "Edi Slijepčević",
-                    "link": null,
-                    "description": "Status: Baby member",
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Kristina Strpić",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
     "name": "Tihana Vidnjević",
     "link": null,
     "description": "Status: Alumni",
@@ -128,7 +50,7 @@
         "description": "Status: Alumni",
         "children": [
           {
-            "name": "Sven Mijić",
+            "name": "Sven Mijić (Swanna)",
             "link": null,
             "description": "Status: Alumni",
             "children": [
@@ -199,82 +121,6 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "name": "Mladen Kululić",
-    "link": null,
-    "description": "Status: Alumni | On je navodno mnogima otac i deda",
-    "children": [
-      {
-        "name": "Klaudija Molnar",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": [
-          {
-            "name": "Karko Josip Andrić (JK)",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          }
-        ]
-      },
-      {
-        "name": "Ana Franjić",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": [
-          {
-            "name": "Iva Mikulić",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          },
-          {
-            "name": "Filip Borovec",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          },
-          {
-            "name": "Tea Lovrinov",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          },
-          {
-            "name": "Petra Rebernjak",
-            "link": null,
-            "description": "Status: Alumni",
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Vitka Gres",
-    "link": null,
-    "description": "Status: Alumni",
-    "children": [
-      {
-        "name": "Luka Pavlinek",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": []
-      },
-      {
-        "name": "Rea Bertoša",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": []
-      },
-      {
-        "name": "Paula Gombar",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": []
       }
     ]
   },
@@ -356,7 +202,7 @@
                     "children": []
                   },
                   {
-                    "name": "Emil Ratković",
+                    "name": "Emil Ratković (bEmil)",
                     "link": null,
                     "description": "Status: Alumni",
                     "children": [
@@ -381,7 +227,7 @@
                         ]
                       },
                       {
-                        "name": "Jelena Lara Marinković",
+                        "name": "Jelena Lara Marinković (J. Lo)",
                         "link": null,
                         "description": "Status: Alumni",
                         "children": []
@@ -458,12 +304,12 @@
             ]
           },
           {
-            "name": "Juraj Pejnović",
+            "name": "Juraj Pejnović (Peđa, George)",
             "link": null,
             "description": "Status: Alumni",
             "children": [
               {
-                "name": "Luka Košćak",
+                "name": "Luka Košćak (Ćaki, Chucky)",
                 "link": null,
                 "description": "Status: Alumni",
                 "children": [
@@ -584,12 +430,12 @@
     ]
   },
   {
-    "name": "Ana Božić",
+    "name": "Ana Božić (Bana)",
     "link": null,
     "description": "Status: Alumni",
     "children": [
       {
-        "name": "Ivan Despot",
+        "name": "Ivan Despot (Despacito)",
         "link": null,
         "description": "Status: Alumni",
         "children": [
@@ -599,7 +445,7 @@
             "description": "Status: Alumni",
             "children": [
               {
-                "name": "Anja Macan",
+                "name": "Anja Macan (Kanya West)",
                 "link": null,
                 "description": "Status: Alumni",
                 "children": [
@@ -728,12 +574,12 @@
             ]
           },
           {
-            "name": "Fran Grgić",
+            "name": "Fran Grgić (Saša)",
             "link": null,
             "description": "Status: Alumni",
             "children": [
               {
-                "name": "Sara Stoček",
+                "name": "Sara Stoček (Sarma)",
                 "link": null,
                 "description": "Status: Alumni",
                 "children": [
@@ -810,19 +656,6 @@
     ]
   },
   {
-    "name": "Lada Brnetić",
-    "link": null,
-    "description": "Status: Alumni",
-    "children": [
-      {
-        "name": "Dora Novak",
-        "link": null,
-        "description": "Status: Alumni",
-        "children": []
-      }
-    ]
-  },
-  {
     "name": "Dominik Petrović",
     "link": null,
     "description": "Status: Alumni",
@@ -866,7 +699,7 @@
     "children": []
   },
   {
-    "name": "Ivan Stamenković",
+    "name": "Ivan Stamenković (Stameni)",
     "link": null,
     "description": null,
     "children": [
@@ -890,6 +723,51 @@
                     "link": null,
                     "description": null,
                     "children": []
+                  },
+                  {
+                    "name": "Ana Vuković (VAna)",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  },
+                  {
+                    "name": "Kristina Marijanović",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Lucija Šilić",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Antonija Burčul",
+                            "link": null,
+                            "description": null,
+                            "children": [
+                              {
+                                "name": "Sara G",
+                                "link": null,
+                                "description": "Status: Full member",
+                                "children": []
+                              },
+                              {
+                                "name": "Luka Tokić",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Marko Maričević",
+                            "link": null,
+                            "description": "Status: Baby member",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -921,82 +799,10 @@
     "name": "Dario Nikolić",
     "link": null,
     "description": null,
-    "children": [
-      {
-        "name": "Vanja Rojko",
-        "link": null,
-        "description": null,
-        "children": []
-      }
-    ]
+    "children": []
   },
   {
-    "name": "Nina Jovanović",
-    "link": null,
-    "description": null,
-    "children": [
-      {
-        "name": "Ana Nahod",
-        "link": null,
-        "description": null,
-        "children": [
-          {
-            "name": "Miroslav Dubić",
-            "link": null,
-            "description": null,
-            "children": [
-              {
-                "name": "Ana Mihalić",
-                "link": null,
-                "description": null,
-                "children": [
-                  {
-                    "name": "Ivo Žarković",
-                    "link": null,
-                    "description": null,
-                    "children": []
-                  },
-                  {
-                    "name": "Željko Martinović",
-                    "link": null,
-                    "description": null,
-                    "children": [
-                      {
-                        "name": "Ana Valjak",
-                        "link": null,
-                        "description": null,
-                        "children": []
-                      },
-                      {
-                        "name": "Andrija Vidović",
-                        "link": null,
-                        "description": null,
-                        "children": []
-                      },
-                      {
-                        "name": "Vedrana Starčević",
-                        "link": null,
-                        "description": "Tata ili Željko Martinović ili Marko Marušić",
-                        "children": []
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Matko Borić",
-            "link": null,
-            "description": null,
-            "children": []
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Zoran Bulić",
+    "name": "Zoran Bulić (Zoky)",
     "link": null,
     "description": null,
     "children": [
@@ -1005,16 +811,53 @@
         "link": null,
         "description": null,
         "children": []
+      },
+      {
+        "name": "Tina Šušnjara",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Nina Cerovec",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Vlatka Košutić",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Enis El Kur-Komljenović",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Vedran Marinkov",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Krecl",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
       }
     ]
   },
   {
-    "name": "Goran Marinov",
+    "name": "Goran Marinov (Gori)",
     "link": null,
     "description": null,
     "children": [
       {
-        "name": "Helena Bošnjak",
+        "name": "Helena Bošnjak (Hela)",
         "link": null,
         "description": null,
         "children": []
@@ -1023,12 +866,49 @@
         "name": "Dunja Grčić",
         "link": null,
         "description": null,
+        "children": [
+          {
+            "name": "Ivana Begonja",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Mario Samardžija",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Vanja Rojko",
+        "link": null,
+        "description": "Roditelj možda Dario Nikolić, a ne Goran Marinov",
+        "children": []
+      },
+      {
+        "name": "Iva Ljubičić",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Vanja M",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Martina Belović",
+        "link": null,
+        "description": null,
         "children": []
       }
     ]
   },
   {
-    "name": "Marina Poropat",
+    "name": "Marina Poropat (Popo)",
     "link": null,
     "description": null,
     "children": [
@@ -1037,71 +917,6 @@
         "link": null,
         "description": null,
         "children": []
-      }
-    ]
-  },
-  {
-    "name": "Nikolina Čukelj",
-    "link": null,
-    "description": null,
-    "children": [
-      {
-        "name": "Tomislav Pukšec",
-        "link": null,
-        "description": null,
-        "children": [
-          {
-            "name": "Mirna Šmidt",
-            "link": null,
-            "description": null,
-            "children": [
-              {
-                "name": "Tomislav Hlupić",
-                "link": null,
-                "description": null,
-                "children": [
-                  {
-                    "name": "Inga Cigoj",
-                    "link": null,
-                    "description": null,
-                    "children": []
-                  },
-                  {
-                    "name": "Kristina Gavran",
-                    "link": null,
-                    "description": null,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "name": "Ivan Lučev",
-                "link": null,
-                "description": null,
-                "children": []
-              },
-              {
-                "name": "Dragan Biškić",
-                "link": null,
-                "description": null,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Željko Mikić",
-        "link": null,
-        "description": null,
-        "children": [
-          {
-            "name": "Nikola Džida",
-            "link": null,
-            "description": null,
-            "children": []
-          }
-        ]
       }
     ]
   },
@@ -1119,7 +934,7 @@
     ]
   },
   {
-    "name": "Petar Cvahte",
+    "name": "Petar Cvahte (Cvaljo)",
     "link": null,
     "description": null,
     "children": [
@@ -1138,11 +953,178 @@
                 "link": null,
                 "description": null,
                 "children": []
+              },
+              {
+                "name": "Iva Marković",
+                "link": null,
+                "description": null,
+                "children": []
+              },
+              {
+                "name": "Ana Bukovac",
+                "link": null,
+                "description": "Kasnije posvojena od Nikša Lovrinić",
+                "children": []
+              },
+              {
+                "name": "Dea Marušić (r. Milovan)",
+                "link": null,
+                "description": "Dea Marušić na PA-u",
+                "children": [
+                  {
+                    "name": "Božidar Paun",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Marija Karač",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      },
+                      {
+                        "name": "Marina Morić",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Vitka Gres",
+                            "link": null,
+                            "description": "Status: Alumni",
+                            "children": [
+                              {
+                                "name": "Luka Pavlinek (Pluka)",
+                                "link": null,
+                                "description": "Status: Alumni",
+                                "children": [
+                                  {
+                                    "name": "Luka Matetić",
+                                    "link": null,
+                                    "description": "Status: Alumni",
+                                    "children": [
+                                      {
+                                        "name": "Daria Vlah",
+                                        "link": null,
+                                        "description": "Status: Alumni",
+                                        "children": [
+                                          {
+                                            "name": "Tin Ivan Križ",
+                                            "link": null,
+                                            "description": "Status: Alumni",
+                                            "children": []
+                                          },
+                                          {
+                                            "name": "Valentina Kocijan",
+                                            "link": null,
+                                            "description": "Status: Alumni",
+                                            "children": [
+                                              {
+                                                "name": "Branimir Rajčić",
+                                                "link": null,
+                                                "description": "Status: Baby member",
+                                                "children": []
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "name": "Lucija Boras (Čuc)",
+                                            "link": null,
+                                            "description": "Status: Alumni",
+                                            "children": [
+                                              {
+                                                "name": "Sandra Romac",
+                                                "link": null,
+                                                "description": "Status: Alumni",
+                                                "children": [
+                                                  {
+                                                    "name": "Rino Bolić",
+                                                    "link": null,
+                                                    "description": "Status: Alumni",
+                                                    "children": []
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "name": "Ivan Čičak",
+                                                "link": null,
+                                                "description": "Status: Alumni",
+                                                "children": [
+                                                  {
+                                                    "name": "Adriana Ivoš",
+                                                    "link": null,
+                                                    "description": "Status: Baby member",
+                                                    "children": []
+                                                  },
+                                                  {
+                                                    "name": "Edi Slijepčević",
+                                                    "link": null,
+                                                    "description": "Status: Baby member",
+                                                    "children": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "name": "Kristina Strpić",
+                                            "link": null,
+                                            "description": "Status: Alumni",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "Rea Bertoša",
+                                "link": null,
+                                "description": "Status: Alumni",
+                                "children": []
+                              },
+                              {
+                                "name": "Paula Gombar",
+                                "link": null,
+                                "description": "Status: Alumni",
+                                "children": []
+                              },
+                              {
+                                "name": "Ciprijan Crljenko",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              },
+                              {
+                                "name": "Kristian Macanga",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Marko Jančec",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Barbara Skender",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  }
+                ]
               }
             ]
           },
           {
-            "name": "Berislav Marszalek",
+            "name": "Berislav Marszalek (Bero)",
             "link": null,
             "description": null,
             "children": []
@@ -1157,19 +1139,217 @@
             "name": "Nina Briški",
             "link": null,
             "description": null,
-            "children": []
+            "children": [
+              {
+                "name": "Erna Begović (eRnA)",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Igor Kolar",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Martina Grgić",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      },
+                      {
+                        "name": "Paula Yadranka Žitinski Elías",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Nela Jantol",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  },
+                  {
+                    "name": "Dunja Bjelobrk",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  },
+                  {
+                    "name": "Marko Zdrilić",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Tomislav Šakić (Šaka)",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Nikolina Čukelj (Nixa)",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Tomislav Pukšec",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Mirna Šmidt",
+                            "link": null,
+                            "description": null,
+                            "children": [
+                              {
+                                "name": "Tomislav Hlupić (Junior)",
+                                "link": null,
+                                "description": null,
+                                "children": [
+                                  {
+                                    "name": "Inga Cigoj",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Kristina Gavran",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Antonia Penava",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "Ivan Lučev",
+                                "link": null,
+                                "description": null,
+                                "children": [
+                                  {
+                                    "name": "Mila Klasić",
+                                    "link": null,
+                                    "description": null,
+                                    "children": [
+                                      {
+                                        "name": "Dina Kačar",
+                                        "link": null,
+                                        "description": null,
+                                        "children": [
+                                          {
+                                            "name": "Tina Kar",
+                                            "link": null,
+                                            "description": null,
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Aleksandar Gavrilović",
+                                    "link": null,
+                                    "description": null,
+                                    "children": [
+                                      {
+                                        "name": "Petra Kralj",
+                                        "link": null,
+                                        "description": null,
+                                        "children": []
+                                      },
+                                      {
+                                        "name": "Nikola Matosović",
+                                        "link": null,
+                                        "description": null,
+                                        "children": []
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "name": "Dražen Dostal",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Jasna Stanković",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Martin Morava",
+                                    "link": null,
+                                    "description": null,
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "Dragan Biškić",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Franka",
+                            "link": null,
+                            "description": null,
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Željko Mikić (Žac)",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Nikola Džida",
+                            "link": null,
+                            "description": null,
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Ivan Buconjić",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      },
+                      {
+                        "name": "Miljenko Katunarić",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "name": "Vlatka Košutić",
-    "link": null,
-    "description": null,
-    "children": [
+      },
       {
-        "name": "Enis El Kur-Komljenović",
+        "name": "Lilit Štefan",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Biljana P",
         "link": null,
         "description": null,
         "children": []
@@ -1182,7 +1362,7 @@
     "description": null,
     "children": [
       {
-        "name": "Tomislav Brkljačić",
+        "name": "Tomislav Brkljačić (Brklja)",
         "link": null,
         "description": null,
         "children": [
@@ -1207,7 +1387,7 @@
         "children": []
       },
       {
-        "name": "Marko Dimjašević",
+        "name": "Marko Dimjašević (Dim)",
         "link": null,
         "description": null,
         "children": [
@@ -1236,6 +1416,12 @@
             "link": null,
             "description": null,
             "children": []
+          },
+          {
+            "name": "Monika Marušić",
+            "link": null,
+            "description": null,
+            "children": []
           }
         ]
       },
@@ -1244,33 +1430,6 @@
         "link": null,
         "description": null,
         "children": []
-      }
-    ]
-  },
-  {
-    "name": "Jelena Jakovljević",
-    "link": null,
-    "description": null,
-    "children": [
-      {
-        "name": "Ivan Tomić",
-        "link": null,
-        "description": null,
-        "children": [
-          {
-            "name": "Borna Prpić",
-            "link": null,
-            "description": null,
-            "children": [
-              {
-                "name": "Mislav Kirac",
-                "link": null,
-                "description": null,
-                "children": []
-              }
-            ]
-          }
-        ]
       }
     ]
   },
@@ -1291,6 +1450,12 @@
             "children": [
               {
                 "name": "Tino Tkalec",
+                "link": null,
+                "description": null,
+                "children": []
+              },
+              {
+                "name": "Tomislav Benković",
                 "link": null,
                 "description": null,
                 "children": []
@@ -1351,44 +1516,12 @@
                         "description": "Status: Alumni",
                         "children": [
                           {
-                            "name": "Mirna Barać",
+                            "name": "Lada Brnetić",
                             "link": null,
                             "description": "Status: Alumni",
                             "children": [
                               {
-                                "name": "Mateja Kobeščak",
-                                "link": null,
-                                "description": "Status: Alumni",
-                                "children": [
-                                  {
-                                    "name": "Lucija Bogdan",
-                                    "link": null,
-                                    "description": "Status: Alumni",
-                                    "children": [
-                                      {
-                                        "name": "Danijel Krpes",
-                                        "link": null,
-                                        "description": "Status: Baby member",
-                                        "children": []
-                                      },
-                                      {
-                                        "name": "Barbara Bilić",
-                                        "link": null,
-                                        "description": "Zatražila brisanje javnih podataka | Status: Alumni",
-                                        "children": []
-                                      },
-                                      {
-                                        "name": "Petra Popović",
-                                        "link": null,
-                                        "description": "Status: Baby member",
-                                        "children": []
-                                      }
-                                    ]
-                                  }
-                                ]
-                              },
-                              {
-                                "name": "Tvrtko Zadro",
+                                "name": "Dora Novak",
                                 "link": null,
                                 "description": "Status: Alumni",
                                 "children": []
@@ -1400,20 +1533,134 @@
                     ]
                   }
                 ]
+              },
+              {
+                "name": "Mladen Kukulić",
+                "link": null,
+                "description": "Status: Alumni",
+                "children": [
+                  {
+                    "name": "Klaudija Molnar (Klaus)",
+                    "link": null,
+                    "description": "Status: Alumni",
+                    "children": [
+                      {
+                        "name": "Karko Josip Andrić (JK)",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": []
+                      },
+                      {
+                        "name": "Mirna Inge Barać",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": [
+                          {
+                            "name": "Mateja Kobeščak",
+                            "link": null,
+                            "description": "Status: Alumni",
+                            "children": [
+                              {
+                                "name": "Lucija Bogdan",
+                                "link": null,
+                                "description": "Status: Alumni",
+                                "children": [
+                                  {
+                                    "name": "Danijel Krpes",
+                                    "link": null,
+                                    "description": "Status: Baby member",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Barbara Bilić",
+                                    "link": null,
+                                    "description": "Zatražila brisanje javnih podataka | Status: Alumni",
+                                    "children": []
+                                  },
+                                  {
+                                    "name": "Petra Popović",
+                                    "link": null,
+                                    "description": "Status: Baby member",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Tvrtko Zadro",
+                            "link": null,
+                            "description": "Status: Alumni",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Ana Franjić (Fana)",
+                    "link": null,
+                    "description": "Status: Alumni",
+                    "children": [
+                      {
+                        "name": "Iva Mikulić",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": []
+                      },
+                      {
+                        "name": "Filip Borovec",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": []
+                      },
+                      {
+                        "name": "Tea Lovrinov",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": []
+                      },
+                      {
+                        "name": "Petra Rebernjak",
+                        "link": null,
+                        "description": "Status: Alumni",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Franca Plavotić",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  }
+                ]
               }
             ]
+          },
+          {
+            "name": "Jelena Milošević",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Jelena Novosel",
+            "link": null,
+            "description": null,
+            "children": []
           }
         ]
       }
     ]
   },
   {
-    "name": "Ivana Stulić",
+    "name": "Ivana Štulić (Pookie)",
     "link": null,
     "description": null,
     "children": [
       {
-        "name": "Tomislav Muić",
+        "name": "Tomislav Muić (Mujke)",
         "link": null,
         "description": null,
         "children": [
@@ -1422,42 +1669,61 @@
             "link": null,
             "description": null,
             "children": []
+          },
+          {
+            "name": "Maja Hren",
+            "link": null,
+            "description": null,
+            "children": []
           }
         ]
       }
     ]
   },
   {
-    "name": "Igor Kolar",
+    "name": "Tomislav Rešetar (Treš)",
     "link": null,
     "description": null,
     "children": [
       {
-        "name": "Martina Grgić",
-        "link": null,
-        "description": null,
-        "children": []
-      }
-    ]
-  },
-  {
-    "name": "Lucija Šilić",
-    "link": null,
-    "description": null,
-    "children": [
-      {
-        "name": "Antonija Burčul",
+        "name": "Ana Habijanec (HAna)",
         "link": null,
         "description": null,
         "children": [
           {
-            "name": "Sara G",
+            "name": "Dejan Lutring",
             "link": null,
-            "description": "Status: Full member",
+            "description": null,
+            "children": [
+              {
+                "name": "Anamarija Skenderović (Firefly)",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Ana Pavić",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Ines Bombek",
+                "link": null,
+                "description": null,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Matko Kirac",
+            "link": null,
+            "description": null,
             "children": []
           },
           {
-            "name": "Luka Tokić",
+            "name": "Dominik Vrdoljak",
             "link": null,
             "description": null,
             "children": []
@@ -1465,15 +1731,1141 @@
         ]
       },
       {
-        "name": "Marko Maričević",
+        "name": "Saša Petrović",
         "link": null,
-        "description": "Status: Baby member",
+        "description": null,
         "children": []
       }
     ]
   },
   {
-    "name": "Dea Milovan",
+    "name": "Ema Šolić",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Nikša Lovrinić",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Barbara Šafarić",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Anita Slana",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Viktor Fonić",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Darja Petro",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Petar Krajnović",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Mario Bekavac",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Marijana Ćeškić",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Mladen Rogić",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Marta Kaleb",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Jadranka Lučev",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Jana Lončarević",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Nina Jovanović (Ninja)",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Ana Nahod",
+            "link": null,
+            "description": null,
+            "children": [
+              {
+                "name": "Miroslav Dubić (Miro)",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Ana Mihalić",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Ivo Žarković (Leptir)",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Lorena Štimac",
+                            "link": null,
+                            "description": null,
+                            "children": [
+                              {
+                                "name": "Maja Vištica",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              },
+                              {
+                                "name": "Milan Dalmacija",
+                                "link": null,
+                                "description": null,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Željko Martinović (Sokol)",
+                        "link": null,
+                        "description": null,
+                        "children": [
+                          {
+                            "name": "Ana Valjak (Stožac)",
+                            "link": null,
+                            "description": null,
+                            "children": []
+                          },
+                          {
+                            "name": "Andrija Vidović",
+                            "link": null,
+                            "description": null,
+                            "children": []
+                          },
+                          {
+                            "name": "Vedrana Starčević",
+                            "link": null,
+                            "description": "Tata ili Željko Martinović ili Marko Marušić",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Katarina Tabak",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Matko Borić",
+                "link": null,
+                "description": null,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Damir Korenčić",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Matija Vajdić",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Marko Kaplan",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lana Novosel",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Kristijan Kolačko",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Boris Dražić",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Elizabeta Petersdorfer (Lizzy)",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Tanja Grilec",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Dino Anić",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Viktorija Duđak",
+            "link": null,
+            "description": null,
+            "children": [
+              {
+                "name": "Nina Pavličević",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Katarina Šundrica",
+                    "link": null,
+                    "description": null,
+                    "children": [
+                      {
+                        "name": "Robert Šarić",
+                        "link": null,
+                        "description": null,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Ana Peroš",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Nina Marn",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Željka Jurkas",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Žarko Martinović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Domina Mary Bogdanović",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Frane Šižgorić",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Josip Bagarić (Bax)",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Damir Mužić",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Jelena Ardalić (Jeja)",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Maja Inđić",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Zdravko Eškinja",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pavao Mirošević (Gazda Pavo)",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Alenka Prka",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Nina Šesto",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Rafael Urukalović",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Jura Troje",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Marijana Češkić",
+            "link": null,
+            "description": null,
+            "children": []
+          },
+          {
+            "name": "Augustina",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sanja Miler",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Arthur",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Sanin Mujkić",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Ivana B",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Jelena Jakovljević",
+        "link": null,
+        "description": null,
+        "children": [
+          {
+            "name": "Ivan Tomić (Ero)",
+            "link": null,
+            "description": null,
+            "children": [
+              {
+                "name": "Borna Prpić (Porna)",
+                "link": null,
+                "description": null,
+                "children": [
+                  {
+                    "name": "Mislav Kirac",
+                    "link": null,
+                    "description": null,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Hrvoje Kindl",
+            "link": null,
+            "description": null,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sanja Jasika",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Jakov Pavlek",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Ivan Lovrić (Ivo)",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Aleksandra Čereković (Sashka)",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Ivan Andrišek (Andabak)",
+    "link": null,
+    "description": null,
+    "children": [
+      {
+        "name": "Lana Pecnik",
+        "link": null,
+        "description": null,
+        "children": []
+      },
+      {
+        "name": "Silvija Cvitkovic",
+        "link": null,
+        "description": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "Ana Barčić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Berislav Nadinić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Branko Slivarić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Davor Skeledžija",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Domagoj Pezo",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Goga Zorić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Goran Krajačić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Igor Rajnpreht",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Krešimir Dujmić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Lana Kikić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Leopold Horak",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Matija Kokot",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Matija Maleš",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Nikola Brebrić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Robert Rigo",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Sandra Miler",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Vedrana Ištuk",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Žaklina Polak",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Hrvoje Stancin",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Bojan Mazanek",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivan Petrović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Melita Hren",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Romana Petrović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tomislav Sakić (shaka)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Igor Sipka",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Jagoda Perković",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Hrvoje Tonković",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Mirko Karas (Mike)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Irena Jakić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Karmen Pleše",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Robert Preskar",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tomislav Gazdić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marko Pavić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Kristijan Perković",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Nađa Roić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Stjepan Pavlek",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Milivoj Kovač (Mili)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Igor Borojević",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Goran Rajnpreht",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Petra Damjanić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Jarmila Maksimović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Mirjana Puac",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tina Kaštelan",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Dražen Klarić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Lana Šindler",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Matija Iveković (mivek)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Jana Loncarević",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Zsolt Guzsvany",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Irena Lučić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tibor Kulcsar",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Anja Barešić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tea Grašo",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Višnja Vugrinec",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Koraljka Jelić (Kore)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Dario Nikolić (Sova)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tanja Koletić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Davor Čapalija",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Davor Bošnjak",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Igor Župan (Zhupie)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Damir Muzić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Darko Narandžić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Dubravko Narandžić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Juraj Urbanke",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Senka Drobac",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Miran Brajsa",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Hrvoje Meštrić (Cruz)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivana Rendulić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marina Petković",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivan Ferić (Fera)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivana Ilić (Chili)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marina Ulemek",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Iva Gojmerac",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tamara Forza (Tamy)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Mario Bošnjak (Bario)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marina Dragun (Popo)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivana Sonje",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Martina Jelčić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Vedrana Tadić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Katarina Repar",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ana Gamilec",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tomislav Radošević",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Tomica Gril",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marica Malenica",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Frane Šarlija",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marko Rupert",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Filip Grilec",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Maja Šarenić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Stefan Barešić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Rubina Barl",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marko Orešić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Matija Bukal Hetrich",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ivan Martić (Smartić)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Dominik Borović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Iva Kovačev",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Ava Marušić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Antonela Madunić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Neven Miculinić",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Borna Baričević (Porno)",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Bruno Gavranović",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Marija Hlobik",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Eva Pavlinek",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Kristijan Bartol",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Magdalena Kralj",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Vesna Podgajski",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Nikolina Kovačev",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Kristina Mileta",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Zvonimir Likević",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Irma Kremer",
+    "link": null,
+    "description": null,
+    "children": []
+  },
+  {
+    "name": "Sara Fodor",
     "link": null,
     "description": null,
     "children": []

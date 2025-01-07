@@ -66,8 +66,7 @@ export default function SearchBar({ data, setSearchResults }) {
         />
       )}
       sx={{
-        width: { xs: "100%", sm: "50%" },
-        maxWidth: { xs: "none", sm: "25rem" },
+        maxWidth: "25rem",
       }}
     />
   );
