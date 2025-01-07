@@ -8,7 +8,6 @@ import {
   Button,
   Tooltip,
   Typography,
-  ButtonGroup,
   useMediaQuery,
 } from "@mui/material";
 
@@ -16,16 +15,13 @@ import {
   CloudDownload as CloudDownloadIcon,
   CloudUpload as CloudUploadIcon,
   Delete as DeleteIcon,
-  Logout as LogoutIcon,
-  ExpandMore as ExpandMoreIcon,
   MoreVert as MoreVertIcon,
-  BurstModeTwoTone,
 } from "@mui/icons-material/";
 
 import { useState } from "react";
 
 export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
-  const mqSub480 = useMediaQuery("(max-width: 960px)");
+  const mqSub480 = useMediaQuery("(max-width: 720px)");
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -49,28 +45,35 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
   }
 
   function handleImport() {
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.accept = ".json";
-    fileInput.onchange = (e) => {
-      const file = e.target.files[0];
+    if (
+      treeData.length === 0 ||
+      window.confirm(
+        "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
+      )
+    ) {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = ".json";
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
 
-      const fileReader = new FileReader();
+        const fileReader = new FileReader();
 
-      fileReader.onload = async (e) => {
-        try {
-          const importedData = JSON.parse(e.target.result);
+        fileReader.onload = async (e) => {
+          try {
+            const importedData = JSON.parse(e.target.result);
 
-          updateData(importedData);
-        } catch (error) {
-          alert("Error parsing imported data.");
-        }
+            updateData(importedData);
+          } catch (error) {
+            alert("Error parsing imported data.");
+          }
+        };
+
+        fileReader.readAsText(file);
       };
 
-      fileReader.readAsText(file);
-    };
-
-    fileInput.click();
+      fileInput.click();
+    }
   }
 
   const handleToggleUserMenu = (event) => {
@@ -84,7 +87,7 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
   return (
     <AppBar position="static">
       <Container maxWidth="false">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ gap: "1rem" }}>
           <Box
             sx={{
               flexGrow: 1,
@@ -98,8 +101,12 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
             <Typography
               variant="subtitle2"
               sx={{
-                marginLeft: "2vw",
+                display: { xs: "none", sm: "block" },
+
+                marginLeft: "1rem",
+
                 fontStyle: "italic",
+                whiteSpace: "nowrap",
               }}
             >
               ~ A simple tree graph maker ~
@@ -139,21 +146,7 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                 open={Boolean(anchorElUser)}
                 onClose={handleToggleUserMenu}
               >
-                <MenuItem
-                  onClick={
-                    (handleToggleUserMenu,
-                    () => {
-                      if (
-                        treeData.length === 0 ||
-                        window.confirm(
-                          "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-                        )
-                      ) {
-                        handleImport();
-                      }
-                    })
-                  }
-                >
+                <MenuItem onClick={(handleToggleUserMenu, handleImport)}>
                   <Button variant="text" startIcon={<CloudUploadIcon />}>
                     Import tree
                   </Button>
@@ -189,14 +182,6 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
 
                 display: "flex",
                 gap: "0.5rem",
-
-                "& > *": {
-                  color: "white",
-                },
-
-                "& :hover": {
-                  borderColor: "white",
-                },
               }}
             >
               <Button
@@ -212,6 +197,14 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                     handleImport();
                   }
                 }}
+                sx={{
+                  color: "white",
+
+                  ":hover": {
+                    border: 1,
+                    borderColor: "white",
+                  },
+                }}
               >
                 Import tree
               </Button>
@@ -221,6 +214,14 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                 disabled={treeData.length === 0}
                 startIcon={<CloudDownloadIcon />}
                 onClick={handleExport}
+                sx={{
+                  color: "white",
+
+                  ":hover": {
+                    border: 1,
+                    borderColor: "white",
+                  },
+                }}
               >
                 Export tree
               </Button>
@@ -231,6 +232,14 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                 startIcon={<DeleteIcon />}
                 onClick={() => {
                   setOpenDeleteAlert(true);
+                }}
+                sx={{
+                  color: "white",
+
+                  ":hover": {
+                    border: 1,
+                    borderColor: "white",
+                  },
                 }}
               >
                 Delete tree

@@ -1,20 +1,15 @@
 import {
   CssBaseline,
-  useMediaQuery,
   Typography,
   Container,
   Button,
   Tab,
   Tabs,
   Box,
-  ButtonGroup,
   IconButton,
 } from "@mui/material";
 import {
   AddCircle as AddCircleIcon,
-  CloudDownload as CloudDownloadIcon,
-  CloudUpload as CloudUploadIcon,
-  Delete as DeleteIcon,
   AccountTree as AccountTreeIcon,
   TableChart as TableChartIcon,
   GitHub as GitHubIcon,
@@ -240,21 +235,22 @@ export default function App() {
             onChange={(e, newValue) => setTabValue(newValue)}
             variant="fullWidth"
             centered
-            sx={{
-              "*": {
-                minHeight: 0,
-              },
-            }}
           >
             <Tab
               icon={<AccountTreeIcon />}
               iconPosition="start"
               label="Tree View"
+              sx={{
+                minHeight: 0,
+              }}
             />
             <Tab
               icon={<TableChartIcon />}
               iconPosition="start"
               label="Table View"
+              sx={{
+                minHeight: 0,
+              }}
             />
           </Tabs>
 
@@ -289,6 +285,8 @@ export default function App() {
           justifyContent: "space-between",
           alignItems: "center",
           flexDirection: { xs: "column", sm: "row" },
+
+          textWrap: "balance",
 
           backgroundColor: (theme) => theme.palette.primary.main,
 
