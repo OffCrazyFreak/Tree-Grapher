@@ -10,7 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import TextInput from "./TextInput";
 
@@ -19,7 +19,7 @@ export default function NodeForm({
   openFormModal,
   setOpenFormModal,
   treeData,
-  searchResults,
+  flattenedTree,
   updateData,
   selectedTreeNode,
 }) {
@@ -33,6 +33,21 @@ export default function NodeForm({
   const [linkIsValid, setLinkIsValid] = useState();
   const [descriptionIsValid, setDescriptionIsValid] = useState();
 
+  // Build a map for quick node lookups
+  const nodeMap = useMemo(() => {
+    const map = new Map();
+    function buildMap(tree) {
+      tree.forEach((node) => {
+        map.set(node.name, node);
+        if (node.children && node.children.length > 0) {
+          buildMap(node.children);
+        }
+      });
+    }
+    buildMap(treeData);
+    return map;
+  }, [treeData]);
+
   function submit() {
     if (!parentIsValid || !nameIsValid || !linkIsValid || !descriptionIsValid) {
       console.error("Invalid node details.");
@@ -44,19 +59,19 @@ export default function NodeForm({
       link: link && link.trim() !== "" ? sanitizeLink(link).trim() : null,
       description:
         description && description.trim() !== "" ? description.trim() : null,
-      children: node ? findSubtree(treeData, node.name).children : [],
+      children: node ? nodeMap.get(node.name)?.children || [] : [],
     };
 
     let updatedTreeData = [...treeData];
 
     if (node?.parent === parent.name) {
-      // Editing an existing node with same parent
+      // Editing an existing node with the same parent
       updatedTreeData = replaceSubtree(updatedTreeData, node.name, updatedNode);
     } else {
       if (node) {
         if (node.parent !== "No parent (root node)") {
           // Remove node from old parent's children
-          const oldParentSubtree = findSubtree(updatedTreeData, node.parent);
+          const oldParentSubtree = nodeMap.get(node.parent);
           oldParentSubtree.children = oldParentSubtree.children.filter(
             (child) => child.name !== node.name
           );
@@ -78,7 +93,7 @@ export default function NodeForm({
         updatedTreeData.push(updatedNode);
       } else {
         // Adding or updating a child node
-        const newParentSubtree = findSubtree(updatedTreeData, parent.name);
+        const newParentSubtree = nodeMap.get(parent.name);
         newParentSubtree.children.push(updatedNode);
         updatedTreeData = replaceSubtree(
           updatedTreeData,
@@ -173,7 +188,7 @@ export default function NodeForm({
     setNameIsValid(node ? true : false);
     setLinkIsValid(true);
     setDescriptionIsValid(true);
-  }, [openFormModal]);
+  }, [openFormModal, node, selectedTreeNode]);
 
   return (
     <Backdrop open={openFormModal}>
@@ -228,7 +243,7 @@ export default function NodeForm({
               }}
             >
               <Autocomplete
-                options={[{ name: "No parent (root node)" }, ...searchResults]}
+                options={[{ name: "No parent (root node)" }, ...flattenedTree]}
                 clearOnEscape
                 openOnFocus
                 disabled={treeData.length === 0}
@@ -264,7 +279,7 @@ export default function NodeForm({
                     required
                     fullWidth
                     margin="dense"
-                    helperText={node ? "Cannot be itself or its subnode" : ""}
+                    helperText={node ? "cannot be itself or its subnode" : ""}
                   />
                 )}
               />
@@ -282,14 +297,14 @@ export default function NodeForm({
                   return (
                     input.length >= 2 &&
                     input.length <= 50 &&
-                    isNameUnique(input, searchResults)
+                    isNameUnique(input, flattenedTree)
                   );
                 }}
                 value={name}
                 setValue={setName}
                 valueIsValid={nameIsValid}
                 setValueIsValid={setNameIsValid}
-              ></TextInput>
+              />
 
               <TextInput
                 labelText={"Link"}
@@ -319,7 +334,7 @@ export default function NodeForm({
                 setValue={setLink}
                 valueIsValid={linkIsValid}
                 setValueIsValid={setLinkIsValid}
-              ></TextInput>
+              />
 
               <TextInput
                 labelText={"Description"}
@@ -340,7 +355,7 @@ export default function NodeForm({
                 setValue={setDescription}
                 valueIsValid={descriptionIsValid}
                 setValueIsValid={setDescriptionIsValid}
-              ></TextInput>
+              />
             </Box>
 
             <Box

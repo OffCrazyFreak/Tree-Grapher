@@ -6,30 +6,29 @@ import {
   Tab,
   Tabs,
   Box,
-  IconButton,
 } from "@mui/material";
 import {
   AddCircle as AddCircleIcon,
   AccountTree as AccountTreeIcon,
   TableChart as TableChartIcon,
-  GitHub as GitHubIcon,
 } from "@mui/icons-material";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import BackToTopBtn from "./components/BackToTopBtn";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
 import DeleteAlert from "./components/DeleteAlert";
 
-import SampleTreeData from "./TreeData_Sample.json";
 import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
 
 export default function App() {
   const [treeData, setTreeData] = useState([]);
+  const flattenedTree = useMemo(() => flattenTree(treeData), [treeData]);
   const [searchResults, setSearchResults] = useState([]);
 
   const [tabValue, setTabValue] = useState(0);
@@ -47,7 +46,7 @@ export default function App() {
   }
 
   function handleDeleteNode(node) {
-    // Find the node with the given name in the treeData
+    // Check if the node has children
     const findNode = (nodes, targetName) => {
       for (const node of nodes) {
         if (node.name === targetName) {
@@ -73,27 +72,29 @@ export default function App() {
       return;
     }
 
+    // Ask for confirmation
     const shouldDelete = window.confirm(
       "Are you sure you want to delete this node?"
     );
 
     if (shouldDelete) {
-      // Delete the node from treeData
+      // Recursive function to delete the node
       const deleteNode = (nodes, targetName) => {
-        for (let i = 0; i < nodes.length; i++) {
-          if (nodes[i].name === targetName) {
-            nodes.splice(i, 1);
-            return true;
-          }
-          if (deleteNode(nodes[i].children, targetName)) {
-            return true;
-          }
-        }
-        return false;
+        return nodes
+          .map((node) =>
+            node.name === targetName
+              ? null
+              : { ...node, children: deleteNode(node.children, targetName) }
+          )
+          .filter(Boolean); // Remove null entries
       };
 
-      deleteNode(treeData, node.name);
-      setSearchResults(flattenTree(treeData));
+      const updatedTree = deleteNode(treeData, node.name);
+      setTreeData(updatedTree);
+
+      // Update search results
+      const updatedFlattenedTree = flattenTree(updatedTree);
+      setSearchResults(updatedFlattenedTree);
 
       if (node.name === selectedTreeNode) {
         setSelectedTreeNode(null);
@@ -130,31 +131,31 @@ export default function App() {
 
   function updateData(data) {
     setTreeData(data);
-    setSearchResults(flattenTree(data));
+
+    const updatedFlattenedTree = flattenTree(data);
+    setSearchResults(updatedFlattenedTree);
 
     // Store data in localStorage
     if (data.length > 0) {
-      localStorage.setItem("treeData", JSON.stringify(data));
+      localStorage.setItem("TreeGrapher_Data", JSON.stringify(data));
     } else {
-      localStorage.removeItem("treeData");
+      localStorage.removeItem("TreeGrapher_Data");
     }
   }
 
   useEffect(() => {
     // Retrieve data from localStorage
-    const storedTreeData = localStorage.getItem("treeData");
+    const storedTreeData = localStorage.getItem("TreeGrapher_Data");
 
     // Parse the stored JSON string back to an object
     if (storedTreeData) {
       const parsedData = JSON.parse(storedTreeData);
 
       // Update state with the retrieved data
-      setTreeData(parsedData);
-      setSearchResults(flattenTree(parsedData));
+      updateData(parsedData);
     } else {
       // Update state with the retrieved data
-      setTreeData(BESTZagrebTreeData);
-      setSearchResults(flattenTree(BESTZagrebTreeData));
+      updateData(BESTZagrebTreeData);
     }
   }, []);
 
@@ -169,7 +170,7 @@ export default function App() {
         openFormModal={openFormModal}
         setOpenFormModal={setOpenFormModal}
         treeData={treeData}
-        searchResults={searchResults}
+        flattenedTree={flattenedTree}
         updateData={updateData}
         selectedTreeNode={selectedTreeNode}
       />
@@ -210,7 +211,7 @@ export default function App() {
             }}
           >
             <SearchBar
-              data={flattenTree(treeData)}
+              data={flattenedTree}
               setSearchResults={setSearchResults}
             />
           </Box>
@@ -220,7 +221,7 @@ export default function App() {
             color="primary"
             startIcon={<AddCircleIcon />}
             onClick={() => {
-              setSearchResults(flattenTree(treeData));
+              // setSearchResults(flattenedTree);
               setNode();
               setOpenFormModal(true);
             }}
@@ -278,55 +279,7 @@ export default function App() {
         </Box>
       </Box>
 
-      <Container
-        maxWidth={false}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexDirection: { xs: "column", sm: "row" },
-
-          textWrap: "balance",
-
-          backgroundColor: (theme) => theme.palette.primary.main,
-
-          color: "#fff",
-        }}
-      >
-        <IconButton
-          href="https://github.com/OffCrazyFreak/Tree-Grapher"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="inherit"
-          size="small"
-        >
-          <GitHubIcon />
-        </IconButton>
-
-        <Typography align="center">
-          ~ Remember to export your tree graph ~
-        </Typography>
-        <Typography
-          align="center"
-          onClick={() => {
-            if (
-              treeData.length === 0 ||
-              window.confirm(
-                "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-              )
-            ) {
-              updateData(SampleTreeData);
-            }
-          }}
-          sx={{ cursor: "pointer" }}
-        >
-          ~ Import sample tree graph ~
-        </Typography>
-
-        <Typography align="center">
-          &copy; Jakov Jakovac {new Date().getFullYear()}
-        </Typography>
-      </Container>
+      <Footer treeData={treeData} updateData={updateData} />
     </>
   );
 }

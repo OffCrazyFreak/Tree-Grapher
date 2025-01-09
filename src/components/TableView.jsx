@@ -40,40 +40,35 @@ export default function TableView({
   handleEdit,
   handleDelete,
 }) {
-  const [sortBy, setSortBy] = useState("");
-  const [sortDirection, setSortDirection] = useState("desc");
+  const [sortState, setSortState] = useState({ key: "", direction: "desc" });
 
   function handleSort(column) {
-    if (column.key === sortBy) {
-      // if same column selected, reverse
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    if (column.key === sortState.key) {
+      // Reverse the sort direction if the same column is clicked
+      const newDirection = sortState.direction === "asc" ? "desc" : "asc";
+      setSortState({ ...sortState, direction: newDirection });
       setSearchResults([...searchResults].reverse());
     } else {
-      // if different column selected, sort desc
-      setSortDirection("desc");
-      setSortBy(column.key);
-
-      sortTable(column);
+      // Sort in descending order by default for a new column
+      const newSortState = { key: column.key, direction: "desc" };
+      setSortState(newSortState);
+      sortTable(column, newSortState.direction);
     }
   }
 
   function sortTable(column) {
-    setSearchResults(
-      searchResults.sort((a, b) => {
-        if (a[column.key] === null) {
-          return 1;
-        } else if (b[column.key] === null) {
-          return -1;
-        } else {
-          return a[column.key]
-            .toString()
-            .localeCompare(b[column.key].toString());
-        }
-      })
-    );
+    searchResults.sort((a, b) => {
+      if (a[column.key] === null) {
+        return 1;
+      } else if (b[column.key] === null) {
+        return -1;
+      } else {
+        return a[column.key].toString().localeCompare(b[column.key].toString());
+      }
+    });
   }
 
-  function getFormatedCellValue(column, result) {
+  function getFormattedCellValue(column, result) {
     const cellValue = <Typography>{result[column.key]}</Typography>;
 
     if (column.key === "name" && result.link) {
@@ -118,9 +113,7 @@ export default function TableView({
                   md: "table-cell",
                 },
                 padding: 0.5,
-
                 width: "min-content",
-
                 whiteSpace: "nowrap",
               }}
             >
@@ -128,8 +121,10 @@ export default function TableView({
                 column.label
               ) : (
                 <TableSortLabel
-                  active={sortBy === column.key}
-                  direction={sortBy === column.key ? sortDirection : "desc"}
+                  active={sortState.key === column.key}
+                  direction={
+                    sortState.key === column.key ? sortState.direction : "desc"
+                  }
                   onClick={() => handleSort(column)}
                 >
                   {column.label}
@@ -155,16 +150,14 @@ export default function TableView({
                       md: "table-cell",
                     },
                     padding: 0.5,
-
                     width: "min-content",
-
                     overflow: "hidden",
                     textOverflow: column.showTooltip ? "ellipsis" : "unset",
                     whiteSpace: column.showTooltip ? "nowrap" : "unset",
                     maxWidth: column.showTooltip ? "30ch" : "60ch", // required so the cell doesnt overflow
                   }}
                 >
-                  {getFormatedCellValue(column, result)}
+                  {getFormattedCellValue(column, result)}
                 </TableCell>
               );
             })}
@@ -180,7 +173,6 @@ export default function TableView({
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 0.5,
-
                   padding: 0.5,
                 }}
               >
@@ -191,7 +183,6 @@ export default function TableView({
                     sx={{
                       color: "white",
                       backgroundColor: "#1976d2",
-
                       borderRadius: 1,
                     }}
                   >
@@ -206,7 +197,6 @@ export default function TableView({
                     sx={{
                       color: "white",
                       backgroundColor: "#1976d2",
-
                       borderRadius: 1,
                     }}
                   >
