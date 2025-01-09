@@ -8,16 +8,34 @@ import {
   Box,
 } from "@mui/material";
 
-export default function DeleteModal({ deleteModal, setDeleteModal }) {
-  function submit() {
-    deleteModal.function();
+import { useContext } from "react";
 
+import DeleteModalContext from "../context/DeleteModalContext";
+
+export default function DeleteModal() {
+  const { deleteModal, setDeleteModal } = useContext(DeleteModalContext);
+
+  function submit() {
+    if (deleteModal.function) {
+      deleteModal.function();
+    }
+    closeModal();
+  }
+
+  function closeModal() {
     setDeleteModal({
+      ...deleteModal,
       open: false,
-      modalActionTitle: null,
-      modalText: null,
-      function: null,
     });
+
+    setTimeout(() => {
+      setDeleteModal({
+        open: false,
+        modalActionTitle: null,
+        modalText: null,
+        function: null,
+      });
+    }, 500);
   }
 
   return (
@@ -25,21 +43,12 @@ export default function DeleteModal({ deleteModal, setDeleteModal }) {
       <Modal
         open={deleteModal.open}
         closeAfterTransition
-        // submit on Enter key
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             submit();
           }
         }}
-        // close on Escape key
-        onClose={() => {
-          setDeleteModal({
-            open: false,
-            modalActionTitle: null,
-            modalText: null,
-            function: null,
-          });
-        }}
+        onClose={closeModal}
       >
         <Fade in={deleteModal.open}>
           <FormControl
@@ -48,15 +57,11 @@ export default function DeleteModal({ deleteModal, setDeleteModal }) {
               top: "5%",
               left: "50%",
               transform: "translateX(-50%)",
-
               maxWidth: "95%",
               width: "40rem",
-
               maxHeight: "95%",
-
               borderRadius: "1.5rem",
               padding: "1rem",
-
               backgroundColor: "whitesmoke",
               boxShadow: "#666 2px 2px 8px",
             }}
@@ -86,12 +91,7 @@ export default function DeleteModal({ deleteModal, setDeleteModal }) {
                 gap: 1,
               }}
             >
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  setDeleteModal(false);
-                }}
-              >
+              <Button variant="outlined" onClick={closeModal}>
                 Cancel
               </Button>
 

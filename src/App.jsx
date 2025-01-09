@@ -1,12 +1,4 @@
-import {
-  CssBaseline,
-  Typography,
-  Container,
-  Button,
-  Tab,
-  Tabs,
-  Box,
-} from "@mui/material";
+import { CssBaseline, Typography, Button, Tab, Tabs, Box } from "@mui/material";
 import {
   AddCircle as AddCircleIcon,
   AccountTree as AccountTreeIcon,
@@ -16,12 +8,16 @@ import {
 import { useState, useEffect, useMemo } from "react";
 
 import BackToTopBtn from "./components/BackToTopBtn";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
 import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
+
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
+
 import DeleteModal from "./components/DeleteModal";
 
 import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
@@ -36,13 +32,6 @@ export default function App() {
 
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
-
-  const [deleteModal, setDeleteModal] = useState({
-    open: false,
-    modalActionTitle: null,
-    modalText: null,
-    function: null,
-  });
 
   function handleEditNode(node) {
     setNode(node);
@@ -100,10 +89,6 @@ export default function App() {
       const updatedFlattenedTree = flattenTree(updatedTree);
       setSearchResults(updatedFlattenedTree);
     }
-  }
-
-  function handleDeleteTree() {
-    updateData([]);
   }
 
   // Returns a sorted list of node objects in format { parent, name, link, description }
@@ -164,6 +149,8 @@ export default function App() {
 
       <BackToTopBtn />
 
+      <DeleteModal />
+
       <NodeForm
         node={node}
         openFormModal={openFormModal}
@@ -173,14 +160,7 @@ export default function App() {
         updateData={updateData}
       />
 
-      <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
-
-      <Header
-        treeData={treeData}
-        updateData={updateData}
-        setDeleteModal={setDeleteModal}
-        handleDeleteTree={handleDeleteTree}
-      />
+      <Header treeData={treeData} updateData={updateData} />
 
       <Box sx={{ flex: "1 0 auto", margin: "1.5vw" }}>
         <Box
@@ -267,6 +247,7 @@ export default function App() {
                   setSearchResults={setSearchResults}
                   handleEdit={handleEditNode}
                   handleDelete={handleDeleteNode}
+                  // deleteModalComponent={DeleteModalComponent}
                 />
               )
             )}
