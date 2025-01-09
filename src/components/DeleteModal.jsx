@@ -8,21 +8,21 @@ import {
   Box,
 } from "@mui/material";
 
-export default function DeleteAlert({
-  openDeleteAlert,
-  setOpenDeleteAlert,
+export default function DeleteModal({
+  openDeleteModal,
+  setOpenDeleteModal,
   deleteFunction,
 }) {
   function submit() {
     deleteFunction();
 
-    setOpenDeleteAlert(false);
+    setOpenDeleteModal(false);
   }
 
   return (
-    <Backdrop open={openDeleteAlert}>
+    <Backdrop open={openDeleteModal}>
       <Modal
-        open={openDeleteAlert}
+        open={openDeleteModal}
         closeAfterTransition
         // submit on Enter key
         onKeyDown={(e) => {
@@ -32,10 +32,10 @@ export default function DeleteAlert({
         }}
         // close on Escape key
         onClose={() => {
-          setOpenDeleteAlert(false);
+          setOpenDeleteModal(false);
         }}
       >
-        <Fade in={openDeleteAlert}>
+        <Fade in={openDeleteModal}>
           <FormControl
             sx={{
               position: "absolute",
@@ -83,7 +83,7 @@ export default function DeleteAlert({
               <Button
                 variant="outlined"
                 onClick={() => {
-                  setOpenDeleteAlert(false);
+                  setOpenDeleteModal(false);
                 }}
               >
                 Cancel

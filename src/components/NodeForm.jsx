@@ -12,7 +12,8 @@ import {
 
 import { useState, useEffect, useMemo } from "react";
 
-import TextInput from "./TextInput";
+import CustomTextInput from "./CustomTextInput";
+import CustomAutocomplete from "./CustomAutocomplete";
 
 export default function NodeForm({
   node,
@@ -21,17 +22,21 @@ export default function NodeForm({
   treeData,
   flattenedTree,
   updateData,
-  selectedTreeNode,
 }) {
-  const [parent, setParent] = useState();
-  const [name, setName] = useState();
-  const [link, setLink] = useState();
-  const [description, setDescription] = useState();
-
-  const [parentIsValid, setParentIsValid] = useState();
-  const [nameIsValid, setNameIsValid] = useState();
-  const [linkIsValid, setLinkIsValid] = useState();
-  const [descriptionIsValid, setDescriptionIsValid] = useState();
+  const [formData, setFormData] = useState({
+    entity: {
+      parent: null,
+      name: null,
+      link: null,
+      description: null,
+    },
+    validation: {
+      parentIsValid: true,
+      nameIsValid: false,
+      linkIsValid: true,
+      descriptionIsValid: true,
+    },
+  });
 
   // Build a map for quick node lookups
   const nodeMap = useMemo(() => {
@@ -49,57 +54,80 @@ export default function NodeForm({
   }, [treeData]);
 
   function submit() {
-    if (!parentIsValid || !nameIsValid || !linkIsValid || !descriptionIsValid) {
+    const formIsValid = Object.values(formData.validation).every(Boolean);
+
+    if (!formIsValid) {
       console.error("Invalid node details.");
       return;
     }
 
     const updatedNode = {
-      name: name.trim(),
-      link: link && link.trim() !== "" ? sanitizeLink(link).trim() : null,
+      name: formData.entity.name.trim(),
+      link:
+        formData.entity.link && formData.entity.link.trim() !== ""
+          ? sanitizeLink(formData.entity.link).trim()
+          : null,
       description:
-        description && description.trim() !== "" ? description.trim() : null,
+        formData.entity.description && formData.entity.description.trim() !== ""
+          ? formData.entity.description.trim()
+          : null,
       children: node ? nodeMap.get(node.name)?.children || [] : [],
     };
 
     let updatedTreeData = [...treeData];
 
-    if (node?.parent === parent.name) {
-      // Editing an existing node with the same parent
+    if (node?.parent === formData.entity.parent) {
+      // If the parent of the current node has not changed (still the same parent as in the form data):
+      // Update the subtree where the current node resides.
       updatedTreeData = replaceSubtree(updatedTreeData, node.name, updatedNode);
     } else {
+      // If the parent of the current node has changed:
       if (node) {
+        // If the node being updated already exists:
         if (node.parent !== "No parent (root node)") {
-          // Remove node from old parent's children
+          // If the current node is not a root node (has a parent):
           const oldParentSubtree = nodeMap.get(node.parent);
+          // Find the old parent subtree using the `nodeMap`.
+
           oldParentSubtree.children = oldParentSubtree.children.filter(
             (child) => child.name !== node.name
           );
+          // Remove the current node from the old parent's children.
+
           updatedTreeData = replaceSubtree(
             updatedTreeData,
             oldParentSubtree.name,
             oldParentSubtree
           );
+          // Update the tree data by replacing the old parent's subtree with the modified one.
         } else {
-          // Remove node from top level of the tree
+          // If the current node is a root node (does not have a parent):
           updatedTreeData = updatedTreeData.filter(
             (topLevelNode) => topLevelNode.name !== node.name
           );
+          // Remove the current node from the top-level nodes in the tree.
         }
       }
 
-      if (parent.name === "No parent (root node)") {
-        // Adding or updating a root node
+      // Handle adding the node to its new parent:
+      if (formData.entity.parent === "No parent (root node)") {
+        // If the new parent is the root (node is becoming a top-level node):
         updatedTreeData.push(updatedNode);
+        // Add the updated node directly to the top-level of the tree.
       } else {
-        // Adding or updating a child node
-        const newParentSubtree = nodeMap.get(parent.name);
+        // If the new parent is not the root (node is being added under a new parent):
+        const newParentSubtree = nodeMap.get(formData.entity.parent);
+        // Find the new parent subtree using the `nodeMap`.
+
         newParentSubtree.children.push(updatedNode);
+        // Add the updated node to the new parent's children.
+
         updatedTreeData = replaceSubtree(
           updatedTreeData,
           newParentSubtree.name,
           newParentSubtree
         );
+        // Update the tree data by replacing the new parent's subtree with the modified one.
       }
     }
 
@@ -127,40 +155,11 @@ export default function NodeForm({
     });
   }
 
-  function findSubtree(nodeTree, targetNodeName) {
-    for (const node of nodeTree) {
-      if (node.name === targetNodeName) {
-        return node;
-      }
-
-      if (node.children.length > 0) {
-        const subtree = findSubtree(node.children, targetNodeName);
-        if (subtree) {
-          return subtree;
-        }
-      }
-    }
-
-    return null;
-  }
-
-  // Add http protocol to link if no protocol in link
   function sanitizeLink(link) {
     if (link && !/^https?:\/\//i.test(link)) {
       return `http://${link}`;
     }
     return link;
-  }
-
-  // Returns array of subnode names (including itself)
-  function getSubnodes(node, subNodesList = []) {
-    subNodesList.push(node.name);
-
-    if (node.children.length > 0) {
-      node.children.forEach((child) => getSubnodes(child, subNodesList));
-    }
-
-    return subNodesList;
   }
 
   // Validate if the node name is unique in list
@@ -174,21 +173,22 @@ export default function NodeForm({
   }
 
   useEffect(() => {
-    setParent({
-      // if in edit mode (node exists) set its parent as parent,
-      // else if a node in tree is selected, set it as parent,
-      // else set to no parent
-      name: node?.parent || selectedTreeNode || "No parent (root node)",
+    setFormData({
+      entity: {
+        // if in edit mode (node exists) set its parent as parent,
+        // else if a node in tree is selected, set it as parent,
+        // else set to no parent
+        parent: node?.parent || "No parent (root node)",
+        ...node,
+      },
+      validation: {
+        parentIsValid: true,
+        nameIsValid: node ? true : false,
+        linkIsValid: true,
+        descriptionIsValid: true,
+      },
     });
-    setName(node?.name);
-    setLink(node?.link);
-    setDescription(node?.description);
-
-    setParentIsValid(true);
-    setNameIsValid(node ? true : false);
-    setLinkIsValid(true);
-    setDescriptionIsValid(true);
-  }, [openFormModal, node, selectedTreeNode]);
+  }, [openFormModal]);
 
   return (
     <Backdrop open={openFormModal}>
@@ -237,107 +237,70 @@ export default function NodeForm({
               {!node ? "Add node" : "Update node"}
             </Typography>
 
-            <Box
-              sx={{
-                overflowY: "auto",
-              }}
-            >
-              <Autocomplete
-                options={[{ name: "No parent (root node)" }, ...flattenedTree]}
-                clearOnEscape
-                openOnFocus
-                disabled={treeData.length === 0}
-                value={parent}
-                getOptionLabel={(option) => option.name} // Display node names
-                isOptionEqualToValue={(option, value) =>
-                  option.name === value.name
-                } // Compare by node name
-                filterOptions={(options, { inputValue }) =>
-                  options.filter((option) => {
-                    const doesntContainSubnodes =
-                      !node ||
-                      !getSubnodes(findSubtree(treeData, node.name)).some(
-                        (subnode) =>
-                          subnode.toLowerCase() === option.name.toLowerCase()
-                      );
-
-                    const includesSearchTerm = option.name
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase());
-
-                    return doesntContainSubnodes && includesSearchTerm;
-                  })
-                }
-                onChange={(e, selectedValue) => {
-                  setParent(selectedValue);
-                  setParentIsValid(true);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Parent node"
-                    required
-                    fullWidth
-                    margin="dense"
-                    helperText={node ? "cannot be itself or its subnode" : ""}
-                  />
-                )}
+            <Box sx={{ overflowY: "auto" }}>
+              <CustomAutocomplete
+                options={[
+                  {
+                    name: "No parent (root node)",
+                  },
+                  ...flattenedTree,
+                ]}
+                entityKey="parent"
+                validationKey="parentIsValid"
+                label="Parent Node"
+                formatter={(option) => option.name}
+                disabledCondition={treeData.length === 0}
+                helperTextCondition={!!node}
+                helperText="Cannot be itself or its subnode"
+                formData={formData}
+                setFormData={setFormData}
               />
 
-              <TextInput
-                labelText={"Name"}
+              <CustomTextInput
+                labelText="Name"
                 isRequired
-                placeholderText={"Jane Doe"}
+                placeholderText="Node Name"
                 helperText={{
                   error: "Name must be unique and between 2 and 50 characters",
                   details: "",
                 }}
-                inputProps={{ minLength: 2, maxLength: 50 }}
-                validationFunction={(input) => {
-                  return (
-                    input.length >= 2 &&
-                    input.length <= 50 &&
-                    isNameUnique(input, flattenedTree)
-                  );
-                }}
-                value={name}
-                setValue={setName}
-                valueIsValid={nameIsValid}
-                setValueIsValid={setNameIsValid}
+                inputProps={{ name: "name", minLength: 2, maxLength: 50 }}
+                validationFunction={(input) =>
+                  input.length >= 2 && input.length <= 50 && !nodeMap.has(input)
+                }
+                formData={formData}
+                setFormData={setFormData}
               />
 
-              <TextInput
-                labelText={"Link"}
+              <CustomTextInput
+                labelText="Link"
                 helperText={{
                   error: "Invalid link",
                   details: "",
                 }}
-                placeholderText={"best.hr"}
-                inputProps={{ maxLength: 50 }}
+                placeholderText="http://example.com"
+                inputProps={{ name: "link", maxLength: 50 }}
                 validationFunction={(input) => {
                   const urlPattern = new RegExp(
-                    "^(https?:\\/\\/)?" + // validate protocol
-                      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-                      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-                      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-                      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
+                    "^(https?:\\/\\/)?" +
+                      "(([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}" +
+                      "|((\\d{1,3}\\.){3}\\d{1,3}))" +
+                      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" +
+                      "(\\?[;&a-z\\d%_.~+=-]*)?" +
                       "(\\#[-a-z\\d_]*)?$",
                     "i"
-                  ); // validate fragment locator
-
+                  );
                   return (
                     input === "" ||
                     (input.length <= 50 && urlPattern.test(input))
                   );
                 }}
-                value={link}
-                setValue={setLink}
-                valueIsValid={linkIsValid}
-                setValueIsValid={setLinkIsValid}
+                formData={formData}
+                setFormData={setFormData}
               />
 
-              <TextInput
-                labelText={"Description"}
+              <CustomTextInput
+                labelText="Description"
                 textFieldProps={{
                   multiline: true,
                   minRows: 2,
@@ -347,14 +310,10 @@ export default function NodeForm({
                   error: "Description must be under 1000 characters",
                   details: "",
                 }}
-                inputProps={{ maxLength: 1000 }}
-                validationFunction={(input) => {
-                  return input.length <= 1000;
-                }}
-                value={description}
-                setValue={setDescription}
-                valueIsValid={descriptionIsValid}
-                setValueIsValid={setDescriptionIsValid}
+                inputProps={{ name: "description", maxLength: 1000 }}
+                validationFunction={(input) => input.length <= 1000}
+                formData={formData}
+                setFormData={setFormData}
               />
             </Box>
 
@@ -379,16 +338,8 @@ export default function NodeForm({
               <Button
                 variant="contained"
                 onClick={submit}
-                disabled={
-                  !(
-                    parentIsValid &&
-                    nameIsValid &&
-                    linkIsValid &&
-                    descriptionIsValid
-                  )
-                }
+                disabled={Object.values(formData.validation).some((v) => !v)}
               >
-                {/* span needed because of bug */}
                 <span>{!node ? "Add node" : "Update node"}</span>
               </Button>
             </Box>

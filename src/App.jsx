@@ -22,23 +22,22 @@ import SearchBar from "./components/SearchBar";
 import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
-import DeleteAlert from "./components/DeleteAlert";
+import DeleteModal from "./components/DeleteModal";
 
 import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
 
 export default function App() {
   const [treeData, setTreeData] = useState([]);
   const flattenedTree = useMemo(() => flattenTree(treeData), [treeData]);
-  const [searchResults, setSearchResults] = useState([]);
 
   const [tabValue, setTabValue] = useState(0);
+
+  const [searchResults, setSearchResults] = useState([]);
 
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
 
-  const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
-
-  const [selectedTreeNode, setSelectedTreeNode] = useState(null);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   function handleEditNode(node) {
     setNode(node);
@@ -95,15 +94,10 @@ export default function App() {
       // Update search results
       const updatedFlattenedTree = flattenTree(updatedTree);
       setSearchResults(updatedFlattenedTree);
-
-      if (node.name === selectedTreeNode) {
-        setSelectedTreeNode(null);
-      }
     }
   }
 
   function handleDeleteTree() {
-    setSelectedTreeNode(null);
     updateData([]);
   }
 
@@ -172,19 +166,18 @@ export default function App() {
         treeData={treeData}
         flattenedTree={flattenedTree}
         updateData={updateData}
-        selectedTreeNode={selectedTreeNode}
       />
 
-      <DeleteAlert
-        openDeleteAlert={openDeleteAlert}
-        setOpenDeleteAlert={setOpenDeleteAlert}
+      <DeleteModal
+        openDeleteModal={openDeleteModal}
+        setOpenDeleteModal={setOpenDeleteModal}
         deleteFunction={handleDeleteTree}
       />
 
       <Header
         treeData={treeData}
         updateData={updateData}
-        setOpenDeleteAlert={setOpenDeleteAlert}
+        setOpenDeleteModal={setOpenDeleteModal}
       />
 
       <Box sx={{ flex: "1 0 auto", margin: "1.5vw" }}>
