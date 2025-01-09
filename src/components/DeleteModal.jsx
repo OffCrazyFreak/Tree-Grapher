@@ -8,21 +8,22 @@ import {
   Box,
 } from "@mui/material";
 
-export default function DeleteModal({
-  openDeleteModal,
-  setOpenDeleteModal,
-  deleteFunction,
-}) {
+export default function DeleteModal({ deleteModal, setDeleteModal }) {
   function submit() {
-    deleteFunction();
+    deleteModal.function();
 
-    setOpenDeleteModal(false);
+    setDeleteModal({
+      open: false,
+      modalActionTitle: null,
+      modalText: null,
+      function: null,
+    });
   }
 
   return (
-    <Backdrop open={openDeleteModal}>
+    <Backdrop open={deleteModal.open}>
       <Modal
-        open={openDeleteModal}
+        open={deleteModal.open}
         closeAfterTransition
         // submit on Enter key
         onKeyDown={(e) => {
@@ -32,10 +33,15 @@ export default function DeleteModal({
         }}
         // close on Escape key
         onClose={() => {
-          setOpenDeleteModal(false);
+          setDeleteModal({
+            open: false,
+            modalActionTitle: null,
+            modalText: null,
+            function: null,
+          });
         }}
       >
-        <Fade in={openDeleteModal}>
+        <Fade in={deleteModal.open}>
           <FormControl
             sx={{
               position: "absolute",
@@ -60,7 +66,7 @@ export default function DeleteModal({
               gutterBottom
               sx={{ textTransform: "uppercase", fontWeight: "bold" }}
             >
-              Delete tree
+              {deleteModal.modalActionTitle}
             </Typography>
 
             <Typography
@@ -70,7 +76,7 @@ export default function DeleteModal({
                 minHeight: "5rem",
               }}
             >
-              Are you sure you want to delete the whole tree?
+              {deleteModal.modalText}
             </Typography>
 
             <Box
@@ -83,14 +89,14 @@ export default function DeleteModal({
               <Button
                 variant="outlined"
                 onClick={() => {
-                  setOpenDeleteModal(false);
+                  setDeleteModal(false);
                 }}
               >
                 Cancel
               </Button>
 
               <Button variant="contained" onClick={submit}>
-                Delete tree
+                {deleteModal.modalActionTitle}
               </Button>
             </Box>
           </FormControl>

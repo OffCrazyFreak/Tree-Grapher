@@ -181,8 +181,8 @@ export default function TableView({
                     size="small"
                     onClick={() => handleEdit(result)}
                     sx={{
-                      color: "white",
-                      backgroundColor: "#1976d2",
+                      color: (theme) => theme.palette.primary.contrastText,
+                      backgroundColor: (theme) => theme.palette.primary.main,
                       borderRadius: 1,
                     }}
                   >
@@ -195,8 +195,8 @@ export default function TableView({
                     size="small"
                     onClick={() => handleDelete(result)}
                     sx={{
-                      color: "white",
-                      backgroundColor: "#1976d2",
+                      color: (theme) => theme.palette.primary.contrastText,
+                      backgroundColor: (theme) => theme.palette.primary.main,
                       borderRadius: 1,
                     }}
                   >

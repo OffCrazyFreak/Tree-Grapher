@@ -9,6 +9,7 @@ import {
   Tooltip,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
 import {
@@ -20,10 +21,23 @@ import {
 
 import { useState } from "react";
 
-export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
-  const mqSub480 = useMediaQuery("(max-width: 720px)");
+export default function Header({
+  treeData,
+  updateData,
+  setDeleteModal,
+  handleDeleteTree,
+}) {
+  const theme = useTheme();
+  const mqSm = useMediaQuery(theme.breakpoints.down("md"));
 
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const deleteModalObject = {
+    open: true,
+    modalActionTitle: "Delete tree",
+    modalText: "Are you sure you want to delete the whole tree?",
+    function: handleDeleteTree,
+  };
 
   function handleExport() {
     const now = new Date();
@@ -113,7 +127,7 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
             </Typography>
           </Box>
 
-          {mqSub480 ? (
+          {mqSm ? (
             <Box sx={{ flexGrow: 0 }}>
               <Box
                 sx={{
@@ -165,7 +179,7 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                   onClick={
                     (handleToggleUserMenu,
                     () => {
-                      setOpenDeleteAlert(true);
+                      setDeleteModal(deleteModalObject);
                     })
                   }
                 >
@@ -198,11 +212,11 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                   }
                 }}
                 sx={{
-                  color: "white",
+                  color: (theme) => theme.palette.primary.contrastText,
 
                   ":hover": {
                     border: 1,
-                    borderColor: "white",
+                    borderColor: (theme) => theme.palette.primary.contrastText,
                   },
                 }}
               >
@@ -215,11 +229,11 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                 startIcon={<CloudDownloadIcon />}
                 onClick={handleExport}
                 sx={{
-                  color: "white",
+                  color: (theme) => theme.palette.primary.contrastText,
 
                   ":hover": {
                     border: 1,
-                    borderColor: "white",
+                    borderColor: (theme) => theme.palette.primary.contrastText,
                   },
                 }}
               >
@@ -231,14 +245,14 @@ export default function Header({ treeData, updateData, setOpenDeleteAlert }) {
                 disabled={treeData.length === 0}
                 startIcon={<DeleteIcon />}
                 onClick={() => {
-                  setOpenDeleteAlert(true);
+                  setDeleteModal(deleteModalObject);
                 }}
                 sx={{
-                  color: "white",
+                  color: (theme) => theme.palette.primary.contrastText,
 
                   ":hover": {
                     border: 1,
-                    borderColor: "white",
+                    borderColor: (theme) => theme.palette.primary.contrastText,
                   },
                 }}
               >

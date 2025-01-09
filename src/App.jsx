@@ -37,7 +37,12 @@ export default function App() {
   const [openFormModal, setOpenFormModal] = useState(false);
   const [node, setNode] = useState();
 
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState({
+    open: false,
+    modalActionTitle: null,
+    modalText: null,
+    function: null,
+  });
 
   function handleEditNode(node) {
     setNode(node);
@@ -168,16 +173,13 @@ export default function App() {
         updateData={updateData}
       />
 
-      <DeleteModal
-        openDeleteModal={openDeleteModal}
-        setOpenDeleteModal={setOpenDeleteModal}
-        deleteFunction={handleDeleteTree}
-      />
+      <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
 
       <Header
         treeData={treeData}
         updateData={updateData}
-        setOpenDeleteModal={setOpenDeleteModal}
+        setDeleteModal={setDeleteModal}
+        handleDeleteTree={handleDeleteTree}
       />
 
       <Box sx={{ flex: "1 0 auto", margin: "1.5vw" }}>

@@ -1,4 +1,4 @@
-import { Box, Zoom, Fab, useScrollTrigger } from "@mui/material";
+import { Box, Zoom, Fab, useScrollTrigger, Tooltip } from "@mui/material";
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from "@mui/icons-material";
 
 export default function App() {
@@ -10,20 +10,29 @@ export default function App() {
 
   return (
     <Zoom in={trigger}>
-      <Fab
-        size="small"
-        aria-label="scroll back to top"
-        onClick={(event) => {
-          document.body.scrollIntoView();
-        }}
-        sx={{
-          position: "fixed",
-          bottom: 16,
-          right: 16,
-        }}
-      >
-        <KeyboardArrowUpIcon color="primary" />
-      </Fab>
+      <Tooltip title="Scroll to top">
+        <Fab
+          size="small"
+          onClick={(event) => {
+            document.body.scrollIntoView();
+          }}
+          sx={{
+            position: "fixed",
+            bottom: 48,
+            right: 16,
+
+            backgroundColor: (theme) => theme.palette.primary.main,
+
+            ":hover": {
+              backgroundColor: (theme) => theme.palette.primary.light,
+            },
+          }}
+        >
+          <KeyboardArrowUpIcon
+            sx={{ color: (theme) => theme.palette.primary.contrastText }}
+          />
+        </Fab>
+      </Tooltip>
     </Zoom>
   );
 }
