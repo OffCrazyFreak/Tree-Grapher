@@ -25,26 +25,6 @@ export default function HeaderActions({ treeData, updateData }) {
 
   const { setModalData } = useContext(ModalContext);
 
-  const modalImportTree = {
-    open: true,
-    title: "Import tree",
-    message: "Are you sure you want to override the current tree?",
-    note: "Importing a tree will overwrite the current tree data. This cannot be undone.",
-    cancelAction: "Cancel",
-    confirmAction: "Import tree",
-    function: handleImportData,
-  };
-
-  const modalDeleteTree = {
-    open: true,
-    title: "Delete tree",
-    message: "Are you sure you want to delete the whole tree?",
-    note: "Remember to export your tree graph. Tree deletion cannot be undone.",
-    cancelAction: "Cancel",
-    confirmAction: "Delete tree",
-    function: handleDeleteData,
-  };
-
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleToggleUserMenu = (event) => {
@@ -53,6 +33,16 @@ export default function HeaderActions({ treeData, updateData }) {
     } else {
       setAnchorElUser(null);
     }
+  };
+
+  const modalImportTree = {
+    open: true,
+    title: "Import tree",
+    message: "Are you sure you want to override the current tree?",
+    note: "Importing a tree will overwrite the current tree data. This cannot be undone.",
+    cancelAction: "Cancel",
+    confirmAction: "Import tree",
+    function: handleImportData,
   };
 
   function handleImportData() {
@@ -95,7 +85,7 @@ export default function HeaderActions({ treeData, updateData }) {
       .replace(/[:.]/g, "-")
       .replace(/[T]/g, "_")
       .slice(0, -5); // Remove milliseconds
-    const fileName = `TreeData_${formattedDate}.json`;
+    const fileName = `TreeGrapher_data_${formattedDate}.json`;
 
     const dataToExport = JSON.stringify(treeData, null, 2);
     const blob = new Blob([dataToExport], { type: "application/json" });
@@ -107,81 +97,23 @@ export default function HeaderActions({ treeData, updateData }) {
     URL.revokeObjectURL(url);
   }
 
+  const modalDeleteTree = {
+    open: true,
+    title: "Delete tree",
+    message: "Are you sure you want to delete the whole tree?",
+    note: "Remember to export your tree graph. Tree deletion cannot be undone.",
+    cancelAction: "Cancel",
+    confirmAction: "Delete tree",
+    function: handleDeleteData,
+  };
+
   function handleDeleteData() {
     updateData([]);
   }
 
   return (
     <>
-      {mqSm ? (
-        <Box sx={{ flexGrow: 0 }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <Tooltip title="Tree actions">
-              <MoreVertIcon
-                onClick={handleToggleUserMenu}
-                sx={{ cursor: "pointer" }}
-              />
-            </Tooltip>
-          </Box>
-
-          <Menu
-            sx={{ mt: "45px" }}
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleToggleUserMenu}
-          >
-            <MenuItem
-              onClick={() => {
-                handleToggleUserMenu();
-                handleImportData();
-              }}
-            >
-              <Button variant="text" startIcon={<CloudUploadIcon />}>
-                Import tree
-              </Button>
-            </MenuItem>
-
-            <MenuItem
-              disabled={treeData.length === 0}
-              onClick={() => {
-                handleToggleUserMenu();
-                handleExportData();
-              }}
-            >
-              <Button variant="text" startIcon={<CloudDownloadIcon />}>
-                Export tree
-              </Button>
-            </MenuItem>
-            <MenuItem
-              disabled={treeData.length === 0}
-              onClick={() => {
-                handleToggleUserMenu();
-                setModalData(modalDeleteTree);
-              }}
-            >
-              <Button variant="text" startIcon={<DeleteIcon />}>
-                Delete tree
-              </Button>
-            </MenuItem>
-          </Menu>
-        </Box>
-      ) : (
+      {mqSm || (
         <Box
           sx={{
             flexGrow: 0,
@@ -227,26 +159,103 @@ export default function HeaderActions({ treeData, updateData }) {
             Export tree
           </Button>
 
-          <Button
-            variant="outlined"
-            disabled={treeData.length === 0}
-            startIcon={<DeleteIcon />}
-            onClick={() => {
-              setModalData(modalDeleteTree);
-            }}
-            sx={{
-              color: (theme) => theme.palette.primary.contrastText,
+          {/* <Button
+          variant="outlined"
+          disabled={treeData.length === 0}
+          startIcon={<DeleteIcon />}
+          onClick={() => {
+            setModalData(modalDeleteTree);
+          }}
+          sx={{
+            color: (theme) => theme.palette.primary.contrastText,
 
-              ":hover": {
-                border: 1,
-                borderColor: (theme) => theme.palette.primary.contrastText,
-              },
-            }}
-          >
-            Delete tree
-          </Button>
+            ":hover": {
+              border: 1,
+              borderColor: (theme) => theme.palette.primary.contrastText,
+            },
+          }}
+        >
+          Delete tree
+        </Button> */}
         </Box>
       )}
+
+      <Box sx={{ flexGrow: 0 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Tooltip title="Tree actions">
+            <MoreVertIcon
+              onClick={handleToggleUserMenu}
+              sx={{ cursor: "pointer" }}
+            />
+          </Tooltip>
+        </Box>
+
+        <Menu
+          sx={{ mt: 4 }}
+          anchorEl={anchorElUser}
+          variant="selectedMenu"
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          MenuListProps={{
+            dense: true,
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleToggleUserMenu}
+        >
+          {mqSm && (
+            <MenuItem
+              onClick={() => {
+                handleToggleUserMenu();
+                handleImportData();
+              }}
+            >
+              <Button variant="text" startIcon={<CloudUploadIcon />}>
+                Import tree
+              </Button>
+            </MenuItem>
+          )}
+
+          {mqSm && (
+            <MenuItem
+              disabled={treeData.length === 0}
+              onClick={() => {
+                handleToggleUserMenu();
+                handleExportData();
+              }}
+            >
+              <Button variant="text" startIcon={<CloudDownloadIcon />}>
+                Export tree
+              </Button>
+            </MenuItem>
+          )}
+
+          <MenuItem
+            disabled={treeData.length === 0}
+            onClick={() => {
+              handleToggleUserMenu();
+              setModalData(modalDeleteTree);
+            }}
+          >
+            <Button variant="text" startIcon={<DeleteIcon />}>
+              Delete tree
+            </Button>
+          </MenuItem>
+        </Menu>
+      </Box>
     </>
   );
 }
