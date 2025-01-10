@@ -5,7 +5,9 @@ import {
   TableChart as TableChartIcon,
 } from "@mui/icons-material";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
+
+import ModalContext from "./context/ModalContext";
 
 import BackToTopBtn from "./components/BackToTopBtn";
 
@@ -18,11 +20,13 @@ import NodeForm from "./components/NodeForm";
 import ControlledTreeView from "./components/ControlledTreeView";
 import TableView from "./components/TableView";
 
-import DeleteModal from "./components/DeleteModal";
+import DeleteModal from "./components/CustomModal";
 
 import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
 
 export default function App() {
+  const { setModalData } = useContext(ModalContext);
+
   const [treeData, setTreeData] = useState([]);
   const flattenedTree = useMemo(() => flattenTree(treeData), [treeData]);
 
@@ -55,22 +59,7 @@ export default function App() {
 
     const nodeToDelete = findNode(treeData, node.name);
 
-    if (!nodeToDelete) {
-      alert("Node not found.");
-      return;
-    }
-
-    if (nodeToDelete.children.length > 0) {
-      alert("Cannot delete a node with children.");
-      return;
-    }
-
-    // Ask for confirmation
-    const shouldDelete = window.confirm(
-      "Are you sure you want to delete this node?"
-    );
-
-    if (shouldDelete) {
+    function deleteNode() {
       // Recursive function to delete the node
       const deleteNode = (nodes, targetName) => {
         return nodes
@@ -89,6 +78,19 @@ export default function App() {
       const updatedFlattenedTree = flattenTree(updatedTree);
       setSearchResults(updatedFlattenedTree);
     }
+
+    setModalData({
+      open: true,
+      title: "Delete node",
+      message: "Are you sure you want to delete " + node.name + "?",
+      note:
+        nodeToDelete.children.length > 0
+          ? "This node has children which will be deleted alongside this node."
+          : null,
+      cancelAction: "Cancel",
+      confirmAction: "Delete node",
+      function: deleteNode,
+    });
   }
 
   // Returns a sorted list of node objects in format { parent, name, link, description }
@@ -196,7 +198,6 @@ export default function App() {
             color="primary"
             startIcon={<AddCircleIcon />}
             onClick={() => {
-              // setSearchResults(flattenedTree);
               setNode();
               setOpenFormModal(true);
             }}
@@ -247,7 +248,6 @@ export default function App() {
                   setSearchResults={setSearchResults}
                   handleEdit={handleEditNode}
                   handleDelete={handleDeleteNode}
-                  // deleteModalComponent={DeleteModalComponent}
                 />
               )
             )}

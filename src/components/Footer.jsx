@@ -1,4 +1,4 @@
-import { Container, Typography, IconButton } from "@mui/material";
+import { Container, Typography, IconButton, Link } from "@mui/material";
 
 import { GitHub as GitHubIcon } from "@mui/icons-material";
 
@@ -31,9 +31,6 @@ export default function Footer({ treeData, updateData }) {
         <GitHubIcon />
       </IconButton>
 
-      <Typography align="center">
-        ~ Remember to export your tree graph ~
-      </Typography>
       <Typography
         align="center"
         onClick={() => {
@@ -52,7 +49,20 @@ export default function Footer({ treeData, updateData }) {
       </Typography>
 
       <Typography align="center">
-        &copy; Jakov Jakovac {new Date().getFullYear()}
+        &copy;&nbsp;
+        <Link
+          href="https://github.com/OffCrazyFreak"
+          sx={{
+            color: (theme) => theme.palette.primary.contrastText,
+
+            cursor: "pointer",
+
+            ":hover": { color: "inherit" },
+          }}
+        >
+          Jakov Jakovac
+        </Link>
+        &nbsp;{new Date().getFullYear()}
       </Typography>
     </Container>
   );

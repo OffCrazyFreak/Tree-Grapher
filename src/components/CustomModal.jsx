@@ -10,38 +10,42 @@ import {
 
 import { useContext } from "react";
 
-import DeleteModalContext from "../context/DeleteModalContext";
+import ModalContext from "../context/ModalContext";
 
-export default function DeleteModal() {
-  const { deleteModal, setDeleteModal } = useContext(DeleteModalContext);
+export default function CustomModal() {
+  const { modalData, setModalData } = useContext(ModalContext);
 
   function submit() {
-    if (deleteModal.function) {
-      deleteModal.function();
+    if (modalData.function) {
+      modalData.function();
     }
+
     closeModal();
   }
 
   function closeModal() {
-    setDeleteModal({
-      ...deleteModal,
+    setModalData({
+      ...modalData,
       open: false,
     });
 
     setTimeout(() => {
-      setDeleteModal({
+      setModalData({
         open: false,
-        modalActionTitle: null,
-        modalText: null,
+        title: null,
+        message: null,
+        note: null,
+        cancelAction: null,
+        confirmAction: null,
         function: null,
       });
     }, 500);
   }
 
   return (
-    <Backdrop open={deleteModal.open}>
+    <Backdrop open={modalData.open}>
       <Modal
-        open={deleteModal.open}
+        open={modalData.open}
         closeAfterTransition
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -50,7 +54,7 @@ export default function DeleteModal() {
         }}
         onClose={closeModal}
       >
-        <Fade in={deleteModal.open}>
+        <Fade in={modalData.open}>
           <FormControl
             sx={{
               position: "absolute",
@@ -71,18 +75,28 @@ export default function DeleteModal() {
               gutterBottom
               sx={{ textTransform: "uppercase", fontWeight: "bold" }}
             >
-              {deleteModal.modalActionTitle}
+              {modalData.title}
             </Typography>
 
             <Typography
               variant="body1"
               gutterBottom
+              textAlign="justify"
               sx={{
-                minHeight: "5rem",
+                minHeight: "3rem",
               }}
             >
-              {deleteModal.modalText}
+              {modalData.message}
             </Typography>
+
+            {modalData.note && (
+              <Typography variant="body1" gutterBottom textAlign="justify">
+                <Box component="span" fontWeight="bold">
+                  NOTE:&nbsp;
+                </Box>
+                {modalData.note}
+              </Typography>
+            )}
 
             <Box
               sx={{
@@ -91,12 +105,20 @@ export default function DeleteModal() {
                 gap: 1,
               }}
             >
-              <Button variant="outlined" onClick={closeModal}>
-                Cancel
-              </Button>
+              {modalData.cancelAction && (
+                <Button variant="outlined" onClick={closeModal}>
+                  {modalData.cancelAction}
+                </Button>
+              )}
 
-              <Button variant="contained" onClick={submit}>
-                {deleteModal.modalActionTitle}
+              <Button
+                variant="contained"
+                onClick={submit}
+                sx={{
+                  marginLeft: "auto",
+                }}
+              >
+                {modalData.confirmAction}
               </Button>
             </Box>
           </FormControl>

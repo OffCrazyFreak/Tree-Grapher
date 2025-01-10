@@ -4,7 +4,7 @@ import App from "./App";
 
 import "./index.css";
 
-import { DeleteModalProvider } from "./context/DeleteModalContext";
+import { ModalProvider } from "./context/ModalContext";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
@@ -21,9 +21,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <DeleteModalProvider>
+      <ModalProvider>
         <App />
-      </DeleteModalProvider>
+      </ModalProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

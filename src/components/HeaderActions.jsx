@@ -17,19 +17,32 @@ import {
 
 import { useState, useContext } from "react";
 
-import DeleteModalContext from "../context/DeleteModalContext";
+import ModalContext from "../context/ModalContext";
 
 export default function HeaderActions({ treeData, updateData }) {
   const theme = useTheme();
   const mqSm = useMediaQuery(theme.breakpoints.down("md"));
 
-  const { setDeleteModal } = useContext(DeleteModalContext);
+  const { setModalData } = useContext(ModalContext);
 
-  const deleteModalObject = {
+  const modalImportTree = {
     open: true,
-    modalActionTitle: "Delete tree",
-    modalText: "Are you sure you want to delete the whole tree?",
-    function: handleDeleteTree,
+    title: "Import tree",
+    message: "Are you sure you want to override the current tree?",
+    note: "Importing a tree will overwrite the current tree data. This cannot be undone.",
+    cancelAction: "Cancel",
+    confirmAction: "Import tree",
+    function: handleImportData,
+  };
+
+  const modalDeleteTree = {
+    open: true,
+    title: "Delete tree",
+    message: "Are you sure you want to delete the whole tree?",
+    note: "Remember to export your tree graph. Tree deletion cannot be undone.",
+    cancelAction: "Cancel",
+    confirmAction: "Delete tree",
+    function: handleDeleteData,
   };
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -41,6 +54,39 @@ export default function HeaderActions({ treeData, updateData }) {
       setAnchorElUser(null);
     }
   };
+
+  function handleImportData() {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".json";
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+
+      const fileReader = new FileReader();
+
+      fileReader.onload = async (e) => {
+        try {
+          const importedData = JSON.parse(e.target.result);
+
+          updateData(importedData);
+        } catch (error) {
+          setModalData({
+            open: true,
+            title: "Error",
+            message: "Error parsing imported data.",
+            note: null,
+            cancelAction: null,
+            confirmAction: "OK",
+            function: handleImportData,
+          });
+        }
+      };
+
+      fileReader.readAsText(file);
+    };
+
+    fileInput.click();
+  }
 
   function handleExportData() {
     const now = new Date();
@@ -61,39 +107,7 @@ export default function HeaderActions({ treeData, updateData }) {
     URL.revokeObjectURL(url);
   }
 
-  function handleImportData() {
-    if (
-      treeData.length === 0 ||
-      window.confirm(
-        "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-      )
-    ) {
-      const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.accept = ".json";
-      fileInput.onchange = (e) => {
-        const file = e.target.files[0];
-
-        const fileReader = new FileReader();
-
-        fileReader.onload = async (e) => {
-          try {
-            const importedData = JSON.parse(e.target.result);
-
-            updateData(importedData);
-          } catch (error) {
-            alert("Error parsing imported data.");
-          }
-        };
-
-        fileReader.readAsText(file);
-      };
-
-      fileInput.click();
-    }
-  }
-
-  function handleDeleteTree() {
+  function handleDeleteData() {
     updateData([]);
   }
 
@@ -158,7 +172,7 @@ export default function HeaderActions({ treeData, updateData }) {
               disabled={treeData.length === 0}
               onClick={() => {
                 handleToggleUserMenu();
-                setDeleteModal(deleteModalObject);
+                setModalData(modalDeleteTree);
               }}
             >
               <Button variant="text" startIcon={<DeleteIcon />}>
@@ -180,13 +194,8 @@ export default function HeaderActions({ treeData, updateData }) {
             variant="outlined"
             startIcon={<CloudUploadIcon />}
             onClick={() => {
-              if (
-                treeData.length === 0 ||
-                window.confirm(
-                  "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-                )
-              ) {
-                handleImportData();
+              if (treeData?.length !== 0) {
+                setModalData(modalImportTree);
               }
             }}
             sx={{
@@ -223,7 +232,7 @@ export default function HeaderActions({ treeData, updateData }) {
             disabled={treeData.length === 0}
             startIcon={<DeleteIcon />}
             onClick={() => {
-              setDeleteModal(deleteModalObject);
+              setModalData(modalDeleteTree);
             }}
             sx={{
               color: (theme) => theme.palette.primary.contrastText,
