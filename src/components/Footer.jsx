@@ -1,6 +1,10 @@
-import { Container, Typography, IconButton, Link } from "@mui/material";
+import { Container, Typography, IconButton, Link, Box } from "@mui/material";
 
-import { GitHub as GitHubIcon } from "@mui/icons-material";
+import {
+  GitHub as GitHubIcon,
+  LinkedIn as LinkedInIcon,
+  Instagram as InstagramIcon,
+} from "@mui/icons-material";
 
 import SampleTreeData from "../TreeData_Sample.json";
 
@@ -21,15 +25,44 @@ export default function Footer({ treeData, updateData }) {
         color: "#fff",
       }}
     >
-      <IconButton
-        href="https://github.com/OffCrazyFreak/Tree-Grapher"
-        target="_blank"
-        rel="noopener noreferrer"
-        color="inherit"
-        size="small"
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 0.125,
+        }}
       >
-        <GitHubIcon />
-      </IconButton>
+        <IconButton
+          href="https://github.com/OffCrazyFreak/Tree-Grapher"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="inherit"
+          size="small"
+        >
+          <GitHubIcon />
+        </IconButton>
+
+        <IconButton
+          href="https://www.linkedin.com/in/jakov-jakovac/"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="inherit"
+          size="small"
+        >
+          <LinkedInIcon />
+        </IconButton>
+
+        <IconButton
+          href="https://www.instagram.com/jakov_jakovac/"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="inherit"
+          size="small"
+        >
+          <InstagramIcon />
+        </IconButton>
+      </Box>
 
       <Typography
         align="center"
