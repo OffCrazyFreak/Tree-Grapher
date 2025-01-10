@@ -1,30 +1,36 @@
 import React from "react";
 import { TreeItem } from "@mui/lab";
-import { Tooltip, Typography, Box, Link } from "@mui/material";
-import { Info as InfoIcon } from "@mui/icons-material";
+import { Tooltip, Typography, Box, Link, IconButton } from "@mui/material";
+import { Info as InfoIcon, Edit as EditIcon } from "@mui/icons-material";
 
-export default function TreeItemNode({ node, fontSize, depth = 0 }) {
-  let nodeNameComponent = (
+export default function TreeItemNode({
+  node,
+  fontSize,
+  depth = 0,
+  selectedNode,
+  handleEditNodeMid,
+}) {
+  let nodeItemComponent = (
     <Typography fontSize={fontSize} whiteSpace="nowrap">
       {node.name}
     </Typography>
   );
 
   if (node.link) {
-    nodeNameComponent = (
+    nodeItemComponent = (
       <Link
         href={node.link}
         target="_blank"
         rel="noopener noreferrer"
         underline="none"
       >
-        {nodeNameComponent}
+        {nodeItemComponent}
       </Link>
     );
   }
 
   if (node.description) {
-    nodeNameComponent = (
+    nodeItemComponent = (
       <Tooltip
         title={node.description}
         placement="top-start"
@@ -32,8 +38,8 @@ export default function TreeItemNode({ node, fontSize, depth = 0 }) {
         enterTouchDelay={0}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {nodeNameComponent}
-          <InfoIcon sx={{ marginLeft: 0.2, color: "#666", fontSize }} />
+          {nodeItemComponent}
+          <InfoIcon sx={{ marginLeft: 0.5, color: "#666", fontSize }} />
         </Box>
       </Tooltip>
     );
@@ -43,7 +49,32 @@ export default function TreeItemNode({ node, fontSize, depth = 0 }) {
     <TreeItem
       key={node.name}
       nodeId={node.name}
-      label={nodeNameComponent}
+      label={
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          {nodeItemComponent}
+
+          {/* {selectedNode === node.name && (
+            // Show the icon only for the selected node
+            <EditIcon
+              aria-label={`Edit ${node.name}`}
+              onClick={() => {
+                handleEditNodeMid(node);
+              }}
+              sx={{
+                color: (theme) => theme.palette.primary.main,
+                fontSize,
+              }}
+            />
+          )} */}
+        </Box>
+      }
       sx={{
         paddingTop: depth === 0 && fontSize,
         "& .MuiTreeItem-content": {
@@ -58,6 +89,8 @@ export default function TreeItemNode({ node, fontSize, depth = 0 }) {
           node={childNode}
           fontSize={fontSize}
           depth={depth + 1}
+          selectedNode={selectedNode}
+          handleEditNodeMid={handleEditNodeMid}
         />
       ))}
     </TreeItem>

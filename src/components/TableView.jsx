@@ -37,8 +37,8 @@ const tableColumns = [
 export default function TableView({
   searchResults,
   setSearchResults,
-  handleEdit,
-  handleDelete,
+  handleEditNode,
+  handleDeleteNode,
 }) {
   const [sortState, setSortState] = useState({ key: "", direction: "desc" });
 
@@ -68,13 +68,13 @@ export default function TableView({
     });
   }
 
-  function getFormattedCellValue(column, result) {
-    const cellValue = <Typography>{result[column.key]}</Typography>;
+  function getFormattedCellValue(column, node) {
+    const cellValue = <Typography>{node[column.key]}</Typography>;
 
-    if (column.key === "name" && result.link) {
+    if (column.key === "name" && node.link) {
       return (
         <Link
-          href={result.link}
+          href={node.link}
           target="_blank"
           rel="noopener noreferrer"
           underline="none"
@@ -137,8 +137,8 @@ export default function TableView({
         </TableRow>
       </TableHead>
       <TableBody>
-        {searchResults.map((result) => (
-          <TableRow key={result.name}>
+        {searchResults.map((node) => (
+          <TableRow key={node.name}>
             {tableColumns.map((column) => {
               return (
                 <TableCell
@@ -157,7 +157,7 @@ export default function TableView({
                     maxWidth: column.showTooltip ? "30ch" : "60ch", // required so the cell doesnt overflow
                   }}
                 >
-                  {getFormattedCellValue(column, result)}
+                  {getFormattedCellValue(column, node)}
                 </TableCell>
               );
             })}
@@ -179,7 +179,7 @@ export default function TableView({
                 <Tooltip title="Edit">
                   <IconButton
                     size="small"
-                    onClick={() => handleEdit(result)}
+                    onClick={() => handleEditNode(node)}
                     sx={{
                       color: (theme) => theme.palette.primary.contrastText,
                       backgroundColor: (theme) => theme.palette.primary.main,
@@ -193,7 +193,7 @@ export default function TableView({
                 <Tooltip title="Delete">
                   <IconButton
                     size="small"
-                    onClick={() => handleDelete(result)}
+                    onClick={() => handleDeleteNode(node)}
                     sx={{
                       color: (theme) => theme.palette.primary.contrastText,
                       backgroundColor: (theme) => theme.palette.primary.main,

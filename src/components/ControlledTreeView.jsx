@@ -7,8 +7,14 @@ import {
 import TreeItemNode from "./TreeItemNode";
 import { calculateMaxDepth, buildParentMap } from "../utils/treeUtils";
 
-export default function ControlledTreeView({ treeData, searchResults }) {
+export default function ControlledTreeView({
+  treeData,
+  searchResults,
+  handleEditNode,
+}) {
   const [expanded, setExpanded] = useState([]);
+
+  const [selectedNode, setSelectedNode] = useState(null);
 
   // Memoize the maximum depth and font size
   const maxDepth = useMemo(() => calculateMaxDepth(treeData), [treeData]);
@@ -16,6 +22,11 @@ export default function ControlledTreeView({ treeData, searchResults }) {
     () => `max(1rem, ${2 - maxDepth * 0.1}rem)`,
     [maxDepth]
   );
+
+  function handleEditNodeMid(node) {
+    node.parent = findParentNode(node)?.name;
+    handleEditNode(node);
+  }
 
   // Build a parent map during initialization
   const parentMap = useMemo(() => buildParentMap(treeData), [treeData]);
@@ -43,11 +54,22 @@ export default function ControlledTreeView({ treeData, searchResults }) {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={expanded}
-      onNodeToggle={(e, nodeIds) => setExpanded(nodeIds)}
+      onNodeToggle={(e, nodeName) => {
+        setExpanded(nodeName);
+      }}
+      onNodeSelect={(e, nodeName) => {
+        setSelectedNode(nodeName);
+      }}
       sx={{ overflowX: "auto" }}
     >
       {treeData.map((rootNode) => (
-        <TreeItemNode key={rootNode.name} node={rootNode} fontSize={fontSize} />
+        <TreeItemNode
+          key={rootNode.name}
+          node={rootNode}
+          fontSize={fontSize}
+          selectedNode={selectedNode}
+          handleEditNodeMid={handleEditNodeMid}
+        />
       ))}
     </TreeView>
   );

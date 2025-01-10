@@ -162,24 +162,14 @@ export default function NodeForm({
     return link;
   }
 
-  // Validate if the node name is unique in list
-  function isNameUnique(newNodeName, nodesList) {
-    for (const node of nodesList) {
-      if (node.name === newNodeName) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   useEffect(() => {
     setFormData({
       entity: {
+        ...node,
         // if in edit mode (node exists) set its parent as parent,
         // else if a node in tree is selected, set it as parent,
         // else set to no parent
-        parent: node?.parent || "No parent (root node)",
-        ...node,
+        parent: node?.parent ?? "No parent (root node)",
       },
       validation: {
         parentIsValid: true,

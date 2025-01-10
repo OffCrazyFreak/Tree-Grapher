@@ -240,14 +240,16 @@ export default function App() {
               <ControlledTreeView
                 treeData={treeData}
                 searchResults={searchResults}
+                handleEditNode={handleEditNode}
+                handleDeleteNode={handleDeleteNode}
               />
             ) : (
               tabValue === 1 && (
                 <TableView
                   searchResults={searchResults}
                   setSearchResults={setSearchResults}
-                  handleEdit={handleEditNode}
-                  handleDelete={handleDeleteNode}
+                  handleEditNode={handleEditNode}
+                  handleDeleteNode={handleDeleteNode}
                 />
               )
             )}
