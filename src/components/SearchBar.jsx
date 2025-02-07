@@ -7,11 +7,22 @@ import {
 import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
 export default function SearchBar({ data, setSearchResults }) {
-  function handleChange(value) {
-    value = value.toLowerCase();
+  function normalizeString(str) {
+    return str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
 
+  function handleChange(value) {
+    // Normalize and lowercase the search query
+    const normalizedQuery = normalizeString(value);
+
+    // Filter data by comparing normalized names with the normalized query
     const results = data.filter((item) => {
-      return item.name.toLowerCase().includes(value);
+      const normalizedName = normalizeString(item.name);
+
+      return normalizedName.includes(normalizedQuery);
     });
 
     setSearchResults(results);
