@@ -25,7 +25,7 @@ import DeleteModal from "./components/CustomModal";
 import BESTZagrebTreeData from "./sampleData/TreeData_BEST_Zagreb.json";
 
 import { flattenTree } from "./utils/treeUtils";
-import { findNodeInTree, deleteNodeRecursively } from "./utils/nodeUtils";
+import { deleteNodeRecursively } from "./utils/nodeUtils";
 
 export default function App() {
   const { setModalData } = useContext(ModalContext);
@@ -46,25 +46,28 @@ export default function App() {
   }
 
   function handleDeleteNode(node) {
-    const nodeToDelete = findNodeInTree(treeData, node.name);
+    // check if the node has children for modal note
+    const targetNodeName = node.name;
+    const nodeHasChildren = flattenedTree.some(
+      (node) => node.parent === targetNodeName
+    );
 
     setModalData({
       open: true,
       title: "Delete node",
-      message: "Are you sure you want to delete " + node.name + "?",
-      note:
-        nodeToDelete.children.length > 0
-          ? "This node has children which will be deleted alongside this node. This cannot be undone."
-          : null,
+      message: "Are you sure you want to delete " + targetNodeName + "?",
+      note: nodeHasChildren
+        ? "This node has children which will be deleted alongside this node (including any subchildren). This cannot be undone."
+        : null,
       cancelActionText: "Cancel",
       confirmActionText: "Delete node",
       modalCondition: false,
-      function: () => deleteNode(treeData, node.name),
+      function: () => deleteNode(treeData, targetNodeName),
     });
   }
 
-  function deleteNode(treeData, targetName) {
-    const updatedTree = deleteNodeRecursively(treeData, targetName);
+  function deleteNode(treeData, targetNodeName) {
+    const updatedTree = deleteNodeRecursively(treeData, targetNodeName);
     setTreeData(updatedTree);
 
     // Update search results
