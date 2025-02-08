@@ -27,6 +27,7 @@ export default function Header({ treeData, updateData }) {
                 width={50}
                 height={50}
               />
+
               <Box
                 sx={{
                   display: "flex",
