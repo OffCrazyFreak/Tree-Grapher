@@ -22,7 +22,7 @@ import TableView from "./components/TableView";
 
 import DeleteModal from "./components/CustomModal";
 
-import BESTZagrebTreeData from "./sampleData/TreeData_BEST_Zagreb.json";
+import BESTZagrebTreeData from "./assets/sampleData/TreeData_BEST_Zagreb.json";
 
 import { flattenTree } from "./utils/treeUtils";
 import { deleteNodeRecursively } from "./utils/nodeUtils";

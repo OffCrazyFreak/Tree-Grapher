@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 import ModalContext from "../context/ModalContext";
 
-import SampleTreeData from "../sampleData/TreeData_Sample.json";
+import SampleTreeData from "../assets/sampleData/TreeData_Sample.json";
 
 export default function Footer({ treeData, updateData }) {
   const { setModalData } = useContext(ModalContext);
