@@ -6,9 +6,30 @@ import {
   Instagram as InstagramIcon,
 } from "@mui/icons-material";
 
-import SampleTreeData from "../TreeData_Sample.json";
+import { useContext } from "react";
+
+import ModalContext from "../context/ModalContext";
+
+import SampleTreeData from "../sampleData/TreeData_Sample.json";
 
 export default function Footer({ treeData, updateData }) {
+  const { setModalData } = useContext(ModalContext);
+
+  const modalImportSampleTree = {
+    open: true,
+    title: "Import tree",
+    message: "Are you sure you want to override the current data?",
+    note: "Importing a tree will overwrite the current data. This cannot be undone.",
+    cancelActionText: "Cancel",
+    confirmActionText: "Import tree",
+    modalCondition: treeData.length == 0,
+    function: handleImportData,
+  };
+
+  function handleImportData() {
+    updateData(SampleTreeData);
+  }
+
   return (
     <Container
       maxWidth={false}
@@ -67,14 +88,7 @@ export default function Footer({ treeData, updateData }) {
       <Typography
         align="center"
         onClick={() => {
-          if (
-            treeData.length === 0 ||
-            window.confirm(
-              "Importing a tree will overwrite the current tree data. Are you sure you want to do that?"
-            )
-          ) {
-            updateData(SampleTreeData);
-          }
+          setModalData(modalImportSampleTree);
         }}
         sx={{ cursor: "pointer" }}
       >

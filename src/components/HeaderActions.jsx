@@ -40,8 +40,9 @@ export default function HeaderActions({ treeData, updateData }) {
     title: "Import tree",
     message: "Are you sure you want to override the current tree?",
     note: "Importing a tree will overwrite the current tree data. This cannot be undone.",
-    cancelAction: "Cancel",
-    confirmAction: "Import tree",
+    cancelActionText: "Cancel",
+    confirmActionText: "Import tree",
+    modalCondition: treeData.length === 0,
     function: handleImportData,
   };
 
@@ -65,8 +66,8 @@ export default function HeaderActions({ treeData, updateData }) {
             title: "Error",
             message: "Error parsing imported data.",
             note: null,
-            cancelAction: null,
-            confirmAction: "OK",
+            cancelActionText: "Cancel",
+            confirmActionText: "Try another file",
             function: handleImportData,
           });
         }
@@ -101,9 +102,10 @@ export default function HeaderActions({ treeData, updateData }) {
     open: true,
     title: "Delete tree",
     message: "Are you sure you want to delete the whole tree?",
-    note: "Remember to export your tree graph. Tree deletion cannot be undone.",
-    cancelAction: "Cancel",
-    confirmAction: "Delete tree",
+    note: "Remember to export your tree graph. This cannot be undone.",
+    cancelActionText: "Cancel",
+    confirmActionText: "Delete tree",
+    modalCondition: treeData.length === 0,
     function: handleDeleteData,
   };
 
@@ -126,9 +128,7 @@ export default function HeaderActions({ treeData, updateData }) {
             variant="outlined"
             startIcon={<CloudUploadIcon />}
             onClick={() => {
-              if (treeData?.length !== 0) {
-                setModalData(modalImportTree);
-              }
+              setModalData(modalImportTree);
             }}
             sx={{
               color: (theme) => theme.palette.primary.contrastText,

@@ -6,14 +6,9 @@ import {
 } from "@mui/material";
 import { Search as SearchIcon, Info as InfoIcon } from "@mui/icons-material";
 
-export default function SearchBar({ data, setSearchResults }) {
-  function normalizeString(str) {
-    return str
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-  }
+import { normalizeString } from "../utils/stringUtils";
 
+export default function SearchBar({ data, setSearchResults }) {
   function handleChange(value) {
     // Normalize and lowercase the search query
     const normalizedQuery = normalizeString(value);

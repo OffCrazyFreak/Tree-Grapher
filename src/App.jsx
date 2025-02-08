@@ -22,7 +22,10 @@ import TableView from "./components/TableView";
 
 import DeleteModal from "./components/CustomModal";
 
-import BESTZagrebTreeData from "./TreeData_BEST_Zagreb.json";
+import BESTZagrebTreeData from "./sampleData/TreeData_BEST_Zagreb.json";
+
+import { flattenTree } from "./utils/treeUtils";
+import { findNodeInTree, deleteNodeRecursively } from "./utils/nodeUtils";
 
 export default function App() {
   const { setModalData } = useContext(ModalContext);
@@ -43,41 +46,7 @@ export default function App() {
   }
 
   function handleDeleteNode(node) {
-    // Check if the node has children
-    const findNode = (nodes, targetName) => {
-      for (const node of nodes) {
-        if (node.name === targetName) {
-          return node;
-        }
-        const foundNode = findNode(node.children, targetName);
-        if (foundNode) {
-          return foundNode;
-        }
-      }
-      return null;
-    };
-
-    const nodeToDelete = findNode(treeData, node.name);
-
-    function deleteNode() {
-      // Recursive function to delete the node
-      const deleteNode = (nodes, targetName) => {
-        return nodes
-          .map((node) =>
-            node.name === targetName
-              ? null
-              : { ...node, children: deleteNode(node.children, targetName) }
-          )
-          .filter(Boolean); // Remove null entries
-      };
-
-      const updatedTree = deleteNode(treeData, node.name);
-      setTreeData(updatedTree);
-
-      // Update search results
-      const updatedFlattenedTree = flattenTree(updatedTree);
-      setSearchResults(updatedFlattenedTree);
-    }
+    const nodeToDelete = findNodeInTree(treeData, node.name);
 
     setModalData({
       open: true,
@@ -85,34 +54,22 @@ export default function App() {
       message: "Are you sure you want to delete " + node.name + "?",
       note:
         nodeToDelete.children.length > 0
-          ? "This node has children which will be deleted alongside this node."
+          ? "This node has children which will be deleted alongside this node. This cannot be undone."
           : null,
-      cancelAction: "Cancel",
-      confirmAction: "Delete node",
-      function: deleteNode,
+      cancelActionText: "Cancel",
+      confirmActionText: "Delete node",
+      modalCondition: false,
+      function: () => deleteNode(treeData, node.name),
     });
   }
 
-  // Returns a sorted list of node objects in format { parent, name, link, description }
-  function flattenTree(nodes) {
-    const nodesList = [];
+  function deleteNode(treeData, targetName) {
+    const updatedTree = deleteNodeRecursively(treeData, targetName);
+    setTreeData(updatedTree);
 
-    function traverseTree(nodes, parentName) {
-      for (const currentNode of nodes) {
-        const { name, link, description, children } = currentNode;
-        nodesList.push({ parent: parentName, name, link, description });
-
-        if (children && children.length > 0) {
-          traverseTree(children, name);
-        }
-      }
-    }
-
-    traverseTree(nodes, "No parent (root node)");
-
-    nodesList.sort((a, b) => a.name.localeCompare(b.name)); // Sort nodes by names
-
-    return nodesList;
+    // Update search results
+    const updatedFlattenedTree = flattenTree(updatedTree);
+    setSearchResults(updatedFlattenedTree);
   }
 
   function updateData(data) {
@@ -135,10 +92,22 @@ export default function App() {
 
     // Parse the stored JSON string back to an object
     if (storedTreeData) {
-      const parsedData = JSON.parse(storedTreeData);
+      try {
+        const parsedData = JSON.parse(storedTreeData);
 
-      // Update state with the retrieved data
-      updateData(parsedData);
+        updateData(parsedData);
+      } catch (error) {
+        setModalData({
+          open: true,
+          title: "Error",
+          message: "Error parsing imported data from local storage.",
+          note: null,
+          cancelActionText: null,
+          confirmActionText: "OK",
+          modalCondition: false,
+          function: null,
+        });
+      }
     } else {
       // Update state with the retrieved data
       updateData(BESTZagrebTreeData);

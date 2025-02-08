@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import ModalContext from "../context/ModalContext";
 
@@ -24,28 +24,38 @@ export default function CustomModal() {
   }
 
   function closeModal() {
+    // firstly close modal
     setModalData({
       ...modalData,
       open: false,
     });
 
+    // and then reset the data
     setTimeout(() => {
       setModalData({
         open: false,
         title: null,
         message: null,
         note: null,
-        cancelAction: null,
-        confirmAction: null,
+        cancelActionText: null,
+        confirmActionText: null,
+        modalCondition: false,
         function: null,
       });
     }, 500);
   }
 
+  useEffect(() => {
+    // call the modal function immediately if the condition is met
+    if (modalData.open === true && modalData.modalCondition === true) {
+      submit();
+    }
+  }, [modalData.open, modalData.modalCondition]);
+
   return (
-    <Backdrop open={modalData.open}>
+    <Backdrop open={!modalData.modalCondition && modalData.open}>
       <Modal
-        open={modalData.open}
+        open={!modalData.modalCondition && modalData.open}
         closeAfterTransition
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -54,7 +64,7 @@ export default function CustomModal() {
         }}
         onClose={closeModal}
       >
-        <Fade in={modalData.open}>
+        <Fade in={!modalData.modalCondition && modalData.open}>
           <FormControl
             sx={{
               position: "absolute",
@@ -105,9 +115,9 @@ export default function CustomModal() {
                 gap: 1,
               }}
             >
-              {modalData.cancelAction && (
+              {modalData.cancelActionText && (
                 <Button variant="outlined" onClick={closeModal}>
-                  {modalData.cancelAction}
+                  {modalData.cancelActionText}
                 </Button>
               )}
 
@@ -118,7 +128,7 @@ export default function CustomModal() {
                   marginLeft: "auto",
                 }}
               >
-                {modalData.confirmAction}
+                {modalData.confirmActionText}
               </Button>
             </Box>
           </FormControl>
