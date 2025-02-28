@@ -1,5 +1,6 @@
 import React from "react";
-import { TreeItem } from "@mui/lab";
+import { TreeItem2 } from "@mui/x-tree-view";
+import "@mui/lab";
 import { Tooltip, Typography, Box, Link, IconButton } from "@mui/material";
 import { Info as InfoIcon, Edit as EditIcon } from "@mui/icons-material";
 
@@ -46,9 +47,9 @@ export default function TreeItemNode({
   }
 
   return (
-    <TreeItem
+    <TreeItem2
+      itemId={node.name}
       key={node.name}
-      nodeId={node.name}
       label={
         <Box
           sx={{
@@ -93,6 +94,6 @@ export default function TreeItemNode({
           handleEditNodeMid={handleEditNodeMid}
         />
       ))}
-    </TreeItem>
+    </TreeItem2>
   );
 }

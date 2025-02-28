@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { TreeView } from "@mui/lab";
+import { SimpleTreeView } from "@mui/x-tree-view";
 import {
   ExpandMore as ExpandMoreIcon,
   ChevronRight as ChevronRightIcon,
@@ -12,9 +12,8 @@ export default function ControlledTreeView({
   searchResults,
   handleEditNode,
 }) {
-  const [expanded, setExpanded] = useState([]);
-
-  const [selectedNode, setSelectedNode] = useState(null);
+  const [expandedItems, setExpandedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   // Memoize the maximum depth and font size
   const maxDepth = useMemo(() => calculateMaxDepth(treeData), [treeData]);
@@ -46,19 +45,22 @@ export default function ControlledTreeView({
       return parents;
     }, new Set());
 
-    setExpanded([...expandedNodes, ...parentNodes]);
+    setExpandedItems([...expandedNodes, ...parentNodes]);
   }, [searchResults]);
 
   return (
-    <TreeView
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      expanded={expanded}
-      onNodeToggle={(e, nodeName) => {
-        setExpanded(nodeName);
+    <SimpleTreeView
+      slots={{
+        expandIcon: ChevronRightIcon,
+        collapseIcon: ExpandMoreIcon,
       }}
-      onNodeSelect={(e, nodeName) => {
-        setSelectedNode(nodeName);
+      expandedItems={expandedItems}
+      onExpandedItemsChange={(e, nodeNames) => {
+        setExpandedItems(nodeNames);
+      }}
+      selectedItems={selectedItems}
+      onSelectedItemsChange={(e, nodeNames) => {
+        setSelectedItems(nodeNames);
       }}
       sx={{ overflowX: "auto" }}
     >
@@ -67,10 +69,10 @@ export default function ControlledTreeView({
           key={rootNode.name}
           node={rootNode}
           fontSize={fontSize}
-          selectedNode={selectedNode}
+          selectedNode={selectedItems}
           handleEditNodeMid={handleEditNodeMid}
         />
       ))}
-    </TreeView>
+    </SimpleTreeView>
   );
 }

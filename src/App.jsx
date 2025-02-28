@@ -98,6 +98,7 @@ export default function App() {
       try {
         const parsedData = JSON.parse(storedTreeData);
 
+        // Update state with the retrieved data
         updateData(parsedData);
       } catch (error) {
         setModalData({
@@ -112,7 +113,7 @@ export default function App() {
         });
       }
     } else {
-      // Update state with the retrieved data
+      // Update state with sample
       updateData(BESTZagrebTreeData);
     }
   }, []);
