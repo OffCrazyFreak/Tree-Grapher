@@ -1,4 +1,11 @@
-import { AppBar, Box, Toolbar, Container, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Container,
+  Typography,
+  Link,
+} from "@mui/material";
 
 import logo from "../assets/images/logo.png";
 
@@ -20,13 +27,15 @@ export default function Header({ treeData, updateData }) {
                 gap: "0.75rem",
               }}
             >
-              <img
-                src={logo}
-                alt="Logo"
-                loading="lazy"
-                width={50}
-                height={50}
-              />
+              <Link href="https://treegrapher.netlify.app/" underline="none">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  loading="lazy"
+                  width={50}
+                  height={50}
+                />
+              </Link>
 
               <Box
                 sx={{
