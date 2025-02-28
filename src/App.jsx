@@ -22,8 +22,6 @@ import TableView from "./components/TableView";
 
 import DeleteModal from "./components/CustomModal";
 
-import BESTZagrebTreeData from "./assets/sampleData/TreeData_BEST_Zagreb.json";
-
 import { flattenTree } from "./utils/treeUtils";
 import { deleteNodeRecursively } from "./utils/nodeUtils";
 
@@ -112,9 +110,6 @@ export default function App() {
           function: null,
         });
       }
-    } else {
-      // Update state with sample
-      updateData(BESTZagrebTreeData);
     }
   }, []);
 
